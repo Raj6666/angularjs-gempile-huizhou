@@ -1,0 +1,991 @@
+/*RT/AA*/
+.monitoring_input {
+    border: 1px solid #2BBCFF;
+    background: #fff;
+    border-radius: 2px;
+    padding: 0 20px;
+    height: 25px;
+    color: #1BCFE9;
+}
+
+/*RT/AA*/
+.color_settings {
+    margin: 2px 8px;
+    padding: 3px;
+    border: 1px solid transparent;
+    cursor: pointer;
+}
+
+/*RT/AA*/
+.color_settings ins {
+    width: 20px;
+    height: 20px;
+    display: block;
+    padding: 0;
+    margin: 0;
+}
+
+.Coveragequality_main {
+    background: #fff;
+    border-radius: 5px;
+    margin-bottom: 5px;
+}
+
+.Savetheform {
+    width: 108px;
+    height: 32px;
+    background: url(../images/icon_uploading.png) no-repeat 15px 6px/16px 17px;
+    border: 1px solid #00a7f3;
+    border-radius: 4px;
+    color: #00a7f3;
+    float: right;
+    padding-left: 20px;
+}
+
+/*弹窗-查询设置*/
+.shade {
+    z-index: 9998;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 200%;
+    height: 200%;
+    background: #000;
+    opacity: 0.7;
+    filter: alpha(opacity=70);
+    display: none;
+}
+
+.TC, .monitoring_tc {
+    background: #eef4f7;
+    position: fixed;
+    top: 15%;
+    left: 17%;
+    z-index: 99999;
+    border-radius: 10px 10px 0 0;
+    box-shadow: 0 2px 5px #c3c3c3;
+}
+
+.monitoring_tc {
+    top: 50%;
+    left: 50%;
+}
+
+.XTC_title {
+    background: #545454;
+    font-size: 16px;
+    color: #fff;
+    padding: 10px 20px;;
+    border-radius: 10px 10px 0 0;
+    line-height: 15px;
+}
+
+.Ncreate_divselect {
+    font-size: 13px;
+    margin-left: 5px;
+    width: 130px;
+    background: #fff url(../images/icon_down_arrowa.png) no-repeat right;
+    border: 1px solid #c0bfbf;
+    border-radius: 2px;
+}
+
+.Ncreate_divinput {
+    font-size: 13px;
+    margin-left: 5px;
+    width: 140px;
+    border: 1px solid #c0bfbf;
+    padding-left: 5px;
+    border-radius: 2px;
+}
+
+.chooseradio {
+    float: left !important;
+    padding: 3px 6px 0 0;
+    cursor: pointer;
+}
+
+.Ttypetext {
+    margin-left: 20px !important;
+    height: 21px;
+    width: 290px !important;
+    color: #6d6d6d !important;
+}
+
+.recordupdate_main {
+    width: 735px;
+}
+
+.recordupdateTtable {
+    background: #fff;
+    width: 100%;
+    max-height: 280px;
+    overflow: auto;
+    position: relative;
+}
+
+.recordupdatetable {
+    width: 100%;
+    table-layout: fixed;
+}
+
+.recordupdatetable th {
+    background: #878484;
+    color: #fff;
+    padding: 5px 10px;
+    border-right: 1px solid #6d6d6d;
+    border-bottom: 1px solid #878484;
+    line-height: 20px;
+    width: 7.14%;
+    min-width: 100px;
+    position: relative;
+}
+
+.recordupdatetable th:nth-child(1) {
+    border-left: 1px solid #6d6d6d;
+}
+
+.recordupdatetable .th1 {
+    width: 220px;
+    min-width: 220px;
+}
+
+.recordupdatetable td {
+    padding: 5px 10px;
+    color: #545454;
+    border-right: 1px solid #f1f1f1;
+    line-height: 20px;
+    overflow: hidden;
+}
+
+.recordupdatetable td:nth-child(1) {
+    border-left: 1px solid #f1f1f1;
+}
+
+.recordupdatetable td img {
+    padding-top: 1px;
+    float: right;
+    height: 17px;
+    margin-left: 10px;
+    cursor: pointer;
+}
+
+.recordupdatetable tr {
+    border-bottom: 1px solid #f1f1f1;
+}
+
+.recordupdatetable tr:hover {
+    background: #d9f3ff;
+}
+
+.Network_fault_analysistitle {
+    font-size: 16px;
+    font-weight: bold;
+    padding: 10px 20px;
+}
+
+.Network_fault_analysisT {
+    width: 100%;
+    background: url(../images/border_bg.png) no-repeat bottom;
+    background-size: 99% 1px;
+    padding-bottom: 1px;
+}
+
+.Network_fault_analysisTL {
+    background: url(../images/border_bg.png) no-repeat right bottom;
+    background-size: 1px 83%;
+    width: 50%;
+    float: left;
+}
+
+.Network_fault_analysisBL {
+    background: url(../images/border_bg.png) no-repeat right top;
+    background-size: 1px 95%;
+    width: 50%;
+    float: left;
+}
+
+.Network_fault_analysisTL img {
+    width: 99%;
+    float: right;
+    padding-right: 3px;
+}
+
+.Network_fault_analysisTR, .Network_fault_analysisBR {
+    width: 50%;
+    float: left;
+}
+
+.Network_fault_analysisTR img {
+    width: 94%;
+    float: left;
+}
+
+.malfunctionshowul {
+    float: left;
+    width: 3%;
+    margin-top: 35px;
+    margin-left: 6px;
+}
+
+.malfunctionshowul li {
+    height: 113px;
+    padding: 0 5px 0;
+    box-shadow: -2px 0 4px #545454;
+    border-radius: 3px;
+    text-align: center;
+    background: #f2f1f1;
+    cursor: pointer;
+}
+
+.subdivideshowul {
+    float: left;
+    width: 6%;
+    margin-top: 35px;
+}
+
+.subdivideshowul li {
+    box-shadow: -2px 0 4px #545454;
+    border-radius: 3px;
+    text-align: center;
+    background: #f2f1f1;
+    cursor: pointer;
+    padding: 18px 12%;
+    word-wrap: break-word;
+    break-word: break-all;
+}
+
+.Network_fault_analysisttable {
+    width: 104%;
+    margin: -5px -10px;
+}
+
+.Network_fault_analysisttable td {
+    min-width: 100px;
+}
+
+.Network_fault_analysisttable .Td1 {
+    width: 49.5% !important;
+}
+
+.Network_fault_analysistable1, .Network_fault_analysistable2 {
+    width: 100%;
+    overflow: hidden;
+    table-layout: fixed;
+}
+
+.Network_fault_analysistable1 td, .Network_fault_analysistable2 td {
+    padding: 5px 10px;
+    color: #545454;
+    overflow: hidden;
+}
+
+.Network_fault_analysistable1 tr, .Network_fault_analysistable2 tr {
+    border-bottom: 1px solid #f1f1f1;
+}
+
+.Network_fault_analysistable2 tr:hover {
+    background: #d9f3ff;
+}
+
+.Network_fault_analysistable1 th {
+    line-height: 24px;
+    background: #545454;
+    color: #fff;
+    border-right: 1px solid #6d6d6d;
+    padding: 5px 10px;
+    border-bottom: 1px solid #545454;
+}
+
+.Network_fault_analysistable2 th {
+    width: 33.33%;
+    min-width: 100px;
+    background: #545454;
+    color: #fff;
+    line-height: 24px;
+    border-right: 1px solid #6d6d6d;
+    padding: 5px 10px;
+    border-bottom: 1px solid #545454;
+}
+
+.Network_fault_analysistable1 .th1, .Network_fault_analysistable1 .th2 {
+    width: 40%;
+}
+
+.Network_fault_analysistable1 .th2, .Network_fault_analysistable1 .th2 {
+    width: 20%;
+}
+
+.Network_fault_analysistable1 .td1 {
+    width: 20%;
+    border-right: 1px solid #f1f1f1;
+}
+
+.Network_fault_analysistable1 tr:nth-child(2n) {
+    background: #ecf9ff;
+}
+
+.Network_fault_analysistable1 tr:nth-child(2n+1) {
+    background: #FEF0FF;
+}
+
+.trbackgroundnone tr {
+    background: transparent !important
+}
+
+.Network_fault_analysistable1 .tr1 {
+    background: #ecf9ff;
+}
+
+.Network_fault_analysistable1 .tr2 {
+    background: #FEF0FF;
+}
+
+.malfunctionshowulli1 {
+    background: #fff !important;
+}
+
+.Network_fault_analysisst1 {
+    width: 98%;
+    text-align: center;
+}
+
+.Network_fault_analysisst1 img {
+    padding-top: 50px;
+}
+
+.Networktitle {
+    line-height: 30px;
+    padding: 7px 20px;
+    margin: 0;
+}
+
+.Nsavetheprogress {
+    min-width: 20%;
+    background: #fff;
+    z-index: 9999;
+    position: fixed;
+    top: 30%;
+    left: 42.5%;
+    border-radius: 3px;
+}
+
+#Nsubmitdiv1 {
+    width: 440px;
+    height: 360px;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+}
+
+.Nsavetheprogress p {
+    text-align: center;
+}
+
+.Nsavetheprogress .p1 {
+    font-size: 18px;
+    padding: 30px 10px 20px;
+    font-weight: bold;
+}
+
+.Nsavetheprogress .p2 {
+    margin-bottom: 40px;
+    height: 20px;
+}
+
+.Nsavetheprogress .p2 span {
+    display: inline-block;
+}
+
+.Nsavetheprogress .p2 .Nbutton1 {
+    width: 90px;
+    line-height: 25px;
+    margin-right: 20px;
+    border: 1px solid #FC3740;
+    background: #FC3740;
+    color: #fff;
+    border-radius: 2px;
+}
+
+.Nsavetheprogress .p2 .Nbutton2 {
+    width: 90px;
+    line-height: 25px;
+    border: 1px solid #E4E4E4;
+    border-radius: 2px;
+}
+
+.Nsavetheprogress .p2 .span1 {
+    width: 70%;
+    height: 20px;
+    background: #E7E7E7;
+    text-align: left;
+    border-radius: 50px;
+    margin-left: 9%;
+    float: left;
+}
+
+.Nsavetheprogress .p2 .span2 {
+    width: 40%;
+    height: 20px;
+    background: #5CC14B;
+    border-radius: 50px;
+    float: left;
+}
+
+.Nsavetheprogress .p2 .span3 {
+    color: #5CC14B;
+    padding-left: 5px;
+    float: left;
+}
+
+.Nnclose {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    cursor: pointer;
+}
+
+.Ncreate {
+    padding: 10px;
+    border-bottom: 3px solid #2BBCFF;
+    margin-bottom: 10px;
+}
+
+.Ncreate_div {
+    border-bottom: 1px dashed #c1c1c1;
+    line-height: 30px;
+    padding: 10px 0;
+}
+
+.Ncreate_div2 {
+    border-bottom: 1px dashed #199ED8;
+}
+
+.Ncreate_div span {
+    float: left;
+}
+
+.Ncreate_div .Nddiv1, .PpaddingL80 {
+    padding-left: 80px;
+}
+
+.Ncreate_div .Nddiv1 ul, .Nddiv1_divR {
+    padding-right: 30px;
+}
+
+.Ncreate_div .Nddiv1 .ulselect {
+    height: 30px;
+    overflow: hidden;
+}
+
+.Ncreate_div .Nddiv1 li {
+    float: left;
+    padding-right: 15px;
+    min-width: 105px;
+}
+
+.Ncreate_div .Nddiv1 li img, .Ncreate_div .Nddiv1 .Ntime img {
+    float: left;
+    padding-top: 7px;
+    padding-right: 5px;
+}
+
+.Ncreate_div .Nddiv1 .Ntime {
+    padding-right: 20px;
+}
+
+.Ncreate_div .Nddiv1 .Ntime img {
+    float: left;
+    padding-top: 7px;
+    padding-right: 5px;
+}
+
+.Ncreate_div .Ntimeblock input, .common_input {
+    width: 58px;
+    border-radius: 2px;
+    border: 1px solid #C2C1C1;
+    padding-left: 5px;
+}
+
+.Ncreate_div .Ntimeblock input {
+    width: 58px;
+    border-radius: 2px;
+    border: 1px solid #C2C1C1;
+    padding-left: 5px;
+}
+
+.Ncreate_div .Ntimet {
+    width: auto;
+    padding-left: 20px;
+}
+
+.Ncreate_div .Ntimet img {
+    float: left;
+    padding-top: 8px;
+    margin-right: 5px;
+}
+
+.Ncreate_div .Ntimet2 {
+    width: auto;
+    padding-left: 70px;
+}
+
+.Ncreate_div .Ntimet2 span {
+    width: 30px;
+    text-align: center;
+    display: inline-block;
+}
+
+.Nsubmitdivbutton {
+    width: 80px;
+    border: 1px solid #AAE4FF;
+    border-radius: 2px;
+    color: #7A7B7C;
+    display: inline-block;
+    padding: 2px 0;
+}
+
+.Nsubmitdivbuttonbg {
+    background: #A5E3FF;
+}
+
+.Ncreate_div .more, .more {
+    float: right;
+    line-height: 15px;
+    border: 1px solid #2BBCFF;
+    color: #2BBCFF;
+    padding: 3px 10px;
+    border-radius: 2px;
+    margin-top: 3px;
+    background: #fff;
+}
+
+.more:hover {
+    background: #2BBCFF;
+    color: #fff;
+    cursor: pointer;
+}
+
+.Ncreate_div .Nnumb {
+    float: none;
+    width: auto;
+    color: #2BBCFF;
+    padding: 0 3px;
+}
+
+.Ncreate_div .Ntext {
+    float: none;
+    width: auto;
+}
+
+.Ncreate_div .clearr, .clearr {
+    float: right;
+    line-height: 15px;
+    border: 1px solid #FB5D51;
+    color: #FB5D51;
+    padding: 3px 10px;
+    border-radius: 2px;
+    margin-top: 3px;
+    background: #fff;
+}
+
+.clearr:hover, .Nbutton1:hover {
+    background: #FB5D51;
+    color: #fff;
+    cursor: pointer;
+}
+
+.Ncreate_div .Nddiv {
+    width: 297px !important;
+}
+
+.Ncreate_div .Nddiv2 {
+    float: left;
+    width: 247px;
+    margin-right: 30px;
+}
+
+.Ncreate_div .Nddiv2 p {
+    line-height: 26px;
+}
+
+.Ncreate_div .Nddiv2 .p1 {
+    height: 26px;
+    padding-bottom: 18px;
+}
+
+.Ncreate_div .Nddiv2 .p1 input {
+    margin-left: 30px;
+}
+
+.Ncreate_div .Nddiv2 .span1 {
+    width: 70px;
+    text-align: right;
+    color: #7d7c7c;
+    padding-bottom: 18px;
+}
+
+.Ncreate_div .Nddiv2 .span2 {
+    width: 70px;
+    text-align: right;
+}
+
+.Ncreate_div .Nddiv2 .span3 {
+    height: 26px;
+    padding-bottom: 19px;
+}
+
+.Ncreate_div .Nddiv2 .Npp1 {
+    float: left;
+    width: 180px;
+    padding: 0 5px;
+    background: url("../images/searchK_bg.png") no-repeat bottom;
+    background-size: 100% 6px;
+    line-height: 25px;
+    margin-right: 5px;
+    color: #6d6d6d;
+}
+
+.Ncreate_div .Nddiv2 .Nkuang {
+    height: 250px;
+    overflow: auto;
+    white-space: nowrap;
+    border: 1px solid #BFBFBF;
+    padding: 3px 8px 3px 0;
+    margin-top: 10px;
+    background: #fff;
+}
+
+.Ncreate_div .Nddiv2 .Nkuang ul {
+    padding-left: 17px;
+}
+
+.Ncreate_div .Nddiv2 .Nkuang ul {
+    padding-left: 5px;
+}
+
+.Ncreate_div .Nddiv2 .Nkuang .Nuul1 {
+    margin-left: 5px;
+}
+
+.Ncreate_div .Nddiv2 .Nkuang img {
+    float: left;
+    padding-top: 9px;
+    padding-right: 5px;
+    cursor: pointer;
+}
+
+.Ncreate_div .Nddiv2 .Nkuang{
+    padding: 4px 5px 0 10px !important;
+}
+
+.Ncreate_div .Nddiv2 .Nkuang .Nshow {
+    padding-top: 11px;
+}
+
+.Ncreate_div .Nddiv2 .Nkuang .NshowTop {
+    padding-top: 11px;
+}
+
+.Network_indicators_analysisTtable {
+    width: 100%;
+    overflow: auto;
+    height: 253px;
+    position: relative;
+    margin-bottom: 15px;
+}
+
+.Network_indicators_analysistable, .Theader {
+    width: 100%;
+}
+
+.Network_indicators_analysistable tr {
+    border-bottom: 1px solid #f1f1f1;
+}
+
+.Network_indicators_analysistable tr:hover {
+    background: #d9f3ff;
+}
+
+.Network_indicators_analysistable th {
+    width: 1%;
+    min-width: 120px;
+    line-height: 20px;
+    background: #545454;
+    color: #fff;
+    padding: 5px 10px;
+    border-right: 1px solid #606060;
+    border-bottom: 1px solid #545454;
+    position: relative;
+}
+
+.Network_indicators_analysistable th img, .recordupdatetable th img {
+    float: right;
+    height: 16px;
+    padding-top: 2px;
+    z-index: 1;
+}
+
+.Network_indicators_analysistable td {
+    padding: 5px 10px;
+    color: #545454;
+    border-right: 1px solid #f1f1f1;
+    position: relative;
+    min-width: 120px;
+}
+
+.Network_indicators_analysistable td img {
+    padding-top: 1px;
+    float: right;
+    margin-left: 10px;
+    cursor: pointer;
+}
+
+#Nsubmitdiv1 .Nsubmitdivtitle {
+    background: #F3F1F2;
+    line-height: 45px;
+    font-size: 14px;
+    text-align: left;
+    padding-left: 15px;
+    font-weight: bold;
+    border-radius: 3px 3px 0 0;
+}
+
+#Nsubmitdiv1 .Nsubmitdivcontent {
+    padding: 0 50px 0 25px;
+    font-size: 14px;
+    line-height: 32px;
+    margin-top: 15px;
+}
+
+#Nsubmitdiv1 .Nsubmitdivcontent input {
+    width: 250px;
+    padding: 0 5px;
+    font-size: 14px;
+    border: 1px solid #B6B6B6;
+    height: 30px;
+}
+
+.Nsubmitdivbutton {
+    margin-top: 30px;
+    margin-bottom: 10px;
+}
+
+.Nsubmitdivbutton2 {
+    margin-right: 35px;
+    margin-left: 95px;
+    cursor: pointer;
+}
+
+.popup_window {
+    z-index: 99;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+}
+
+.virtual_th {
+    min-width: 143px !important;
+}
+
+[class^="icon-"], [class*=" icon-"] {
+    display: inline-block;
+    width: 14px;
+    height: 14px;
+    line-height: 14px;
+    vertical-align: text-top;
+    background-image: url("../images/glyphicons-halflings.png");
+    background-position: 14px 14px;
+    background-repeat: no-repeat;
+    margin-top: 1px;
+}
+
+/*时间段*/
+.timequantum {
+    height: 16px;
+    position: relative;
+}
+
+.timequantum_span {
+    line-height: 20px;
+    width: 65px;
+    text-align: center;
+    padding-right: 20px;
+    background: url("../images/icon_downward_select.png") no-repeat 71px center, url("../images/timequantum_line.jpg") repeat-y 65px;
+    border: 1px solid #666;
+    border-radius: 2px;
+}
+
+.timequantum_ul {
+    position: absolute;
+    top: 22px;
+    left: 0;
+    border: 1px solid #1E90FF;
+    border-top: 0;
+    color: #323232;
+    background: #fff;
+    max-height: 168px;
+    overflow: auto;
+}
+
+.timequantum_ul li {
+    line-height: 20px;
+    font-size: 14px;
+    padding: 0 11px;
+    border-top: 1px solid #1E90FF;
+}
+
+/*下拉框鼠标滑过子对象出发的样式*/
+.timequantum_ul li:hover {
+    background: #1E90FF;
+    color: #fff;
+    /*font-size: x-small;*/
+    font-size: 14px;
+}
+
+.Wdate {
+    border-radius: 2px;
+}
+
+.Wwidth50 {
+    width: 50px !important;
+}
+
+.Wwidth120 {
+    width: 120px !important;
+}
+
+.Wwidth300 {
+    width: 305px !important;
+}
+
+.HheightA {
+    height: auto !important;
+}
+
+.Hheight19 {
+    height: 19px;
+}
+
+.Hheight21 {
+    height: 21px !important;
+}
+
+.Llineheight25 {
+    line-height: 25px;
+}
+
+.Ppadding0 {
+    padding: 0 !important;
+}
+
+.Ppadding10t {
+    padding: 10px;
+}
+
+.Ppadding10 {
+    padding: 10px 0;
+}
+
+.PpaddingT10 {
+    padding-top: 10px;
+}
+
+.PpaddingL10 {
+    padding-left: 10px !important;
+}
+
+.PpaddingL20 {
+    padding-left: 20px !important;
+}
+
+.PpaddingR0 {
+    padding-right: 0 !important;
+}
+
+.PpaddingB20 {
+    padding-bottom: 20px;
+}
+
+.DdisplayIB {
+    display: inline-block;
+}
+
+.Mmargin0 {
+    margin: 0 !important;
+}
+
+.MmarginL5 {
+    margin-left: 5px !important;
+}
+
+.MmarginR0 {
+    margin-right: 0 !important;
+}
+
+.MmarginR70 {
+    margin-right: 70px;
+}
+
+.MmarginR5 {
+    margin-right: 5px;
+}
+
+.MmarginT15 {
+    margin-top: 15px;
+}
+
+.MmarginB15 {
+    margin-bottom: 15px;
+}
+
+.FfloatL {
+    float: left !important;
+}
+
+.FfloatR {
+    float: right !important;
+}
+
+.Cclearb {
+    clear: both !important;
+}
+
+.Bborder0 {
+    border: 0 !important;
+}
+
+.Ttextalign {
+    text-align: center;
+}
+
+.TtextalignR {
+    text-align: right !important;
+}
+
+.Ffontsize9 {
+    font-size: 9px !important;
+}
+
+#chooseradio3 {
+    overflow: initial;
+    padding-left: 80px;
+}
+
+.exportBtn{
+	height:26px;
+	width:56px;
+	position:absolute;
+	bottom:4px;
+	right:27%;
+	padding:0;
+}
+
+/*leftlet地图隐藏标记*/
+.leaflet-control-attribution a{
+	display:none;
+}

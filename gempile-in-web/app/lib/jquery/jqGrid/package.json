@@ -1,0 +1,88 @@
+{
+  "_args": [
+    [
+      {
+        "raw": "jqGrid",
+        "scope": null,
+        "escapedName": "jqGrid",
+        "name": "jqGrid",
+        "rawSpec": "",
+        "spec": "latest",
+        "type": "tag"
+      },
+      "D:\\SourceCode\\gempile-fe-web\\gempile-in-web"
+    ]
+  ],
+  "_from": "jqGrid@latest",
+  "_id": "jqGrid@5.1.1",
+  "_inCache": true,
+  "_location": "/jqGrid",
+  "_nodeVersion": "6.3.0",
+  "_npmOperationalInternal": {
+    "host": "packages-12-west.internal.npmjs.com",
+    "tmp": "tmp/jqGrid-5.1.1.tgz_1472579008239_0.6360487646888942"
+  },
+  "_npmUser": {
+    "name": "meneguite",
+    "email": "ronaldo@fireguard.com.br"
+  },
+  "_npmVersion": "3.10.3",
+  "_phantomChildren": {},
+  "_requested": {
+    "raw": "jqGrid",
+    "scope": null,
+    "escapedName": "jqGrid",
+    "name": "jqGrid",
+    "rawSpec": "",
+    "spec": "latest",
+    "type": "tag"
+  },
+  "_requiredBy": [
+    "#DEV:/",
+    "#USER"
+  ],
+  "_resolved": "https://registry.npmjs.org/jqGrid/-/jqGrid-5.1.1.tgz",
+  "_shasum": "4818988377488d1224390029e2321587f27d748a",
+  "_shrinkwrap": null,
+  "_spec": "jqGrid",
+  "_where": "D:\\SourceCode\\gempile-fe-web\\gempile-in-web",
+  "author": {
+    "name": "Tony Tomov",
+    "email": "tony@trirand.com",
+    "url": "http://www.guriddo.net"
+  },
+  "dependencies": {},
+  "description": "jqGrid is an Ajax-enabled JavaScript control that provides solutions for representing and manipulating tabular data on the web.",
+  "devDependencies": {
+    "grunt": "^0.4.5",
+    "grunt-contrib-concat": "^0.5.0",
+    "grunt-contrib-jshint": "^0.11.0",
+    "grunt-contrib-requirejs": "^0.4.4",
+    "grunt-contrib-uglify": "^0.7.0"
+  },
+  "directories": {},
+  "dist": {
+    "shasum": "4818988377488d1224390029e2321587f27d748a",
+    "tarball": "https://registry.npmjs.org/jqGrid/-/jqGrid-5.1.1.tgz"
+  },
+  "gitHead": "3161fe4b91c7d8b7a076467552f8c5075916628e",
+  "homepage": "http://www.guriddo.net",
+  "licenses": [
+    {
+      "type": "Creative Commons Attribution-Non-Commercial 3.0 License",
+      "url": "http://guriddo.net/?page_id=103334"
+    }
+  ],
+  "maintainers": [
+    {
+      "name": "meneguite",
+      "email": "ronaldo@fireguard.com.br"
+    }
+  ],
+  "name": "jqGrid",
+  "optionalDependencies": {},
+  "readme": "ERROR: No README data found!",
+  "scripts": {},
+  "title": "Guriddo jqGrid",
+  "version": "5.1.1"
+}

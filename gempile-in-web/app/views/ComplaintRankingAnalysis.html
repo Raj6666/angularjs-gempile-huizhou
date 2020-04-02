@@ -1,0 +1,84 @@
+<div class="content" id="complaint_ranking_analysis">
+	<div class="guidepost">
+		<i class="fa fa-map-marker"></i>
+		<span>投诉分析 > 投诉排行分析</span>
+	</div>
+	<div class="query-panel">
+		<div class="head">
+			<div class="title">
+				<div class="text"><span>新建查询</span></div>
+				<div class="right-triangle"></div>
+			</div>
+		</div>
+		<div id="poor-gis-body" class="collapse poor-gis-body show">
+			<div class="inline-form-group">
+				<div class="selectLabel select-condition">
+					<label class="col-form-label flex-center">查询月份：</label>
+					<input type="month" class="form-control" ng-model="selectMonthStr"
+						   style="width:180px;height:33px;border: 1px solid #5bc0de;"/>
+					<!--<input editable="false" placeholder="请选择月份"
+						   class="easyui-datebox"
+						   type="text" value="${selMonth}"
+						   name="selMonth" id="selMonth"
+						   data-options="required:true"
+						   style="width:180px;height:33px"/>-->
+				</div>
+				<div class="selectTOP select-condition">
+					<label class="col-form-label flex-center">TOP：</label>
+					<select name="" id="" class="form-control" ng-model="topNum">
+						<option value="" disabled selected style="display:none;">请选择TOP值</option>
+						<option value="10">10</option>
+						<option value="20">20</option>
+						<option value="50">50</option>
+						<option value="100">100</option>
+					</select>
+				</div>
+				<button id="toPoorAreaGisAnalysis" type="button" class="btn btn-info inquire"
+						ng-click="toComplainRankingAnalysis()" style="margin-left:30px">查询
+				</button>
+			</div>
+			<!--<div>{{selDate}}{{timeSlot}}{{selArea}}</div>-->
+		</div>
+		<div class="footer"></div>
+	</div>
+	<div class="ranking_analysis">
+		<p class="Networktitle">
+			<span>投诉排行分析 > 当前查询：</span>
+			<label ng-bind="queryStatusMessage"></label>
+		</p>
+		<div class="analysis-box">
+			<div id="ComplaintRankingTitle" class="title">
+				<a ng-class="{Checked : pageSelect==1,ComplaintRankingBtn : true}"
+				   ng-click="switchUserAndBaseStation(1)">高投诉用户</a>
+				<a ng-class="{Checked : pageSelect==2,ComplaintRankingBtn : true}"
+				   ng-click="switchUserAndBaseStation(2)" style="">高投诉基站</a>
+			</div>
+			<div class="table-box">
+				<div class="usersContainer" ng-show="pageSelect===1">
+					<div id="high_complaint_users_table" ui-grid="highComplaintUsersOptions" class="grid"
+						 ui-grid-pinning
+						 ui-grid-exporter
+						 ui-grid-resize-columns
+						 ui-grid-auto-resize
+						 ui-grid-pagination
+					>
+					</div>
+					<div class="noUsersAnalysis" style="display:none">查询不到相关数据</div>
+					<button class="btn btn-primary exportBtn" ng-click="usersExportToCsv()">导出</button>
+				</div>
+				<div class="baseStationContainer" ng-show="pageSelect===2">
+					<div id="high_complaint_base_station_table" ui-grid="highComplaintBaseStation" class="grid"
+						 ui-grid-pinning
+						 ui-grid-exporter
+						 ui-grid-resize-columns
+						 ui-grid-auto-resize
+						 ui-grid-pagination
+					>
+					</div>
+					<div class="noBaseStationAnalysis" style="display:none">查询不到相关数据</div>
+					<button class="btn btn-primary exportBtn" ng-click="baseStationExportToCsv()">导出</button>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

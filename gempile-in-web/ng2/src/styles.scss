@@ -1,0 +1,28 @@
+@import "assets/leafletLocalMap/leaflet.css";
+
+::-webkit-scrollbar {
+    width: 12px;
+    height: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+    height: 30px;
+    background-color: rgba(0,0,0,.3);
+    -webkit-border-radius: 7px;
+    outline: 2px solid #fff;
+    outline-offset: -2px;
+    border: 2px solid #fff;
+}
+
+::-webkit-scrollbar-track-piece {
+    background-color: #fff;
+    -webkit-border-radius: 3px;
+}
+
+body {
+    background-color: inherit;
+}
+
+.acl__hide {
+    display: none;
+}

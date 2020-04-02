@@ -1,0 +1,300 @@
+<nz-layout class="contain">
+  <nz-breadcrumb nzSeparator=">" class="menu">
+    <nz-breadcrumb-item>
+      <i class="anticon anticon-environment-o"></i>软采分析
+    </nz-breadcrumb-item>
+    <nz-breadcrumb-item>
+      软采质差小区分析
+    </nz-breadcrumb-item>
+  </nz-breadcrumb>
+  <nz-content class="content">
+    <div class="search" nz-row>
+      <form nz-form [nzLayout]="'inline'">
+        <div nz-col nzSpan="6">
+          <nz-form-item style="width: 100%;">
+            <nz-form-label>问题类型</nz-form-label>
+            <nz-form-control style="width: 66%;">
+              <nz-select [compareWith]="compareFn" [(ngModel)]="questionType" (ngModelChange)="refreshJudgeTest(questionType.value)" nzPlaceHolder="弱覆盖小区" name="questionType">
+                <nz-option class="nzOption" *ngFor="let option of questionTypeList" [nzValue]="option" [nzLabel]="option.label"></nz-option>
+              </nz-select>
+            </nz-form-control>
+          </nz-form-item>
+        </div>
+        <div nz-col nzSpan="6">
+          <nz-form-item style="width: 92%;">
+            <nz-form-label>覆盖域</nz-form-label>
+            <nz-form-control style="width: 72%;">
+              <nz-select [compareWith]="compareFn"  [(ngModel)]="coverageDomain" nzPlaceHolder="全市" name="coverageDomain">
+                <nz-option  class="nzOption" *ngFor="let data of coverageDomainList" [nzValue]="data" [nzLabel]="data.label"></nz-option>
+              </nz-select>
+            </nz-form-control>
+          </nz-form-item>
+        </div>
+        <div nz-col nzSpan="7">
+          <nz-form-item>
+            <nz-form-label>时间</nz-form-label>
+            <nz-form-control style="width: 82%;">
+               <nz-range-picker nzAllowClear="false"  [(ngModel)]="selectedTime" [nzDisabledDate]="disabledDate" name="selectedTime" (ngModelChange)="selectedDateUpdate()"></nz-range-picker>
+              <!--<nz-range-picker [nzFormat]='dateFormat'></nz-range-picker>-->
+            </nz-form-control>
+          </nz-form-item>
+        </div>
+        <div nz-col nzSpan="2" class="buttons-row" style="top: 4px;" (click)="search()">
+          <button  nz-button nzType="primary">
+            <i class="anticon anticon-search"></i>查询</button>
+        </div>
+      </form>
+    </div>
+    <!-- 判断条件文本 -->
+    <p class="judgeText">{{judgeText}}</p>
+    <p class="Networktitle">
+      <span>软采质差小区分析&gt; 当前查询：</span>
+      <label *ngIf="!hasSearched" class="ng-binding">无</label>
+      <label *ngIf="hasSearched" class="ng-binding">{{coverageArea}}</label>
+      <!--<button class="fullPage" nz-button nzType="default">-->
+        <!--<i class="anticon anticon-arrows-alt"></i>全屏显示</button>-->
+    </p>
+    <!-- 浮动地图表格框 -->
+    <div class="float_div">
+      <!-- 地图 -->
+      <div class="map_div" #map></div>
+
+      <!-- 浮动FDE测距定位上行列表 -->
+      <div class="floatList">
+        <ul>
+          <li class="blueCicle" (mouseenter) = "fBlueCicle = true;"
+          (mouseleave)="fBlueCicle = false;" (click)="switchChannelCircle('F')" [class.bg]="FGreyCicle">
+            <span>F</span>
+          </li>
+          <li class="blueCicle" (mouseenter) = "dBlueCicle = true"
+          (mouseleave)="dBlueCicle = false" (click)="switchChannelCircle('D')" [class.bg]="DGreyCicle">
+            <span>D</span>
+          </li>
+          <li class="blueCicle" (mouseenter) = "eBlueCicle = true"
+          (mouseleave)="eBlueCicle = false" (click)="switchChannelCircle('E')" [class.bg]="EGreyCicle">
+            <span>E</span>
+          </li>
+          <li class="rangingPositioning" (mouseenter) = "showRanging = true" (click)="measureDistance()"
+          (mouseleave)="showRanging = false">
+            <img src="./assets/images/detail/ceju.png">
+          </li>
+          <li class="rangingPositioning" (click)="locatedProblemCell()" (mouseenter) = "showPositioning = true"
+          (mouseleave)="showPositioning = false">
+              <img src="./assets/images/detail/dingwei.png">
+          </li>
+        </ul>
+      </div>
+
+      <!-- 显示FDE频小区测距定位提示框 -->
+      <div *ngIf="fBlueCicle || dBlueCicle || eBlueCicle || showRanging || showPositioning" class="FDEprompt">
+        <ul>
+          <li style="left:20px;" [hidden]="!fBlueCicle">{{fChannelHoverText}}</li>
+          <li style="left:95px;" [hidden]="!dBlueCicle">{{dChannelHoverText}}</li>
+          <li style="left:165px;" [hidden]="!eBlueCicle">{{eChannelHoverText}}</li>
+          <li style="left:235px;" [hidden]="!showRanging">{{testDistanceText}}</li>
+          <li style="left:315px;" [hidden]="!showPositioning">定位问题小区</li>
+        </ul>
+      </div>
+
+      <!-- 上行点击切换显示表格文字提醒 -->
+      <div class="topShowSwitchText" [hidden]="!topShowSwitchText">点击切换显示指标表格</div>
+      <!-- 下行点击切换显示表格文字提醒 -->
+      <div class="bottomShowSwitchText" [hidden]="!bottomShowSwitchText">点击切换显示指标表格</div>
+
+
+
+      <!-- 上行是否显示表格框 -->
+      <div class="topShowTable" [hidden]="!topShowTable" (mouseenter) = "topShowSwitchText = true" (mouseleave)="topShowSwitchText = false" (click)="triggerShowTableButtom()">
+      </div>
+      <!-- 下行是否显示表格框 -->
+      <div class="bottomShowTable" [hidden]="!bottomShowTable" (click)="triggerShowTableButtom()" (mouseenter) = "bottomShowSwitchText = true" (mouseleave)="bottomShowSwitchText = false">
+      </div>
+
+      <!-- 表格选项 -->
+      <div class="coverageArea" [hidden]="!showTable" (click)="switchTableTo('area')">
+        <p>{{coverageArea}}</p>
+      </div>
+      <div class="coveredCellPair" [hidden]="!showTable || !showCoverCellPair" (click)="switchTableTo('cellPair')">
+        <p>{{coveredCellPair}}</p>
+      </div>
+
+      <div class="table_div">
+        <!-- 表格 -->
+        <div class="table" [hidden]="!showTable">
+          <!--覆盖小区表格-->
+            <nz-table
+            #rowSelectionTable
+            [nzData]="coverageAreaDataSet"
+            [(nzPageIndex)]="coverageAreaPageIndex"
+            [(nzPageSize)]="coverageAreaPageSize"
+            [nzLoading] = "coverageAreaLoading"
+            [nzBordered]="true"
+            nzSize="small"
+            [nzShowSizeChanger]="true"
+            [nzScroll]="{x:'2450px', y: '200px'}"
+            (nzPageIndexChange)="searchData()"
+            (nzPageSizeChange)="searchData(true)"
+            [hidden]="!showCoverageAreaTable">
+              <thead>
+                <tr>
+                  <th nzWidth="120px" nzLeft="0px">选择</th>
+                  <th nzWidth="120px" nzLeft="120px" *ngFor="let data of tableHeader">{{data}}</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr [hidden]="getTableDataParams.selectType !== 1" *ngFor="let data of rowSelectionTable.data">
+                  <td nzLeft="0px" nzShowCheckbox [(nzChecked)]="data.checked" (nzCheckedChange)="refreshStatus(data)"></td>
+                  <td nzLeft="120px">{{data.dateId}}</td>
+                  <td>{{data.city}}</td>
+                  <td>{{data.district}}</td>
+                  <td>{{data.cellId}}</td>
+                  <td>{{data.cellName}}</td>
+                  <td>{{data.avgRsrp}}</td>
+                  <td>{{data.avgRsrp}}</td>
+                  <td>{{data.avgTa}}</td>
+                  <td>{{data.cellHeight}}</td>
+                  <td>{{data.cellDowntilt}}</td>
+                  <td>{{data.frequency}}</td>
+                  <td>{{data.mrCount}}</td>
+                  <td>{{data.mrCountLess30dbm}}</td>
+                  <td>{{data.coverCount}}</td>
+                  <td>{{data.coverRate}}</td>
+                  <td>{{data.userCountSection1}}</td>
+                  <td>{{data.userCountSection2}}</td>
+                  <td>{{data.userCountSection3}}</td>
+                  <td>{{data.userCountSection4}}</td>
+                </tr>
+                <tr [hidden]="getTableDataParams.selectType !== 2 && getTableDataParams.selectType !== 3" *ngFor="let data of rowSelectionTable.data">
+                  <td nzLeft="0px" nzShowCheckbox [(nzChecked)]="data.checked" (nzCheckedChange)="refreshStatus(data)"></td>
+                  <td nzLeft="100px">{{data.dateId}}</td>
+                  <td>{{data.city}}</td>
+                  <td>{{data.district}}</td>
+                  <td>{{data.cellId}}</td>
+                  <td>{{data.cellName}}</td>
+                  <td>{{data.avgRsrp}}</td>
+                  <td>{{data.avgRsrp}}</td>
+                  <td>{{data.avgTa}}</td>
+                  <td>{{data.cellHeight}}</td>
+                  <td>{{data.cellDowntilt}}</td>
+                  <td>{{data.frequency}}</td>
+                  <td>{{data.mrCount}}</td>
+                  <td>{{data.mrCountLess30dbm}}</td>
+                  <td>{{data.coverCount}}</td>
+                  <td>{{data.coverRate}}</td>
+                  <td>{{data.userCount}}</td>
+                  <td>{{data.userCountEffect}}</td>
+                </tr>
+                <tr [hidden]="getTableDataParams.selectType !== 5" *ngFor="let data of rowSelectionTable.data">
+                  <td nzLeft="0px" nzShowCheckbox [(nzChecked)]="data.checked" (nzCheckedChange)="refreshStatus(data)"></td>
+                  <td nzLeft="100px">{{data.dateId}}</td>
+                  <td>{{data.city}}</td>
+                  <td>{{data.district}}</td>
+                  <td>{{data.cellId}}</td>
+                  <td>{{data.cellName}}</td>
+                  <td>{{data.avgRsrp}}</td>
+                  <td>{{data.avgRsrp}}</td>
+                  <td>{{data.avgTa}}</td>
+                  <td>{{data.cellHeight}}</td>
+                  <td>{{data.cellDowntilt}}</td>
+                  <td>{{data.frequency}}</td>
+                  <td>{{data.mrCount}}</td>
+                  <td>{{data.mrCountLess30dbm}}</td>
+                  <td>{{data.userCount}}</td>
+                  <td>{{data.userCountEffect}}</td>
+                  <td>{{data.pci}}</td>
+                  <td>{{data.avgUlsinr}}</td>
+                  <td>{{data.cellCountEffect}}</td>
+                </tr>
+                <tr [hidden]="getTableDataParams.selectType !== 7" *ngFor="let data of rowSelectionTable.data">
+                  <td nzLeft="0px" nzShowCheckbox [(nzChecked)]="data.checked" (nzCheckedChange)="refreshStatus(data)"></td>
+                  <td nzLeft="100px">{{data.dateId}}</td>
+                  <td>{{data.city}}</td>
+                  <td>{{data.district}}</td>
+                  <td>{{data.cellId}}</td>
+                  <td>{{data.cellName}}</td>
+                  <td>{{data.avgRsrp}}</td>
+                  <td>{{data.avgRsrp}}</td>
+                  <td>{{data.avgTa}}</td>
+                  <td>{{data.mrCount}}</td>
+                  <td>{{data.mrCountLess30dbm}}</td>
+                  <td>{{data.userCount}}</td>
+                  <td>{{data.userCountEffect}}</td>
+                  <td>{{data.samplingCount}}</td>
+                  <td>{{data.samplingRate}}</td>
+                  <td>{{data.avgUlsinr}}</td>
+                  <td>{{data.ulsinrCount}}</td>
+                </tr>
+              </tbody>
+            </nz-table>
+          <!--覆盖小区组表格-->
+          <nz-table
+            #noRowSelectionTable
+            [nzData]="coverageCellPairDataSet"
+            [(nzPageIndex)]="coverageCellPairPageIndex"
+            [(nzPageSize)]="coverageCellPairPageSize"
+            [nzLoading] = "coverageCellPairLoading"
+            [nzBordered]="true"
+            nzSize="small"
+            [nzShowSizeChanger]="true"
+            [nzScroll]="{x:'3100px', y: '250px'}"
+            (nzPageIndexChange)="searchData()"
+            (nzPageSizeChange)="searchData(true)"
+            [hidden]="!showCoverageCellPairTable">
+            <thead>
+            <tr>
+              <th nzWidth="180px" nzLeft="0px">日期</th>
+              <th nzWidth="180px" nzLeft="180px" *ngFor="let data of cellPairTableHeader">{{data}}</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr [hidden]="getTableDataParams.selectType !== 3" *ngFor="let data of noRowSelectionTable.data">
+              <td nzLeft="0px">{{data.dateId}}</td>
+              <td nzLeft="180px">{{data.city}}</td>
+              <td>{{data.district}}</td>
+              <td>{{data.cellId}}</td>
+              <td>{{data.cellName}}</td>
+              <td>{{data.avgRsrp}}</td>
+              <td>{{data.avgRsrp}}</td>
+              <td>{{data.avgTa}}</td>
+              <td>{{data.cellHeight}}</td>
+              <td>{{data.cellDowntilt}}</td>
+              <td>{{data.mrCount}}</td>
+              <td>{{data.mrCountLess30dbm}}</td>
+              <td>{{data.neighborCellName}}</td>
+              <td>{{data.neighborCellId}}</td>
+              <td>{{data.samplingCount}}</td>
+              <td>{{data.samplingRate}}</td>
+              <td>{{data.scelltoncellDistance}}</td>
+            </tr>
+            <tr [hidden]="getTableDataParams.selectType !== 5" *ngFor="let data of noRowSelectionTable.data">
+              <td nzLeft="0px">{{data.dateId}}</td>
+              <td nzLeft="180px">{{data.city}}</td>
+              <td>{{data.district}}</td>
+              <td>{{data.cellId}}</td>
+              <td>{{data.cellName}}</td>
+              <td>{{data.avgRsrp}}</td>
+              <td>{{data.avgRsrp}}</td>
+              <td>{{data.avgTa}}</td>
+              <td>{{data.mrCount}}</td>
+              <td>{{data.mrCountLess30dbm}}</td>
+              <td>{{data.neighborCellName}}</td>
+              <td>{{data.neighborCellId}}</td>
+              <td>{{data.samplingCount}}</td>
+              <td>{{data.samplingRate}}</td>
+              <td>{{data.pci}}</td>
+              <td>{{data.pciNeighbor}}</td>
+            </tr>
+            </tbody>
+          </nz-table>
+        </div>
+        <!-- 导出 -->
+        <div class="export" *ngIf="(showCoverageAreaTable && tableHasResult && showTable) || (showCoverageCellPairTable && tableForCellPairHasResult && showTable)" (click)="exportData()">
+          <span>导出</span>
+        </div>
+    </div>
+
+      <div class="f_type" #f_type></div>
+    </div>
+  </nz-content>
+  <p class="foot">广州丰石科技有限公司</p>
+</nz-layout>

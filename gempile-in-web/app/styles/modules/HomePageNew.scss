@@ -1,0 +1,692 @@
+$common-space: 5px;
+$panel-total-width: calc(100% - 2 * #{$common-space});
+#homePageNewModule {
+    flex: 1;
+    height: calc(100vh - 10px);
+    min-height: 45.2rem;
+    min-width: 1345px;
+    width: 100%;
+    margin: -$common-space 0 calc(3 * #{$common-space}) 0;
+    font-family: '微软雅黑';
+	padding:0 10px 0 18px;
+    .s-head {
+        display: flex;
+        height: 30px;
+        align-items: center;
+        padding-left: $common-space;
+        color: #3398DB;
+        font-weight: bold;
+    }
+    /**考核指标表背板*/
+    #assessmentChartPanel{
+        width: 100%;
+        height: 100%;
+        position: relative;
+    }
+    /**进度条部分样式*/
+    .progressPanel {
+        position: relative;
+        //border: 1px solid green;
+        margin: 0 5% 0 5%;
+        .progressCharts {
+            width: 100%;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            //padding: 2.15% 0 1.15% 0;
+            .textDetail {
+                width: 50%;
+                text-align: center;
+                border-bottom: 1px solid #55B7FB;
+                padding-top: 0.6rem;
+                height: 2.1rem;
+                //z-index:3;
+                span{
+                    -webkit-text-size-adjust: none;
+                    font-size: 0.8rem;
+                    font-weight: bold;
+                }
+            }
+            .textDetailHidden{
+                width:45%;
+                visibility: hidden;
+                //width: 50%;
+                text-align: center;
+                border-bottom: 1px solid #55B7FB;
+                padding-top: 2.9%;
+                span{
+                    -webkit-text-size-adjust: none;
+                    font-size: 0.8rem;
+                    font-weight: bold;
+                }
+            }
+            .imageDetail {
+                margin-left: -5.5%;
+            }
+        }
+    }
+    /**进度条右边样式*/
+    .progressDetail {
+        width: 60%;
+        // padding-top: 6%;
+        padding-top: 1.1rem;
+        #pChart2 {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            .rightBar {
+                background-color: #FFC03D; //背景橙色
+                width: 2%;
+                padding-top: 0.4rem;
+            }
+            .leftBar {
+                background-color: #55B7FB; //数据部分蓝色
+                width: 98%;
+                padding-top: 0.4rem;
+            }
+        }
+        #pChart3 {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            .rightBar {
+                background-color: #FFC03D; //背景橙色
+                width: 5%;
+                padding-top: 0.4rem;
+            }
+            .leftBar {
+                background-color: #55B7FB; //数据部分蓝色
+                width: 95%;
+                padding-top: 0.4rem;
+            }
+        }
+        #pChart4 {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            .rightBar {
+                background-color: #FFC03D; //背景橙色
+                width: 2%;
+                padding-top: 0.4rem;
+            }
+            .leftBar {
+                background-color: #55B7FB; //数据部分蓝色
+                width: 98%;
+                padding-top: 0.4rem;
+            }
+        }
+        #pChart5 {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            .rightBar {
+                background-color: #FFC03D; //背景橙色
+                width: 2%;
+                padding-top: 0.4rem;
+            }
+            .leftBar {
+                background-color: #55B7FB; //数据部分蓝色
+                width: 98%;
+                padding-top: 0.4rem;
+            }
+        }
+        .percentage {
+            -webkit-text-size-adjust: none;
+            float: right;
+            font-size: 0.7rem;
+            font-weight: bold;
+        }
+    }
+    /** 悬浮图标显示样式 */
+    #downloadDetail{
+        // visibility: hidden;
+        position: absolute;
+        top: 5px;
+        left: 180px;
+        width: 300px;
+        padding: 6px;
+        border: #dfdfdf 1px solid;
+    }
+    /**悬浮显示*/
+    #downloadDetail{
+        display:none;
+        width:40%;
+        justify-content: center;
+        align-items: center;
+        background-color:black;
+        background-color:black;
+        color:white;
+        font-family:'微软雅黑';
+        position:absolute;
+        margin-left:-12rem;
+        margin-top: -30px;
+        text-align: center;
+        border:1px solid white;
+        border-radius:12px;
+        opacity: 0.7;
+        z-index:999;
+    }
+    .hoverDetail{
+        width:25%;
+        margin: -2rem 0 0 3rem;
+        justify-content: center;
+        align-items: center;
+        background-color:black;
+        color:white;
+        font-family:'微软雅黑';
+        position:absolute;
+        border:1px solid white;
+        border-radius:11px;
+        opacity: 0.7;
+        display:none;
+        z-index:999;
+    }
+    #showDownload a:hover + #downloadDetail{display:flex;}
+    #showGaming a:hover + #gamingDetail{display:flex;}
+    #showVideo a:hover + #videoDetail{display:flex;}
+    #showChat a:hover + #chatDetail{display:flex;}
+    #showBrowse a:hover + #browseDetail{display:flex;}
+
+    /** Volte指标背板 */
+    #volteChartPanel{
+        width: 100%;
+        position: relative;
+    }
+    .CallAndRegChartPanel{
+        //margin-top: 0.3em;
+        width: 100%;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+        .horizontalBar-charts{
+            width: 49%;
+            //height: 13rem;
+            margin: 0 0.2% 0 0.2%;
+            padding: 0;
+            //border: 1px solid green;
+        }
+
+        .gauge-charts{
+            width:33%;
+            //height: 9rem;
+            margin-top: -0.5rem;
+            padding: 0;
+            //border: 1px solid blue;
+        }
+    }
+
+    /**饼图部分样式*/
+    .pieChartPanel {
+        margin-top: 0.3em;
+        border: 1px solid #3399FF;
+        border-radius: 0.5em;
+        width: 100%;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        .assessment-charts {
+            margin-top: -5em;
+            // height: 8.58rem;
+            width: 25%;
+            margin: 0;
+            padding: 0;
+        }
+    }
+    /**网元速率背板*/
+    // #networkElementChartPanel{
+    //     width: 100%;
+    //     height: 85%;
+    //     border:1px solid red;
+    // }
+    /**网元速率表*/
+    .networkElementRate-charts {
+        //display: flex;
+        //height: 17.9rem;
+        width: 100%;
+        //margin-top: -1.5em;
+        //position: relative;
+        //border: 1px solid red;
+    }
+    /**网元速率选择按钮*/
+    .networkElementRate-button {
+        //border:1px solid red;
+        position: relative;
+        height: 20px;
+        text-align: center;
+        line-height: 20px;
+        //margin-top: -1em;
+        button {
+            background-repeat: no-repeat;
+            background-color: transparent;
+            background-size: 100% 100%;
+            height: 20px;
+            width: 20px;
+            border: none;
+            background-image: url('../images/icon-unchecked-white.png');
+        }
+        .Checked {
+            background-image: url('../images/icon-checked-grey.png');
+        }
+    }
+
+    /**业务分布表*/
+    .businessChartPanel{
+         width: 100%;
+         position: relative;
+        .twoPieChartPanel {
+            //border:1px solid blue;
+            width: 100%;
+            margin-top: 0.3em;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            #bpChart1 {
+                //border:1px solid red;
+                //height: 19rem;
+                width: 55%;
+                margin: 0;
+                padding: 0;
+            }
+            #bpChart2 {
+                //border:1px solid blue;
+                margin-top: -5em;
+                //height: 19rem;
+                width: 45%;
+                margin: 0;
+                padding: 0 ;
+            }
+        }
+        .twoWayBarChartPanel{
+            width: 100%;
+            //border:1px solid green;
+            #twoWayBarChart{
+              // border:1px solid green;
+              //width: 100%;
+              border-radius: 6px;
+              //height: 23rem;
+              margin: 0 0 0 0;
+            }
+        }
+        .twoBarTitle{
+            display:flex;
+            width: 100%;
+            //background-color: lightgreen;
+            text-align: center;
+            justify-content: center;
+            align-items: center;
+            .left{
+                margin-left: -1.5rem;
+				cursor:pointer;
+            }
+            .right{
+                margin-left: 5.5rem;
+				cursor:pointer;
+            }
+            span{
+                font-size: 0.8rem;
+            }
+        }
+    }
+    .control-panels {
+        display: flex;
+        height: calc(100% - 10px);
+        width: 100%; //100vw;
+        .middle,
+        .right-side {
+            display: flex; // border: 1px solid black;
+            flex-direction: column;
+            margin: 0 $common-space 0 $common-space;
+            border-radius: 6px;
+            background: #fff;
+            padding: 5px;
+            .title {
+                display: flex;
+                align-items: center;
+                font-size: 20px;
+                font-weight: bold;
+                padding: 0 10px 0 10px;
+                height: 30px;
+                i {
+                    color: #30c9e8
+                }
+                span {
+                    margin-left: 15px;
+                }
+                border-bottom: 1px solid #e4e4e4;
+            }
+            .panel-content {
+                height: 100% !important; //calc(100% - 32.5px);
+                width: 100%;
+                position: relative;
+                .whole-net-bottom {
+                    position: absolute;
+                    right:0;
+                    float: right;
+                    margin: 1.4rem 2.5% 0 0;
+                    text-align: left;
+                    //width: 10rem;
+                    z-index: 999;
+					background:transparent;
+                    img{
+                        margin-top: -5px;
+                    }
+                    span {
+                        padding-top: 50px;
+                        margin-left: 3px;
+                        font-weight: bold;
+                        font-size: 1.3rem;
+                    }
+                    .flowType{
+                        padding-left:20px;
+                        color: #F9760B;
+                    }
+                }
+            }
+        }
+		.right-side{
+			padding: 3px !important;
+			.title{
+				margin:2px 2px 0 2px;
+			}
+		}
+        .left-side {
+            width: 25.5%; //calc(#{$panel-total-width} * 0.3);
+            height: 100%;
+            border-radius: 6px;
+            background: #F2F0F1;
+            #leftPanel{
+                height:100%;
+                //border: 1px solid red;
+            }
+            .title {
+                display: flex;
+                align-items: center;
+                font-size: 20px;
+                padding: 5px 10px 0 10px;
+                height: 34.5px;
+                i {
+                    color: #30c9e8;
+                }
+                span {
+                    margin-left: 1rem;
+                    font-weight: bold;
+                }
+                button{
+                    background-repeat: no-repeat;
+                    background-color: white;
+                    background-size: 100% 100%;
+                    height: 20px;
+                    width: 20px;
+                    border: none;
+                    background-image: url('../images/icon-unchecked-white.png');
+                }
+                .Checked {
+                    background-image: url('../images/icon-checked-grey.png');
+                }
+                border-bottom: 1px solid #e4e4e4;
+            }
+            .left-side-up{
+                width: 100%;
+                height: 60%;
+                margin: 0 $common-space 0 0;
+                display: flex; // border: 1px solid black;
+                flex-direction: column;
+                border-radius: 6px;
+                background: #fff;
+                padding: 0px 1px 0px 1px;
+                //border:1px solid red;
+                //border: 1px solid blue;
+            }
+            .left-side-down{
+                width: 100%;
+                //height: 40%;
+                margin: 0 $common-space 0 0;
+                display: flex; // border: 1px solid black;
+                flex-direction: column;
+                border-radius: 6px;
+                background: #fff;
+                padding: 5px 5px 0 5px;
+                 //border:1px solid  blue;
+            }
+        }
+        .middle {
+            width: 45%; //calc(#{$panel-total-width} * 0.4);
+            margin: 0 calc(#{$common-space} / 2) 0 calc(#{$common-space});
+                //border:1px solid yellow;
+                //height: 65%;
+                 /**惠州地图*/
+            #huizhouMap{
+              width: 100%;
+              height: calc(100% - 12.3rem - 30px);
+            }
+            .tableMeg{
+                width: 100%;
+                height: 12.3rem;
+                //margin-top: 10px;
+                .table-container{
+                    width:100%;
+                    height:100%;
+                    .tableStyle{
+                        margin: auto;
+                        th,td{
+                            font-size: 0.8rem;
+                            font-family: '微软雅黑';
+                            text-align:center;
+                            height: 2.1rem;
+                            // font-size: 13px;
+                            // height: 29px;
+                        }
+                    }
+                }
+            }
+            .carousel-indicators{
+                position:absolute;
+                bottom:0;
+            }
+            #foshanMap{
+                width: 100%;
+                height: 350px;
+                border:1px solid red;
+            }
+        }
+        .right-side {
+            width: 29%; //calc(#{$panel-total-width} * 0.3);
+            height: 100%;
+            margin: 0 calc(#{$common-space} / 5) 0 calc(#{$common-space} / 5);
+            display: flex; // border: 1px solid black;
+            flex-direction: column;
+            margin: 0 $common-space 0 $common-space;
+            border-radius: 6px;
+            background: #fff;
+            padding: 5px;
+            .title {
+                display: flex;
+                align-items: center;
+                font-size: 20px;
+                padding: 0 10px 0 10px;
+                height: 30px;
+                i {
+                    color: #30c9e8
+                }
+                span {
+                    margin-left: 15px;
+                }
+                border-bottom: 1px solid #e4e4e4;
+            }
+
+        }
+    }
+
+	/**双向柱形图翻页*/
+	.twoBarPage{
+		text-align:center;
+		height:20px;
+		input{
+			margin:0 5px;
+			padding:0 3px;
+			width:50px;
+			height:18px;
+			border:1px solid rgba(0,0,0,.2);
+			border-radius:3px;
+		}
+		button{
+			border:none;
+			cursor:pointer;
+			outline: none;
+		}
+		.ui-pg-button{
+			width:20px;
+			height:18px;
+			background:#fff;
+			&:hover{
+				background:rgba(0,0,0,.1);
+			}
+		}
+		.ui-disabled{
+			color:rgba(0,0,0,.4);
+			cursor:default;
+		}
+		.go{
+			width:30px;
+			height:19px;
+			color: #fff;
+			margin-left:5px;
+			background-color: #0275d8;
+			border-color: #0275d8;
+			border-radius:3px;
+			&:hover{
+				background:#0270CF;
+			}
+		}
+	}
+
+    /**屏幕分辨率的适配*/
+    @media screen and (max-width: 1366px){
+     //宽度<=1366 的设备
+         /**左侧*/
+         .assessment-charts{height: 8.58rem;}
+         //.progressCharts {padding: 2% 0 2% 0;}
+         //.networkElementRate-charts {height: 16.5rem;}
+         //.horizontalBar-charts{height: 13rem;}
+         //.gauge-charts{margin-top: -1.3rem;}
+         /**中间*/
+         //#myMap{height: 65% !important;}
+         /**右侧*/
+         //#twoWayBarChart{height: 23rem;}
+         //#bpChart1{height: 18.2rem;}
+         //#bpChart2{height: 18.2rem;}
+		#userCount{
+			margin:0.8rem 1.2% 0 0;
+			span{
+				font-size:1rem;
+			}
+		}
+    }
+    @media screen and (min-width: 1367px) and (max-width: 1401px){
+     //1367<=宽度<=1400 的设备
+         /**左侧*/
+         .assessment-charts{height: 10rem;}
+         //.progressCharts {padding: 8.05% 0 8% 0;}
+         //.left-side-down .title{padding-top:30px; height: 30px;}
+         //.networkElementRate-charts { margin-top:10px; height: 20.8rem;}
+         //.horizontalBar-charts{height: 25.8rem;}
+         /**中间*/
+         //#myMap{height: 75% !important;}
+         .tableMeg{margin: 0;}
+         /**右侧*/
+         //#twoWayBarChart{height: 32rem;}
+         //#bpChart1{height: 29.2rem;}
+         //#bpChart2{height: 29.2rem;}
+		#userCount{
+			margin:0.8rem 1.2% 0 0;
+			span{
+				font-size:1.15rem;
+			}
+		}
+    }
+    @media screen and (min-width: 1401px) and (max-width: 1440px){
+     //1401<=宽度<=1440 的设备
+         /**左侧*/
+         .assessment-charts{height: 9.3rem;}
+         //.progressCharts {padding: 4.17% 0 4.17% 0;}
+         //.networkElementRate-charts {height: 19rem;}
+         //.horizontalBar-charts{height: 19.9rem;}
+         /**中间*/
+         //#myMap{height: 74% !important;}
+         /**右侧*/
+         //#twoWayBarChart{height: 27.5rem;}
+         //#bpChart1{height: 23.2rem;}
+         //#bpChart2{height: 23.2rem;}
+		#userCount{
+			margin:0.8rem 1.2% 0 0;
+			span{
+				font-size:1.15rem;
+			}
+		}
+    }
+    @media screen and (min-width: 1441px) and (max-width: 1600px){
+     //1441<=宽度<=1600 的设备
+         /**左侧*/
+         .assessment-charts{height: 10.05rem;}
+         //.progressCharts {padding: 3.15% 0 3.15% 0;}
+         .textDetailHidden{width: 46%;}
+         //.networkElementRate-charts {height: 19rem;}
+         //.horizontalBar-charts{height: 19.85rem;}
+         /**中间*/
+         //#myMap{height: 74% !important;}
+         /**右侧*/
+         //#twoWayBarChart{height: 27.5rem;}
+         //#bpChart1{height: 23.2rem;}
+         //#bpChart2{height: 23.2rem;}
+		#userCount{
+			margin:0.8rem 1.2% 0 0;
+			span{
+				font-size:1.15rem;
+			}
+		}
+    }
+    @media screen and (min-width: 1601px) and (max-width: 1680px){
+     //1601<=宽度<=1680 的设备
+         /**左侧*/
+         .assessment-charts{height: 11rem;}
+         //.progressCharts {padding: 4.5% 0 4.45% ;}
+         //.textDetail {margin-top: -0.8%; height: 2.5rem;}
+         .textDetailHidden{width: 46%;}
+         //.networkElementRate-charts { margin-top:10px; height: 21rem;}
+         //.horizontalBar-charts{height: 24rem;}
+         /**中间*/
+         //#myMap{height: 78.5% !important;}
+         /**右侧*/
+         //#twoWayBarChart{height: 32rem;}
+         //#bpChart1{height: 29.2rem;}
+         //#bpChart2{height: 29.2rem;}
+		#userCount{
+			margin:0.9rem 1.3% 0 0;
+			span{
+				font-size:1.2rem;
+			}
+		}
+    }
+    @media screen and (min-width: 1681px) and (max-width: 1920px){
+     //1681<=宽度<=1920 的设备
+         /**左侧*/
+         .assessment-charts{height: 11rem;}
+         //.progressCharts {padding: 4.95% 0 4.9% 0;}
+         .textDetailHidden{width: 46%;}
+         .progressDetail{margin-top: -1%;}
+         .imageDetail img{width: 32px;height: 32px;}
+         //.networkElementRate-charts {height: 24rem;}
+         //.horizontalBar-charts{height: 26rem;}
+         /**中间*/
+         //#myMap{height: 79% !important;}
+         /**右侧*/
+         //#twoWayBarChart{height: 36rem;}
+         //#bpChart1{height: 27.2rem;}
+         //#bpChart2{height: 27.2rem;}
+    }
+
+}
+

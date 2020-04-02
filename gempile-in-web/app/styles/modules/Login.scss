@@ -1,0 +1,50 @@
+#login {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    width:100%;
+    background: #fff;
+    .header{
+        display: flex;
+        align-items: center;
+        height: 80px;
+        width: 100%;
+        padding-left:30px;
+    }
+    .content{
+        flex: 1;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        min-height: 480px;
+        // height: 60%;
+        width: 100%;
+        background: url(../../asserts/images/login/background.png) no-repeat 50% 50%;
+        .login-box{
+            position: relative;
+            right: 15%;
+            border: 1px silver solid;
+            border-radius: 4px;
+            width: 400px;
+            height: 380px;
+            padding: 20px;
+            background: #fff;
+            .title,
+            .message{
+                margin-bottom: 15px;
+            }
+           
+            .input-group{
+                margin-bottom: 20px;
+                height: 50px;
+                span{
+                    width: 50px;
+                }
+            }
+            
+        }
+    }
+    .footer{
+        height: 8%;
+    }
+}

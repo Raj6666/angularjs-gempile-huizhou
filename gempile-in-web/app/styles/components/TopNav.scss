@@ -1,0 +1,150 @@
+
+.top-nav {
+	z-index: 999;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	flex-flow: row;
+	height: 65px;
+	min-width:1345px;
+	background: #0275D8;
+	.nav-left > li {
+		height: 65px;
+		float: left;
+	}
+	.nav-item {
+		width: $NAV_ITEM_WIDTH;
+		justify-content: center;
+		align-items: center;
+		flex: 0 auto;
+		height: 100%;
+		// margin: 0 15px;
+		color: whitesmoke;
+		&:hover {
+			background-color: #1E80D0;
+		}
+		// padding: 0 10px;
+		span {
+			width: $NAV_ITEM_WIDTH;
+			font-size: 17px;
+		}
+		.nav-2rd-menu {
+			display: none;
+			width: $NAV_ITEM_WIDTH;
+			list-style: none;
+			position: relative;
+			z-index: 3333;
+			li {
+				height: 40px;
+				width: $NAV_ITEM_WIDTH;
+				border-top: 1px solid #0082C2;
+				background-color: #1E80D0;
+				&:hover {
+					background-color: #0275D8;
+				}
+				a {
+					color: #fff;
+				}
+			}
+		}
+	}
+	.nav-icon {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		width: 50px;
+		height: 100%;
+		color: #fff;
+	}
+	.right-btn-list {
+		height: 65px;
+		display: flex;
+		align-items: center;
+		position:relative;
+	}
+	.controllerTop{
+		position:absolute;
+		top:51px;
+		right:0;
+		width:24px;
+		height:14px;
+		//background-color: #678bff;
+		&:hover{
+			background-color: #627bff;
+		}
+		i{
+			position: absolute;
+			color: #fff;
+		}
+		#chevron_up{
+			font-size: 22px;
+			left: 5px;
+			top: -6px;
+		}
+		#thumb-tack{
+			left: 8px;
+			top: -1px;
+			transform:rotate(-90deg);
+			-ms-transform:rotate(-90deg); 	/* IE 9 */
+			-moz-transform:rotate(-90deg); 	/* Firefox */
+			-webkit-transform:rotate(-90deg); /* Safari 和 Chrome */
+			-o-transform:rotate(-90deg); /* Opera */
+		}
+	}
+	.logo {
+		margin: 0 15px;
+	}
+	.main-menu {
+		display: none;
+		position: relative;
+		z-index: 3333;
+		min-width: 1200px;
+		background-color: white;
+		box-shadow: 3px 3px 16px #6d6d6d;
+		span {
+			font-size: 16px;
+			color: black;
+			font-weight: lighter;
+		}
+		li {
+			height: 45px;
+			display: flex;
+			align-items: center;
+			.business-category {
+				display: flex;
+				flex-flow: row;
+				align-items: center;
+				img {
+					height: 20px;
+					width: 20px;
+				}
+				span {
+					border-right: 1px silver solid;
+				}
+			}
+			a.disabled {
+				cursor: not-allowed;
+				span {
+					color: silver
+				}
+				&:hover {
+					span {
+						color: silver
+					}
+				}
+			}
+			a {
+				display: flex;
+				align-items: center;
+				flex: none;
+				width: 175px;
+				padding: 0 10px;
+				&:hover {
+					span {
+						color: #0082c2
+					}
+				}
+			}
+		}
+	}
+}

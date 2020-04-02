@@ -1,0 +1,7 @@
+/gempile-in-web/build
+/gempile-in-web/node_modules
+/gempile-in-web/ng2/node_modules
+/.idea
+/gempile-in-web/.idea
+/gempile-in-web/.vscode
+yarn.lock

@@ -1,0 +1,112 @@
+<div class="content" id="gis_analysis">
+    <div class="guidepost">
+        <i class="fa fa-map-marker"></i>
+        <span>软采分析 > 弱覆盖区域GIS分析</span>
+    </div>
+    <div class="query-panel">
+        <div class="head">
+            <div class="title">
+                <div class="text"><span>新建查询</span></div>
+                <div class="right-triangle"></div>
+            </div>
+        </div>
+        <div id="poor-gis-body" class="collapse poor-gis-body show">
+            <div class="inline-form-group">
+                <div class="select-date">
+                    <label class="col-form-label flex-center">日期：</label>
+                    <div class="form-items">
+                        <input class="btn btn-outline-info selDate Wwidth170" type="text" placeholder="请选择时间"
+                               ng-model="selDate" style="text-align:left;color:#464a4c;">
+                    </div>
+                </div>
+                <div class="select-time">
+                    <label class="col-form-label flex-center">时段：</label>
+                    <select name="" id="" class="form-control" ng-model="timeSlot">
+                        <option value="" disabled selected style="display:none;">请选择时段</option>
+                        <option value="0">00:00—01:00</option>
+                        <option value="1">01:00—02:00</option>
+                        <option value="2">02:00—03:00</option>
+                        <option value="3">03:00—04:00</option>
+                        <option value="4">04:00—05:00</option>
+                        <option value="5">05:00—06:00</option>
+                        <option value="6">06:00—07:00</option>
+                        <option value="7">07:00—08:00</option>
+                        <option value="8">08:00—09:00</option>
+                        <option value="9">09:00—10:00</option>
+                        <option value="10">10:00—11:00</option>
+                        <option value="11">11:00—12:00</option>
+                        <option value="12">12:00—13:00</option>
+                        <option value="13">13:00—14:00</option>
+                        <option value="14">14:00—15:00</option>
+                        <option value="15">15:00—16:00</option>
+                        <option value="16">16:00—17:00</option>
+                        <option value="17">17:00—18:00</option>
+                        <option value="18">18:00—19:00</option>
+                        <option value="19">19:00—20:00</option>
+                        <option value="21">21:00—22:00</option>
+                        <option value="22">22:00—23:00</option>
+                        <option value="23">23:00—24:00</option>
+                    </select>
+                </div>
+                <div class="select-area">
+                    <label class="col-form-label flex-center">覆盖域：</label>
+                    <select name="" class="form-control" ng-model="selArea">
+                        <option value="" disabled selected style="display:none;">请选择区域</option>
+                        <option value="全网">全网</option>
+                        <option value="惠城区">惠城区</option>
+                        <option value="惠阳区">惠阳区</option>
+                        <option value="博罗县">博罗县</option>
+                        <option value="惠东县">惠东县</option>
+                        <option value="龙门县">龙门县</option>
+                        <option value="大亚湾区">大亚湾区</option>
+                        <option value="仲恺区">仲恺区</option>
+                    </select>
+                </div>
+                <button id="toPoorAreaGisAnalysis" type="button" class="btn btn-info inquire"
+                        ng-click="toPoorAreaGisAnalysis()">查询
+                </button>
+            </div>
+            <!--<div>{{selDate}}{{timeSlot}}{{selArea}}</div>-->
+        </div>
+        <div class="footer"></div>
+    </div>
+    <div class="map_analysis">
+        <p class="Networktitle">
+            <span>弱覆盖区域GIS分析 > 当前查询：</span>
+            <label ng-bind="queryStatusMessage"></label>
+            <!--<input type="button" value="全屏显示" class="Savetheform fullPage btn-outline-info" ng-click="fullPage()">-->
+            <button value="全屏显示" class="fullPage btn-outline-info"
+                    ng-click="fullPage()"><i class="fa fa-arrows-alt" aria-hidden="true"></i>全屏显示
+            </button>
+            <input type="button" value="保存表格" class="Savetheform btn-outline-info" ng-click="exportGisToCsv()">
+        </p>
+        <div class="map_gis_analysis" id="map_gis_analysis"><!--ng-show="mapGisAnalysis"-->
+            <div class="map_show ">
+                <button class="click_loading" ng-click="showTable()">---</button>
+                <button class="close_full_screen" ng-click="noFullScreen()" style="display:none">×</button>
+                <button type="button" class="btn btn-sm btn-info exit" style="display:none" ng-click="showBigMap()">
+                    Exit
+                </button>
+                <div class="gis_type" style="display:none">
+                    <ul>
+                        <li><i></i><span>（-∞，-110）</span></li>
+                        <!--<li><s></s><span>（-110，-95）</span></li>-->
+                        <!--<li><em></em><span>（-95，+∞）</span></li>-->
+                    </ul>
+                </div>
+                <div class="big_map" id="bigMap">
+                </div>
+            </div>
+            <div class="table_show" id="table_show" ng-if="tableAnalysis"><!--ng-show="tableAnalysis"-->
+                <div id="Gis_analysis_statistics" ui-grid="gisGridOptions" class="grid"
+                     ui-grid-pinning
+                     ui-grid-exporter
+                     ui-grid-resize-columns
+                     ui-grid-auto-resize
+                     ui-grid-selection>
+                </div>
+                <div class="totalItem">共{{gisGridOptions.totalItems}}条记录</div>
+            </div>
+        </div>
+    </div>
+</div>

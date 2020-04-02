@@ -1,0 +1,381 @@
+*,
+body {
+    margin: 0;
+    padding: 0;
+    /*background:#f5f5f5;*/
+    font-family: '微软雅黑';
+    font-size: 14px;
+    outline: none;
+
+}
+
+html {
+    font-size: 14px;
+}
+
+html,
+body {
+    width: 100%;
+    height: 100%;
+    color: #545454;
+}
+
+body {
+    background: #f2f0f1;
+    //min-width: 1280px;
+    height: 100%;
+}
+
+ul,
+ol,
+li {
+    list-style: none;
+}
+
+a,
+ins {
+    text-decoration: none;
+}
+
+input,
+textarea,
+select {
+    font-family: inherit;
+    font-size: inherit;
+    font-weight: inherit;
+    color: #545454;
+}
+
+table,
+th,
+td {
+    border-collapse: collapse;
+    border-spacing: 0;
+    font-weight: normal;
+    text-align: left;
+    font-size: 12px;
+    border-radius: 0;
+}
+
+img,
+input,
+select {
+    border: 0;
+}
+
+input:-webkit-autofill {
+    -webkit-box-shadow: 0 0 0 1000px white inset;
+}
+
+input[type="button"],
+input[type="submit"],
+input[type="reset"],
+.Network_indicators_analysistable th img,
+.Nscreen p,
+.btn1,
+.btn2,
+.cursorp,
+.NnewconstructionRspan2_select li {
+    outline: none;
+    cursor: pointer;
+}
+
+.disabled {
+    cursor: not-allowed;
+    color: silver;
+}
+
+select::-ms-expand {
+    display: none;
+}
+
+/*select,
+input[type="text"],
+input[type="button"],
+input[type="radio"],
+input[type="password"] {
+    appearance: none;
+    -moz-appearance: none;
+    -webkit-appearance: none;
+}*/
+
+input[type="text"],
+input[type="button"],
+input[type="radio"],
+input[type="password"] {
+    -moz-appearance: none;
+    -webkit-appearance: none;
+}
+
+div::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+}
+
+/* 这是针对缺省样式 (必须的) */
+div::-webkit-scrollbar-track {
+    background-color: #eee;
+}
+
+/* 滚动条的滑轨背景颜色 */
+div::-webkit-scrollbar-thumb {
+    background-color: #dcdcdc;
+}
+
+/* 滑块颜色 */
+div::-webkit-scrollbar-button {
+    display: none;
+    background-color: #000;
+}
+
+/* 滑轨两头的监听按钮颜色 */
+div::-webkit-scrollbar-corner {
+    background: #eee;
+}
+
+a {
+    // display: inline-block;
+    // color : white;
+    width: 100%;
+    height: 100%;
+}
+
+a:hover {
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.flex-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.flex-vertical-center-right {
+    display: flex;
+    align-items: center;
+    flex-direction: row-reverse;
+}
+
+.flex-vertical {
+    display: flex;
+    flex-direction: column;
+}
+
+.main {
+    min-width: 1024px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.main-content {
+    //position: absolute;
+    //width: 100%;
+    //top: 65px;
+    //bottom: 40px;
+    //overflow-y: scroll;
+	flex: 1;
+}
+
+.content {
+    padding: 10px 20px;
+}
+
+.ng2-contain {
+	//z-index: -1;
+    position: absolute;
+    width: 100%;
+    //top: 65px;
+    bottom: 0;
+	margin-top: auto;
+
+    iframe {
+        width: 100%;
+        height: 100%;
+    }
+}
+
+.top_0 {
+	top: 0;
+	//z-index: -1;
+}
+
+.top_65 {
+	top: 65px;
+}
+
+
+footer {
+    //flex: 1;
+    //display: flex;
+    //justify-content: center;
+    //align-items: center;
+    //height: 40px;
+    //bottom: 0;
+    //position: absolute;
+    //width: 100%;
+	height: 45px;
+	text-align: center;
+	line-height: 45px;
+}
+
+// 新建查询面板
+.query-panel {
+    background-color: white;
+    padding: 0 !important;
+    border-radius: 4px;
+    .head {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        height: 40px !important;
+        border-bottom: 2px solid $BLUE_POSITIVE;
+        padding: 10px 15px 0 0 !important;
+        .select-zone {
+            display: flex; // align-items: center;
+            height: 30px;
+            .prompt {
+                position: relative;
+                top: -1px;
+                font-size: 16px;
+                margin: 0 15px;
+            }
+        }
+        .title {
+            display: flex;
+            align-items: center;
+            height: 30px;
+            .text {
+                display: flex;
+                align-items: center;
+                height: 30px;
+                color: white;
+                padding: 0 20px;
+                background-color: $BLUE_POSITIVE;
+            }
+            .right-triangle {
+                width: 30px;
+                height: 30px;
+                display: inline-block;
+                background: url("../../asserts/images/common/right_triangle.png") no-repeat right center;
+                background-size: auto 30px;
+            }
+        }
+    }
+    .footer {
+        display: flex;
+        justify-content: center;
+        border-top: 2px solid $BLUE_POSITIVE;
+    }
+    .inline-form-group {
+        padding: 8px 30px;
+        height: 54px;
+        display: flex;
+        align-content: center;
+        .select-date, .select-time, .select-area,.select-condition {
+            //width: 230px;
+            display: flex;
+            align-items: center;
+            white-space: nowrap;
+            margin-right: 50px;
+            select{
+                width: 170px;
+                height: 33px;
+                border: 1px solid #5bc0de;
+                &:hover {
+                    cursor: pointer;
+                    background-color: #5bc0de;
+                }
+                option {
+                    background-color: #fff;
+                }
+            }
+        }
+        .inquire {
+            padding: 0 10px;
+            height: 30px;
+            margin-top: 5px;
+        }
+    }
+    #query-param-panel {
+        .inline-form-group {
+            display: flex;
+            align-content: center;
+            border-bottom: 1px dashed silver;
+            height: 60px;
+            .col-form-label {
+                width: 100px;
+                margin: 0 10px;
+            }
+            .form-items {
+                display: flex;
+                align-items: center;
+                input {
+                    margin: 0 10px;
+                }
+            }
+        }
+        .custom-checkbox {
+            margin: 0 20px 0 0;
+        }
+        .submit-btns {
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            button {
+                margin: 0 20px;
+            }
+        }
+    }
+    .collapse-btn {
+        width: 120px;
+        height: 11px;
+        padding: .1rem .5rem;
+        background-color: $BLUE_POSITIVE;
+        border-color: $BLUE_POSITIVE;
+        border-radius: 0 0 2px 2px;
+        i {
+            position: relative;
+            top: -3px;
+        }
+    }
+}
+
+// 导航标志
+.guidepost {
+    margin: 8px 10px;
+}
+
+// 提示
+.prompt {
+    color: #969696;
+}
+
+//下拉框
+.select-width {
+    width: 90px;
+}
+
+.custom-control-input:focus ~ .custom-control-indicator {
+    box-shadow: none;
+}
+
+.jstree-default .jstree-clicked {
+    background-color: #fff !important;
+    border: none;
+    box-shadow: none;
+}
+
+.clear-fix {
+    zoom: 1; //为了兼容IE
+    &:after {
+        content: ""; //设置内容为空
+        height: 0; //高度为0
+        line-height: 0; //行高为0
+        display: block; //将文本转为块级元素
+        visibility: hidden; //将元素隐藏
+        clear: both; //清除浮动
+    }
+}

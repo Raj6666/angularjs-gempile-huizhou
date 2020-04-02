@@ -1,0 +1,337 @@
+.menu {
+  padding: 10px 15px 10px;
+}
+
+.content {
+  width: 98%;
+  margin: 0 auto;
+  background: #fff;
+}
+
+.search {
+  padding: 20px 20px 8px 20px;
+}
+
+.judgeText{
+  padding: 0 0 8px 20px;
+  border-bottom: 1px solid #20bbfe;
+  color: red;
+  margin-bottom: 0;
+}
+
+.poor-gis-body{
+  margin-top: 10px;
+  padding-left: 20px;
+  border-bottom: 2px solid #20bbfe;
+}
+
+.Networktitle {
+  line-height: 30px;
+  padding: 8px 20px;
+  margin: 0;
+  padding-left: 20px
+}
+
+.fullPage{
+  height: 32px;
+  width: 108px;
+  border: 1px solid #00a7f3;
+  border-radius: 4px;
+  color: #00a7f3;
+  float: right;
+  margin-left: 18px;
+}
+
+.float_div{
+  width: 100%;
+  position: relative;
+  height: 595px;
+  cursor: pointer;
+}
+
+.FDEprompt{
+  z-index: 1;
+  position: absolute;
+  overflow: hidden;
+  width: 800px;
+  height: 60px;
+  top: 75px;
+  left: 120px;
+}
+
+.FDEprompt ul li{
+  background: url(../../../assets/images/detail/kuang.png) no-repeat;
+  background-size: 100% 100%;
+  float: left;
+  width: 12%;
+  height: 30px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  color: white;
+  margin-right: 10px;
+  position: absolute;
+}
+
+.FDEprompt ul li img{
+  position: relative;
+  top: -20px;
+  z-index: 1;
+}
+
+.FDEprompt ul li:nth-last-child(){
+  margin-right: 0;
+}
+
+.floatList{
+  width: 360px;
+  height: 45px;
+  position: absolute;
+  left: 140px;
+  top: 20px;
+  z-index: 1;
+  overflow: hidden;
+}
+
+ul{
+  overflow: hidden;
+  width: 100%;
+  margin-bottom: 0;
+  padding: 0;
+}
+
+li{
+  list-style: none;
+}
+
+.floatList .blueCicle{
+  background: url(../../../assets/images/detail/blue.png) no-repeat;
+  background-size: 100% 100%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  width:13%;
+  font-weight: 600;
+  color: white;
+  font-size: 20px;
+}
+
+.floatList .bg{
+  background: url(../../../assets/images/detail/grey.png) no-repeat;
+  background-size: 100% 100%;
+}
+
+.floatList ul li{
+  margin-right: 7%;
+  height: 45px;
+  float: left;
+}
+
+.floatList ul li:last-child{
+  margin-right: 0;
+}
+
+.rangingPositioning{
+  width:15%;
+}
+
+.rangingPositioning img{
+  width: 100%;
+}
+
+.topShowSwitchText{
+  background: url(../../../assets/images/detail/kuang.png) no-repeat;
+  background-size: 100% 100%;
+  z-index: 1;
+  position: absolute;
+  overflow: hidden;
+  width: 145px;
+  height: 30px;
+  top: 246px;
+  left: 25px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  color: white;
+}
+
+.bottomShowSwitchText{
+  background: url(../../../assets/images/detail/kuang.png) no-repeat;
+  background-size: 100% 100%;
+  z-index: 1;
+  position: fixed;
+  overflow: hidden;
+  width: 145px;
+  height: 30px;
+  bottom: 38px;
+  left: 25px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  color: white;
+}
+
+.topShowTable{
+  position: absolute;
+  opacity: 0.5;
+  width: 45px;
+  height: 28px;
+  border-radius: 10px 10px 0 0 ;
+  border:1px solid rgb(80, 78, 78);
+  top: 292px;
+  background: rgb(80, 78, 78);
+  z-index: 1;
+}
+
+.bottomShowTable{
+  position: fixed;
+  opacity: 0.5;
+  width: 45px;
+  height: 28px;
+  border-radius: 10px 10px 0 0 ;
+  border:1px solid rgb(80, 78, 78);
+  bottom: 8px;
+  background: rgb(80, 78, 78);
+  z-index: 1;
+}
+
+.coverageArea{
+  position: absolute;
+  z-index: 1;
+  width:140px;
+  height: 40px;
+  top: 285px;
+  left: 60px;
+  background: url(../../../assets/images/detail/yellow.png) no-repeat;
+  background-size: 100% 100%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
+.coverageArea p{
+  margin-bottom: 0;
+  color: white;
+}
+
+.coveredCellPair{
+  position: absolute;
+  z-index: 1;
+  width:140px;
+  height: 40px;
+  top: 285px;
+  left: 200px;
+  background: url(../../../assets/images/detail/green.png) no-repeat;
+  background-size: 100% 100%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
+.coveredCellPair p{
+  margin-bottom: 0;
+  color: white;
+}
+
+.map_div{
+  width: 100%;
+  height: 595px;
+  overflow: hidden;
+  margin-bottom: 20px;
+  z-index: 0;
+}
+
+.table_div{
+  z-index: 1;
+  width: 100%;
+  position: absolute;
+  top: 320px;
+}
+
+.table{
+  width: 100%;
+  z-index: 1;
+  background: #fff;
+}
+//.table #th th{
+//  background: #20bbfe;
+//  color: white;
+//  text-align: center;
+//}
+//
+// .abc th{
+//  background: #20bbfe;
+//  color: white;
+//  text-align: center;
+//}
+
+.table td{
+  text-align: center;
+}
+
+.export{
+  z-index: 1;
+  position: relative;
+  width: 75px;
+  left: 35%;
+  bottom: 31px;
+  background: #00a7f3;
+  border: 1px solid #00a7f3;
+  border-radius: 5px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  color: white;
+}
+
+::ng-deep .ant-table-thead > tr > th {
+  background: #20bbfe !important;
+  color: white;
+  text-align: center;
+}
+
+::ng-deep .ng-star-inserted .ant-pagination{
+  position: relative;
+  left: 42%;
+  float: left;
+  z-index: 1;
+}
+
+.foot{
+  text-align: center;
+  margin: 0.5em 0;
+}
+
+::ng-deep .leaflet-popup-content{
+  margin: 15px;
+  font-size: 20px;
+}
+
+::ng-deep .ant-table-pagination.ant-pagination{
+  margin: 8px 0;
+  z-index: 1;
+}
+
+::ng-deep .red{
+  color: red;
+}
+
+::ng-deep .black{
+  color: black;
+}
+
+::ng-deep .black:nth-child(1){
+  padding-top: 0;
+}
+
+::ng-deep .redBorder{
+  border: 1px solid red;
+  border-radius: 4px;
+}
+
+::ng-deep .redBorder:hover {
+  border: 2px solid red;
+  border-radius: 6px;
+}
+
+

@@ -1,0 +1,831 @@
+<div class="content" id="custom_area_analysis">
+	<div class="guidepost">
+		<i class="fa fa-map-marker"></i>
+		<span>专题分析 > 自定义区域分析</span>
+	</div>
+	<div class="query-panel">
+		<div class="head">
+			<div class="title">
+				<div class="text">
+					<span>新建查询</span>
+				</div>
+				<div class="right-triangle"></div>
+			</div>
+		</div>
+		<div id="information-body" class="collapse information-body show">
+			<div class="inline-form-group">
+				<div class="select-timeParticles width30">
+					<label class="col-form-label bFont" style="letter-spacing: 3px;">时间粒度：</label>
+					<div class="selectContainer">
+						<select class="form-control" id="sel_timeParticles">
+							<option value="小时" selected="selected">小时</option>
+							<option value="天">天</option>
+							<!--<option value="5分钟">5分钟</option>-->
+						</select>
+						<i class="fa fa-caret-down" aria-hidden="true"></i>
+					</div>
+				</div>
+				<div class="select-date width28">
+					<label class="col-form-label bFont" style="letter-spacing: 10px;">日期：</label>
+					<div class="form-items">
+						<input class="btn btn-outline-info selDate" type="text" placeholder="请选择日期" ng-model="selDate" style="text-align:left;color:#464a4c;">
+					</div>
+				</div>
+				<div class="select-time width22">
+					<label class="col-form-label bFont" style="letter-spacing: 10px;">时段：</label>
+					<select name="" class="form-control" ng-model="timeSlot" id="hourSlot">
+						<option value="" disabled selected style="display:none;">请选择时段</option>
+						<option value="00">00:00—01:00</option>
+						<option value="01">01:00—02:00</option>
+						<option value="02">02:00—03:00</option>
+						<option value="03">03:00—04:00</option>
+						<option value="04">04:00—05:00</option>
+						<option value="05">05:00—06:00</option>
+						<option value="06">06:00—07:00</option>
+						<option value="07">07:00—08:00</option>
+						<option value="08">08:00—09:00</option>
+						<option value="09">09:00—10:00</option>
+						<option value="10">10:00—11:00</option>
+						<option value="11">11:00—12:00</option>
+						<option value="12">12:00—13:00</option>
+						<option value="13">13:00—14:00</option>
+						<option value="14">14:00—15:00</option>
+						<option value="15">15:00—16:00</option>
+						<option value="16">16:00—17:00</option>
+						<option value="17">17:00—18:00</option>
+						<option value="18">18:00—19:00</option>
+						<option value="19">19:00—20:00</option>
+						<option value="21">21:00—22:00</option>
+						<option value="22">22:00—23:00</option>
+						<option value="23">23:00—24:00</option>
+					</select>
+					<div class="notClick" style="display:none"></div>
+				</div>
+				<div class="autoRefresh">
+					<input type="checkbox" id="refresh">
+					<span class="bFont">自动刷新</span>
+				</div>
+				<!--<div class="select-time" ng-show="timeParticles== '5分钟'">
+					<label class="col-form-label flex-center">时间：</label>
+					<div class="form-items">
+						<input class="btn btn-outline-info selTime" type="text" placeholder="请选择时间"
+							   ng-model="selTime" style="text-align:left;color:#464a4c;">
+					</div>
+				</div>-->
+
+			</div>
+			<div class="inline-form-group">
+				<div class="select-area width30">
+					<label class="col-form-label bFont">自定义区域：</label>
+					<!--<div class="btn-group template-list">
+                        <div class="dropdown-toggle selected-button" data-toggle="dropdown">
+                            {{selectOuterAreaName}}
+                        </div>
+                        <div class="dropdown-menu dropdown-menu-left" id="outerAreaContainer">
+                            <div ng-class="dropdown-item" ng-repeat="outerAreaElement in outerAreaList track by $index"
+                                 ng-click="selectOuterArea(outerAreaElement)" class="oneArea">
+                                {{outerAreaElement}}
+                            </div>
+                            <div ng-show='outerAreaElementInit.isLoading'>Loading data...</div>
+                        </div>
+                    </div>-->
+					<div ng-dropdown-multiselect options="outerAreaList" selected-model="outerAreaSelectedModel" extra-settings="outerAreaSelectedSetting"
+					    translation-texts="selectorText" events="outerAreaSelectedEvents">
+					</div>
+					<button type="button" class=" btn-outline-info inquire allocation" data-toggle="modal" data-target="#myModal">配置
+					</button>
+				</div>
+				<div class="select-template width48">
+					<label class="col-form-label bFont">显示模板：</label>
+					<div ng-dropdown-multiselect options="$page.templateOptions" selected-model="$page.template" extra-settings="templateSetting"
+					    translation-texts="selectorTemplateDelete" events="$page.templateEvents">
+					</div>
+					<button type="button" class=" btn-outline-info inquire presetBtn" data-toggle="modal" data-target="#presetModal" ng-click="$page.resetTemplate()">预设
+					</button>
+				</div>
+				<div class="three-button">
+					<button id="toUserDefinedAreaAnalysis" type="button" class="btn btn-info inquire" ng-click="clickToUserDefinedAreaAnalysis()">查询
+					</button>
+					<button value="全屏显示" class="fullPage btn-outline-info" ng-click="fullPage()">
+						<i class="fa fa-arrows-alt" aria-hidden="true"></i>全屏显示
+					</button>
+				</div>
+			</div>
+		</div>
+		<div class="footer"></div>
+	</div>
+	<div class="userDefinedArea-analysis">
+		<p class="Networktitle">
+			<span>自定义区域分析 > 当前查询：</span>
+			<label ng-bind="queryStatusMessage"></label>
+		</p>
+		<div class="analysis-box">
+			<ul>
+				<!--左边部分-->
+				<li class="map-and-keyIndicators">
+					<!--地图部分-->
+					<div class="map-indicators">
+						<div class="poorArea-name" style="display:none">{{selectedArea}}</div>
+						<div class="personnel-source" style="display:none">
+							<table>
+								<tr>
+									<td style="text-align:right;">
+										<div class="province">
+											<a href="">省内：</a>
+											<span class="hoverContainer province-analysis">{{selectedTime}}
+												<br>区域省内人数：{{provinceSubscriber}}人</span>
+										</div>
+										<div class="Macao">
+											<a href="">港澳台：</a>
+											<span class="hoverContainer Macao-analysis">{{selectedTime}}
+												<br>区域港澳台人数：{{hmtSubscriber}}人</span>
+										</div>
+
+									</td>
+									<td>
+										<div class="province province-number number">
+											<a id="provinceNumber">{{provinceSubscriber}}</a>
+											<span class="hoverContainer province-analysis">{{selectedTime}}
+												<br>区域省内人数：{{provinceSubscriber}}人</span>
+										</div>
+										<div class="Macao Macao-number number">
+											<a id="MacaoNumber">{{hmtSubscriber}}</a>
+											<span class="hoverContainer Macao-analysis">{{selectedTime}}
+												<br>区域港澳台人数：{{hmtSubscriber}}人</span>
+										</div>
+									</td>
+									<td>
+										<div class="people">人</div>
+										<div class="people">人</div>
+									</td>
+									<td style="padding-left:20px;">
+										<div class="inter-provincial">
+											<a href="">省际：</a>
+											<span class="hoverContainer inter-provincial-analysis">{{selectedTime}}
+												<br>区域省际人数：{{outProvinceSubscriber}}人</span>
+										</div>
+										<div class="international">
+											<a href="">国际：</a>
+											<span class="hoverContainer international-analysis">{{selectedTime}}
+												<br>区域国际人数：{{internationalSubscriber}}人</span>
+										</div>
+									</td>
+									<td>
+										<div class="inter-provincial inter-provincial-number number">
+											<a id="interProvincialNumber">{{outProvinceSubscriber}}</a>
+											<span class="hoverContainer inter-provincial-analysis">{{selectedTime}}
+												<br>区域省际人数：{{outProvinceSubscriber}}人</span>
+										</div>
+										<div class="international international-number number">
+											<a id="internationalNumber">{{internationalSubscriber}}</a>
+											<span class="hoverContainer international-analysis">{{selectedTime}}
+												<br>区域国际人数：{{internationalSubscriber}}人</span>
+										</div>
+									</td>
+									<td>
+										<div class="people">人</div>
+										<div class="people">人</div>
+									</td>
+								</tr>
+							</table>
+						</div>
+						<div class="personnel-distribution" style="display:none">
+							<ul>
+								<li>
+									<button class="btn btn-info source" data-toggle="modal" data-target="#myPeopleModal" ng-click="getNumberAttribution()">人员来源查询
+									</button>
+								</li>
+								<li style="background:rgba(255,255,255,0.5);border-radius:3px;" class="userBox">
+									<a>
+										<i class="fa fa-user" aria-hidden="true"></i>
+										<span>
+											<span class="number" id="areaCountNumber">{{areaSubscriber}}</span>人</span>
+										<br>
+										<span style="padding-left:30px;">4G：
+											<span class="number" id="areaCountNumber4G">{{areaSubscriber4G}}</span>人</span>
+										<br>
+										<span style="padding-left:30px;">3G：
+											<span class="number" id="areaCountNumber3G">{{areaSubscriber3G}}</span>人</span>
+										<br>
+										<span style="padding-left:30px;">2G：
+											<span class="number" id="areaCountNumber2G">{{areaSubscriber2G}}</span>人</span>
+										<br>
+									</a>
+									<span class="hoverContainer totalNumber">
+										{{selectedTime}}
+										<br> 区域总人数：{{areaSubscriber}}人
+										<br> 区域4G人数：{{areaSubscriber4G}}人
+										<br> 区域3G人数：{{areaSubscriber3G}}人
+										<br> 区域2G人数：{{areaSubscriber2G}}人
+										<br>
+									</span>
+								</li>
+								<li style="background:rgba(255,255,255,0.5);border-radius:3px;" class="downloadBox">
+									<a>
+										<i class="fa fa-cloud-download" aria-hidden="true"></i>
+										<span class="number" id="areaCountFlow">{{areaFlow}}</span>
+										<span>GB</span>
+									</a>
+									<span class="hoverContainer totalFlow">{{selectedTime}}
+										<br>区域总流量：{{areaFlow}}GB</span>
+								</li>
+							</ul>
+						</div>
+						<!--默认模板时显示该模块-->
+						<div class="progressPanel1" ng-show="$page.templateType === 'default'">
+							<div class="progressCharts">
+								<div class="textDetailHidden"></div>
+								<div id="showDownload" class="imageDetail" style="padding-left:5px;">
+									<a>
+										<i class="fa fa-cloud-download" aria-hidden="true"></i>
+									</a>
+								</div>
+								<a class="textDetail HTTP-download" style="width: 60%;margin-left: -5.5%;margin-right:5px;">
+									<span id="httpRate" class="value" data-index="0" data-unit="(Mbps)">{{httpRate}}Mbps</span>
+									<p class="hoverContainer HTTP-speed" style="width:190px;">{{selectedTime}}
+										<br>HTTP下载速率：{{httpRate}}Mbps
+									</p>
+								</a>
+								<p class="icon" style="top: 5px; right: 6%;">
+									<a href="javascript: void(0)" class="imgHoverA">
+										<img ng-src="{{'./images/'+$page.setDefaultTemplateIcon(0, 'httpRate')+'.png'}}">
+										<span class="imgHoverContainer ng-binding">{{$page.setDefaultTemplateLevelText('httpRate')}}全市均值：{{httpRate_City}}Mbps</span>
+									</a>
+								</p>
+							</div>
+							<div class="progressCharts">
+								<a class="textDetail game-response-timeDelay">
+									<span id="browseResponseAvgDelay" class="value" data-index="1" data-unit="(ms)">{{browseResponseAvgDelay}}ms</span>
+									<p class="hoverContainer game-timeDelay" style="width:180px;">{{selectedTime}}
+										<br>浏览响应时延：{{browseResponseAvgDelay}}ms
+									</p>
+									<p class="icon left">
+										<a href="javascript: void(0)" class="imgHoverA">
+											<img ng-src="{{'./images/'+$page.setDefaultTemplateIcon(1, 'browseResponseAvgDelay')+'.png'}}">
+											<span class="imgHoverContainer ng-binding">{{$page.setDefaultTemplateLevelText('browseResponseAvgDelay')}}全市均值：{{browseResponseAvgDelay_City}}ms</span>
+										</a>
+									</p>
+								</a>
+								<div id="showBrowse" class="imageDetail">
+									<a>
+										<i class="fa fa-internet-explorer" aria-hidden="true"></i>
+									</a>
+								</div>
+								<div class="progressDetail game-response-successRate">
+									<div id="pChart5" class="progressBar">
+										<div class="leftBar"></div>
+										<div class="rightBar"></div>
+									</div>
+									<span class="percentage value" data-index="2" data-unit="(%)">{{browseResponseSuccessRate}}%</span>
+									<p class="icon">
+										<a href="javascript: void(0)" class="imgHoverA">
+											<img ng-src="{{'./images/'+$page.setDefaultTemplateIcon(2, 'browseResponseSuccessRate')+'.png'}}">
+											<span class="imgHoverContainer ng-binding">{{$page.setDefaultTemplateLevelText('browseResponseSuccessRate')}}全市均值：{{browseResponseSuccessRate_City}}%</span>
+										</a>
+									</p>
+									<p class="hoverContainer game-successRate" style="width:180px;">
+										{{selectedTime}}
+										<br>浏览响应成功率：{{browseResponseSuccessRate}}%
+									</p>
+								</div>
+							</div>
+							<div class="progressCharts">
+								<a class="textDetail game-response-timeDelay">
+									<span id="gameResponseAvgDelay" class="value" data-index="3" data-unit="(ms)">{{gameResponseAvgDelay}}ms</span>
+									<p class="hoverContainer game-timeDelay" style="width:180px;">{{selectedTime}}
+										<br>游戏响应时延：{{gameResponseAvgDelay}}ms
+									</p>
+									<p class="icon left">
+										<a href="javascript: void(0)" class="imgHoverA">
+											<img ng-src="{{'./images/'+$page.setDefaultTemplateIcon(3, 'gameResponseAvgDelay')+'.png'}}">
+											<span class="imgHoverContainer ng-binding">{{$page.setDefaultTemplateLevelText('gameResponseAvgDelay')}}全市均值：{{gameResponseAvgDelay_City}}ms</span>
+										</a>
+									</p>
+								</a>
+								<div id="showGaming" class="imageDetail">
+									<a>
+										<i class="fa fa-gamepad" aria-hidden="true"></i>
+									</a>
+								</div>
+								<div class="progressDetail game-response-successRate">
+									<div id="pChart2" class="progressBar">
+										<div class="leftBar"></div>
+										<div class="rightBar"></div>
+									</div>
+									<span class="percentage value" data-index="4" data-unit="(%)">{{gameResponseSuccessRate}}%</span>
+									<p class="icon">
+										<a href="javascript: void(0)" class="imgHoverA">
+											<img ng-src="{{'./images/'+$page.setDefaultTemplateIcon(4, 'gameResponseSuccessRate')+'.png'}}">
+											<span class="imgHoverContainer ng-binding">{{$page.setDefaultTemplateLevelText('gameResponseSuccessRate')}}全市均值：{{gameResponseSuccessRate_City}}%</span>
+										</a>
+									</p>
+									<p class="hoverContainer game-successRate" style="width:180px;">
+										{{selectedTime}}
+										<br>游戏响应成功率：{{gameResponseSuccessRate}}%
+									</p>
+								</div>
+							</div>
+							<div class="progressCharts">
+								<a class="textDetail video-response-timeDelay">
+									<span id="videoResponseAvgDelay" class="value" data-index="5" data-unit="(ms)">{{videoResponseAvgDelay}}ms</span>
+									<p class="hoverContainer video-timeDelay" style="width:180px;">
+										{{selectedTime}}
+										<br>视频响应时延：{{videoResponseAvgDelay}}ms
+									</p>
+									<p class="icon left">
+										<a href="javascript: void(0)" class="imgHoverA">
+											<img ng-src="{{'./images/'+$page.setDefaultTemplateIcon(5, 'videoResponseAvgDelay')+'.png'}}">
+											<span class="imgHoverContainer ng-binding">{{$page.setDefaultTemplateLevelText('videoResponseAvgDelay')}}全市均值：{{videoResponseAvgDelay_City}}ms</span>
+										</a>
+									</p>
+								</a>
+								<div id="showVideo" class="imageDetail">
+									<a>
+										<i class="fa fa-video-camera" aria-hidden="true"></i>
+									</a>
+								</div>
+								<div class="progressDetail video-response-successRate">
+									<div id="pChart3" class="progressBar">
+										<div class="leftBar"></div>
+										<div class="rightBar"></div>
+									</div>
+									<span class="percentage value" data-index="6" data-unit="(%)">{{videoResponseSuccessRate}}%</span>
+									<p class="icon">
+										<a href="javascript: void(0)" class="imgHoverA">
+											<img ng-src="{{'./images/'+$page.setDefaultTemplateIcon(6, 'videoResponseSuccessRate')+'.png'}}">
+											<span class="imgHoverContainer ng-binding">{{$page.setDefaultTemplateLevelText('videoResponseSuccessRate')}}全市均值：{{videoResponseSuccessRate_City}}%</span>
+										</a>
+									</p>
+									<p class="hoverContainer video-successRate" style="width:180px;">
+										{{selectedTime}}
+										<br>视频响应成功率：{{videoResponseSuccessRate}}%</p>
+								</div>
+							</div>
+							<div class="progressCharts">
+								<a class="textDetail communication-response-timeDelay">
+									<span id="instantMessageResponseDelay" class="value" data-index="7" data-unit="(ms)">{{instantMessageResponseDelay}}ms</span>
+									<p class="hoverContainer communication-timeDelay" style="width:180px;">
+										{{selectedTime}}
+										<br>即时通信响应时延：{{instantMessageResponseDelay}}ms</p>
+									<p class="icon left">
+										<a href="javascript: void(0)" class="imgHoverA">
+											<img ng-src="{{'./images/'+$page.setDefaultTemplateIcon(7, 'instantMessageResponseDelay')+'.png'}}">
+											<span class="imgHoverContainer ng-binding">{{$page.setDefaultTemplateLevelText('instantMessageResponseDelay')}}全市均值：{{instantMessageResponseDelay_City}}ms</span>
+										</a>
+									</p>
+								</a>
+								<div id="showChat" class="imageDetail">
+									<a>
+										<i class="fa fa-commenting-o" aria-hidden="true"></i>
+									</a>
+								</div>
+								<div class="progressDetail communication-response-successRate">
+									<p class="icon">
+										<a href="javascript: void(0)" class="imgHoverA">
+											<img ng-src="{{'./images/'+$page.setDefaultTemplateIcon(8, 'instantMessageSuccessRate')+'.png'}}">
+											<span class="imgHoverContainer ng-binding">{{$page.setDefaultTemplateLevelText('instantMessageSuccessRate')}}全市均值：{{instantMessageSuccessRate_City}}%</span>
+										</a>
+									</p>
+									<div id="pChart4" class="progressBar">
+										<div class="leftBar"></div>
+										<div class="rightBar"></div>
+									</div>
+									<span class="percentage value" data-index="8" data-unit="(%)">{{instantMessageSuccessRate}}%</span>
+									<p class="hoverContainer communication-successRate" style="width:200px;">
+										{{selectedTime}}
+										<br>即时通信响应成功率：{{instantMessageSuccessRate}}%</p>
+								</div>
+							</div>
+						</div>
+						<!--非默认模板时显示该模块-->
+						<div class="progressPanel2" ng-show="$page.templateType === 'define'">
+							<ul>
+								<li ng-repeat="(index, item) in $page.selTemplate[0].datas.slice(0, 8)" ng-click="$page.tabIndicator(index, item)">
+									<div class="detailedDescription">
+										<div class="progressWrapper">
+											<span class="detailedName">{{$page.formatIndicatorData(index, item).name}}</span>
+											<a class="textDetail" data-index="0">
+												<span class="detailedData">{{$page.formatIndicatorData(index, item).gemUDAExamKpi}}</span>
+												<p class="hoverContainer" style="width:180px;">
+													{{selectedTime}}
+													<br>{{$page.formatIndicatorData(index, item).name}}：{{$page.formatIndicatorData(index, item).gemUDAExamKpi}}
+												</p>
+											</a>
+										</div>
+										<a href="javascript: void(0)" class="imgHoverA" ng-if="!$page.formatIndicatorData(index, item).noIcon">
+											<img ng-src="{{'./images/'+$page.formatIndicatorData(index, item).avg+'.png'}}">
+											<span class="imgHoverContainer">{{$page.setAvgText($page.formatIndicatorData(index, item))}}于全市均值：{{$page.formatIndicatorData(index, item).gemCityExamKpi}}</span>
+										</a>
+									</div>
+									<div class="lineBox">
+										<div class="leftBar" ng-style="{width: $page.setProgressStyle(index, item)}"></div>
+										<div class="rightBar"></div>
+									</div>
+								</li>
+							</ul>
+						</div>
+						<button class="close_full_screen" ng-click="noFullScreen()" style="display:none">×</button>
+						<div id="hz-map"></div>
+						<div id="tooltip"></div>
+						<div class="loading"></div>
+					</div>
+					<!--关键指标部分-->
+					<div class="key-indicators">
+						<div class="key-title">
+							性能指标
+						</div>
+						<div class="key-content">
+							<key-Chart ng-repeat="(index, item) in $page.getKeyIndicatorArr()" item="item" id="'key'+(index+1)" data="$page.keyIndicatorData"></key-Chart>
+						</div>
+					</div>
+				</li>
+				<!--右边部分-->
+				<li class="operational-indicator">
+					<!--右上-->
+					<div class="area-chart">
+						<div class="area-chart-title">
+							业务指标
+						</div>
+						<div class="areaBox">
+							<div id="areaChart"></div>
+						</div>
+					</div>
+					<!--右下-->
+					<div class="bar-chart">
+						<div class="select-type">
+							<span>业务大类：</span>
+							<div class="btn-group businessType-list">
+								<div class="dropdown-toggle selected-button" data-toggle="dropdown">
+									{{selectBigType}}
+								</div>
+								<div class="dropdown-menu dropdown-menu-left" id="businessType">
+									<div ng-class="dropdown-item" ng-repeat="bigTypeElement in businessBigTypeList" ng-click="selectBusinessBigType(bigTypeElement)"
+									    class="">
+										{{bigTypeElement}}
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="types">
+							<!-- Nav tabs -->
+							<ul class="nav nav-pills" role="tablist" id="myTabs">
+								<li class="nav-item item1" style="border:0">
+									<!--<a class="nav-link" href="#time_delay" role="tab" data-toggle="pills">用户数</a>-->
+								</li>
+								<li class="nav-item item2">
+									<a class="nav-link active" href="#response_success_rate" role="tab" data-toggle="pills">响应时延</a>
+								</li>
+								<li class="nav-item">
+									<a class="nav-link" href="#download_speed" role="tab" data-toggle="pills">响应成功率</a>
+								</li>
+								<li class="nav-item">
+									<a class="nav-link" href="#upload_speed" role="tab" data-toggle="pills">速
+										<br>&nbsp;&nbsp;
+										<br>率</a>
+								</li>
+							</ul>
+							<!-- Tab panes -->
+							<div class="tab-content">
+								<!--<div role="tabpanel" class="tab-pane" id="time_delay">
+                                     <div class="twoBarTitle">
+                                         <div class="left">
+                                             <span>用户数</span>
+                                             <img src="../images/icon_business_user.jpg" style="height:22px"/>
+                                         </div>
+                                         <div class="right">
+                                             <img src="../images/icon_business_flow.jpg"/>
+                                             <span>流量</span>
+                                         </div>
+                                     </div>
+
+                                     <div class="twoWayBarChartPanel">
+                                         <div id="time_delay_chart" class="twoBarChart"></div>
+                                     </div>
+                                 </div>-->
+								<div role="tabpanel" class="tab-pane active" id="response_success_rate">
+									<div class="twoBarTitle">
+										<div class="left">
+											<span>响应时延</span>
+											<img src="../images/u2018.png" />
+										</div>
+										<div class="right">
+											<img src="../images/icon_business_flow.jpg" />
+											<span>流量</span>
+										</div>
+									</div>
+									<div class="twoWayBarChartPanel">
+										<div id="response_success_rate_chart" class="twoBarChart"></div>
+									</div>
+								</div>
+								<div role="tabpanel" class="tab-pane" id="download_speed">
+									<div class="twoBarTitle">
+										<div class="left">
+											<span>响应成功率</span>
+											<img src="../images/u2089.png" />
+										</div>
+										<div class="right">
+											<img src="../images/icon_business_flow.jpg" />
+											<span>流量</span>
+										</div>
+									</div>
+									<div class="twoWayBarChartPanel">
+										<div id="download_speed_chart" class="twoBarChart"></div>
+									</div>
+								</div>
+								<div role="tabpanel" class="tab-pane" id="upload_speed">
+									<div class="twoBarTitle">
+										<div class="left">
+											<span>速率</span>
+											<img src="../images/u2235.png" />
+										</div>
+										<div class="right">
+											<img src="../images/icon_business_flow.jpg" />
+											<span>流量</span>
+										</div>
+									</div>
+									<div class="twoWayBarChartPanel">
+										<div id="upload_speed_chart" class="twoBarChart"></div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</li>
+			</ul>
+		</div>
+	</div>
+
+	<!--配置的模态框-->
+	<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-backdrop="static"
+	    data-keyboard="false">
+		<div class="modal-dialog">
+			<div class="modal-content allocation-content">
+				<div class="modal-header allocation-header">
+					<p>自定义区域配置</p>
+					<button type="button" data-dismiss="modal" aria-hidden="true">×
+					</button>
+				</div>
+				<div class="modal-body">
+					<ul class="select-type">
+						<li class="area-administer selected" ng-click="selectFirst()">区域管理</li>
+						<li class="new-settings" ng-click="selectSecond()">新增设置</li>
+					</ul>
+					<div class="setting" ng-show="settingSelect === 1">
+						<!--<form action="">-->
+						<div class="select-area area-name">
+							<label class="col-form-label">自定义区域名称：</label>
+							<!--<div class="btn-group template-list">
+                                <div class="dropdown-toggle dropdown-button" data-toggle="dropdown">
+                                    {{selectAreaName}}
+                                </div>
+                                <div class="dropdown-menu dropdown-menu-left" id="AreaContainer"
+                                     infinite-scroll="getAreaElementList()"
+                                     infinite-scroll-parent="true"
+                                >
+                                    <div ng-class="dropdown-item" ng-repeat="areaElement in areaList"
+                                         ng-click="selectOneArea(areaElement)" class="oneArea">
+                                        {{areaElement}}
+                                    </div>
+                                    <div ng-show='areaElementInit.isLoading'>Loading data...</div>
+                                </div>
+                          </div>-->
+							<div ng-dropdown-multiselect options="areaList" selected-model="areaSelectedModel" extra-settings="areaSelectedSetting" translation-texts="selectorText"
+							    events="areaSelectedEvents" style="margin-left:20px;">
+							</div>
+
+							<button type="button" class="btn btn-danger sameBtn" ng-click="deleteOwnArea(selectAreaName)">
+								删除
+							</button>
+						</div>
+						<div class="select-area area-name area-search">
+							<label class="col-form-label">小区搜索：</label>
+							<input type="text" placeholder="请输入小区名称" ng-model="cellElementInit.keyword">
+							<button type="button" class="btn btn-primary sameBtn" ng-click="cellNetworkElementList()">确定
+							</button>
+							<button type="button" class="btn btn-danger sameBtn" ng-click="clearSelectedCellList()">清除
+							</button>
+						</div>
+						<div class="select-data">
+							<div class="select-data-panel-body" id="getCellList">
+								<div infinite-scroll="getCellElementList()" infinite-scroll-parent="true">
+									<ul class="network-element-list">
+										<li ng-repeat="cellElement in cellElementList track by $index" ng-click="selectCellElementUnShift(cellElement)">
+											<i class="fa fa-plus text-info"></i>
+											<label ng-bind="cellElement"></label>
+										</li>
+										<li ng-show='cellElementInit.isLoading'>Loading data...
+										</li>
+									</ul>
+								</div>
+							</div>
+							<div class="select-data-panel-body" id="getCellListByArea">
+								<ul class="network-element-list">
+									<li ng-repeat="selectedCellElement in selectedCellElementList track by $index">
+										<i class="fa fa-times text-danger" ng-click="removeThisCellElement(selectedCellElement,$index)"></i>
+										<label ng-bind="selectedCellElement" ng-dblclick="removeThisCellElement(selectedCellElement,$index)"></label>
+									</li>
+								</ul>
+							</div>
+						</div>
+						<div class="setting-footer">
+							<button type="submit" class="btn btn-primary" ng-click="setAreaInformation(selectAreaName)">
+								设&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;置
+							</button>
+						</div>
+						<!--</form>-->
+					</div>
+					<div class="setting second" ng-show="settingSelect === 2">
+						<form action="">
+							<div class="select-area area-name" action="">
+								<label class="col-form-label">自定义区域名称：</label>
+								<input type="text" placeholder="请设置自定义区域的名称" class="set-areaName" ng-model="setAreaName">
+								<button class="input-box" data-toggle="modal" type="button" data-target="#myExcelModal">批量导入
+								</button>
+								<!--<input type="file" disabled="disabled">-->
+							</div>
+							<div class="select-area area-name area-search">
+								<label class="col-form-label">小区搜索：</label>
+								<input type="text" placeholder="请输入小区名称" ng-model="newCellElementInit.keyword">
+								<button type="button" class="btn btn-primary sameBtn" ng-click="newCellNetworkElementList()">确定
+								</button>
+								<button type="button" class="btn btn-danger sameBtn" ng-click="clearSelectedNewCellList()">清除
+								</button>
+							</div>
+							<div class="select-data">
+								<div class="select-data-panel-body" id="getNewCellList">
+									<div infinite-scroll="getNewCellElementList()" infinite-scroll-parent="true">
+										<ul class="network-element-list">
+											<li ng-repeat="newCellElement in newCellElementList" ng-click="selectNewCellElementUnShift(newCellElement)">
+												<i class="fa fa-plus text-info"></i>
+												<label ng-bind="newCellElement"></label>
+											</li>
+											<li ng-show='cellElementInit.isLoading'>Loading data...
+											</li>
+										</ul>
+									</div>
+								</div>
+								<div class="select-data-panel-body">
+									<ul class="network-element-list">
+										<li ng-repeat="selectedNewCellElement in selectedNewCellElementList track by $index">
+											<i class="fa fa-times text-danger" ng-click="removeThisNewCellElement(selectedNewCellElement,$index)"></i>
+											<label ng-bind="selectedNewCellElement" ng-dblclick="removeThisNewCellElement(selectedNewCellElement,$index)"></label>
+										</li>
+									</ul>
+								</div>
+							</div>
+							<div class="setting-footer new">
+								<button class="btn btn-primary" type="button" ng-click="setNewArea()">
+									新&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;增
+								</button>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!--人员来源查询模态框-->
+	<div class="modal fade" id="myPeopleModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"
+	    data-backdrop="static" data-keyboard="false">
+		<div class="modal-dialog">
+			<div class="modal-content personnel-source-content">
+				<div class="modal-header">
+					<img src="../images/u1438.png">
+				</div>
+				<div class="modal-body">
+					<div id="people_analysis" ui-grid="peopleGridOptions" class="grid" ui-grid-pinning ui-grid-exporter ui-grid-resize-columns
+					    ui-grid-auto-resize>
+					</div>
+					<div class="noAnalysis" style="display:none" id="noPeopleAnalysis">查询不到相关数据</div>
+				</div>
+				<div class="modal-footer">
+					<button class="btn btn-info peopleGrid" ng-click="exportTrendToCsv()">保存表格</button>
+					<button class="btn btn-info peopleGrid" data-dismiss="modal" aria-hidden="true">关闭表格
+					</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!--同比环比模态框-->
+	<div class="modal" id="myEchartsModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"
+	    data-backdrop="static" data-keyboard="false">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<p>ANALYSIS</p>
+					<button type="button" data-dismiss="modal" aria-hidden="true">×
+					</button>
+				</div>
+				<div class="modal-body">
+					<p style="margin:0px;">{{queryChartMessage}}</p>
+					<div class="twoCharts">
+						<div id="ChainChart"></div>
+						<div id="sameCompareChart"></div>
+					</div>
+				</div>
+				<div class="modal-footer">
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!--上传文件模态框-->
+	<div class="modal fade" id="myExcelModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-backdrop="static"
+	    data-keyboard="false">
+		<div class="modal-dialog">
+			<div class="modal-content" id="fileUploadContainer">
+				<div class="modal-header">
+					<p>请选择CSV文件</p>
+					<button type="button" data-dismiss="modal" aria-hidden="true">×
+					</button>
+				</div>
+				<div class="modal-body">
+					<p>1、请导入csv文件（首行为列名）</p>
+					<p>2、请保持文件中列的顺序与模板中列的顺序一致</p>
+					<p>3、每一行记录第2列的ECI（4G）和第3、4列的LAC、CI（2/3G）不能同时填写数据</p>
+					<p>4、批量导入新建的区域不能与已有区域重名</p>
+					<a href="asserts/自定义区域批量导入模板.csv">导入模板下载</a>
+					<br>
+					<!-- accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,application/vnd.ms-excel"-->
+					<input type="file" id="myFile" accept=".csv">
+					<div class="modal-footer">
+						<button type="button" class="btn btn-secondary" data-dismiss="modal" aria-hidden="true">取消
+						</button>
+						<button type="button" class="btn btn-primary" ng-click="submitFile()">确定
+						</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!--预设模态框-->
+	<div class="modal fade" id="presetModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-backdrop="static"
+	    data-keyboard="false">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header allocation-header">
+					<p>模板预设</p>
+					<button type="button" data-dismiss="modal" aria-hidden="true">×
+					</button>
+				</div>
+				<div class="modal-body">
+					<div class="modelNameBox">
+						<label class="col-form-label">模板名称：</label>
+						<input type="text" placeholder="请输入模板名称" ng-model="$page.templateName">
+						<button type="button" class="btn btn-info" ng-click="$page.setTemplate()">确定</button>
+					</div>
+					<div class="backgroundImage">
+						<div class="selectContainerTo8">
+							<ul class="container1">
+								<li>1</li>
+								<li>2</li>
+								<li>3</li>
+								<li>4</li>
+								<li>5</li>
+								<li>6</li>
+								<li>7</li>
+								<li>8</li>
+							</ul>
+							<div class="selectBox1">
+								<select ng-repeat="item in $page.selectBox[0]" ng-model="item.value">
+									<option ng-repeat="indicator in indicators13" value="{{indicator.value}}">
+										{{indicator.name}}
+									</option>
+								</select>
+							</div>
+						</div>
+						<ul class="container2">
+							<li>9</li>
+							<li>10</li>
+							<li>11</li>
+							<li>12</li>
+						</ul>
+						<div class="selectBox2">
+							<select ng-repeat="item in $page.selectBox[1]" ng-model="item.value">
+								<option ng-repeat="indicator in indicators13" value="{{indicator.value}}">
+									{{indicator.name}}
+								</option>
+							</select>
+
+						</div>
+						<div class="selectContainerTo13">
+							<div class="container3">13</div>
+							<div class="selectBox3">
+								<select ng-repeat="item in $page.selectBox[2]" ng-model="item.value">
+									<option ng-repeat="indicator in indicators14" value="{{indicator.value}}">
+										{{indicator.name}}
+									</option>
+								</select>
+							</div>
+
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+</div>

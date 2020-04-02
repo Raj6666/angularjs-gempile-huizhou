@@ -1,0 +1,91 @@
+#auto_Reports{
+	min-width:1345px;
+	#auto_reports_body{
+		padding: 0 5px;
+		.selectiveDiv{
+			display:flex;
+			padding: 15px 10px;
+			border-bottom:1px dashed rgba(0,0,0,0.4);
+			span{
+				font-size:15px;
+				font-weight:700;
+				margin-right:5px;
+
+			}
+			ul{
+				display:flex;
+				justify-content:center;
+				margin:0;
+				a{
+					font-size:14px;
+					font-weight:700;
+					margin-right:20px;
+				}
+			}
+			.sameBorder{
+				height:27px;
+				width:170px;
+				padding-left:5px;
+				border:1px solid rgba(0,0,0,0.4);
+				border-radius:2px;
+			}
+		}
+		.selectTime{
+			li{
+				margin-right:40px;
+			}
+		}
+		.addDiv{
+			display:flex;
+			justify-content:center;
+			padding:10px 0 ;
+			button{
+				width:80px;
+				height:30px;
+				border:1px solid #0066FF;
+				border-radius:5px;
+				color:#0066FF;
+				background:#fff;
+				cursor:pointer;
+				font-size:15px;
+			}
+		}
+	}
+
+	.tableContainer{
+		background:#fff;
+		margin-top:5px;
+		border-radius:7px;
+		padding:10px 12px;
+		#tableTitle{
+			height: 48px;
+			.Checked {
+				background-color: #ccc;
+				border-radius:4px 4px 0 0;
+			}
+			.switchBtn {
+				display: inline-block;
+				width:105px;
+				text-align: center;
+				line-height:48px;
+				float: left;
+			}
+		}
+		.usersContainer{
+			position:relative;
+			.exportBtn{
+				bottom: 6px;
+			}
+		}
+		select{
+			-moz-appearance: none;
+			-webkit-appearance: none;
+		}
+	}
+
+	/*表头的行高*/
+	.ui-grid-cell-contents {
+		line-height: 30px;
+		text-align: center;
+	}
+}

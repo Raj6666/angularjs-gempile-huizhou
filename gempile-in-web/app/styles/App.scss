@@ -1,0 +1,37 @@
+// font-awesome
+@import "../../node_modules/font-awesome/scss/font-awesome.scss";
+// bootstrap
+@import "../lib/bootstrap/v4.0/bootstrap.min.css";
+// flatpickr
+@import "../../node_modules/flatpickr/dist/flatpickr.min.css";
+// ui-grid
+@import "../../node_modules/angular-ui-grid/ui-grid.min.css";
+// jqgrid
+@import "../lib/jquery/jqGrid/css/ui.jqgrid.css";
+@import "plugins/ui-lightness/jquery-ui-1.7.2.custom.css";
+// SweetAlert2
+@import "../../node_modules/sweetalert2/dist/sweetalert2.min.css";
+/** Common Styles */
+@import "common.css";
+@import "common/normalize.css";
+@import "common/variables.scss";
+@import "common/main";
+/** Custom plugins Styles */
+@import "custom-plugin/Loading";
+@import "custom-plugin/ui-grid-customizer";
+//angular-dropdown-multiselect
+@import "custom-plugin/angularjs-dropdown-multiselect";
+/** Components Styles */
+@import "components/TopNav";
+/** Module Styles */
+@import "modules/Login";
+@import "modules/PoorCoverageAreaGisAnalysis";
+@import "modules/PoorCoverageAreaTrendAnalysis";
+@import "modules/HomePageNew";
+@import "modules/UserDefinedAreaAnalysis";
+@import "modules/ComplaintLabelAnalysis";
+@import "modules/ComplaintRankingAnalysis";
+@import "modules/ComplaintDataEntry";
+@import "modules/BusinessIndicatorTrendAnalysis";
+@import "modules/IndicatorsDailyBulletin";
+@import "modules/AutomaticGenerationReports";

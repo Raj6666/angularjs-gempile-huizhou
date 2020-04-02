@@ -1,0 +1,70 @@
+<div class="content" id="complaint_data_entry">
+	<div class="guidepost">
+		<i class="fa fa-map-marker"></i>
+		<span>投诉分析 > 投诉数据录入</span>
+	</div>
+	<div class="query-panel">
+		<div class="footer"></div>
+	</div>
+	<div class="data-entry">
+		<div class="complaintsData" id="customer_complaints">
+			<div class="complaintsContainer">
+				<p>导入客户投诉文件：</p>
+				<div class="fileInput">
+					<!--<input type="file" multiple id="customer_file"
+                           accept=".csv">
+                    <button class="btn btn-primary" id="customer_upload">上传</button>-->
+					<div class="fileContainer">
+						<div class="fileBtn" id="customerBtn">
+							<i class="fa fa-folder-open" aria-hidden="true"></i>
+							<span>浏览...</span>
+						</div>
+						<input type="file" multiple id="customer_file"
+							   accept=".csv">
+					</div>
+					<button class="btn btn-primary" id="customer_upload">上传</button>
+				</div>
+				<div class="importRules">
+					<span>1、请导入CSV格式文件</span><br>
+					<span>2、客户投诉文件命名规则示例：
+						<a href="asserts/客户投诉-20180228.csv">《客户投诉-20180228》</a>、
+						<a href="asserts/客户投诉-20180201~20180228.csv">《客户投诉-20180201~20180228》</a>
+					</span>
+				</div>
+				<p>已录入客户投诉数据日历：</p>
+				<div id="customerDate" class="datePicker">
+					<div class="canopy"></div>
+				</div>
+			</div>
+		</div>
+		<div class="dataLine"></div>
+		<div class="complaintsData" id="baseStation_complaints">
+			<div class="complaintsContainer">
+				<p>导入基站投诉文件：</p>
+				<div class="fileInput">
+					<!--<input type="file" multiple id="baseStation_file"
+                           accept=".csv">-->
+					<div class="fileContainer">
+						<div class="fileBtn" id="baseStationBtn">
+							<i class="fa fa-folder-open" aria-hidden="true"></i>
+							<span>浏览...</span>
+						</div>
+						<input type="file" multiple id="baseStation_file"
+							   accept=".csv">
+					</div>
+					<button class="btn btn-primary" id="baseStation_upload">上传</button>
+				</div>
+				<div class="importRules">
+					<span>1、请导入CSV格式文件</span><br>
+					<span>2、基站投诉文件命名规则示例：
+						<a href="asserts/基站投诉-20171201.csv">《基站投诉-20171201》</a>
+					</span>
+				</div>
+				<p>已录入基站投诉数据日历：</p>
+				<div id="baseStationDate" class="datePicker">
+					<div class="canopy"></div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

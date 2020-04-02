@@ -1,0 +1,147 @@
+#complaint_ranking_analysis {
+	min-width: 1345px;
+
+	/** 外部对label标签进行了全局的设置，这里要把label的style还原，如果处理了外部的style问题可以删掉这里 */
+	label {
+		margin-bottom: 0;
+	}
+
+	ul {
+		margin: 0;
+	}
+
+	select{
+		-moz-appearance: none;
+		-webkit-appearance: none;
+	}
+
+	.query-panel {
+		.inline-form-group {
+			.inquire {
+				margin-left: 30px;
+			}
+			.selectTOP {
+				select {
+					border-color: #95B8E7;
+				}
+			}
+		}
+	}
+	.ranking_analysis {
+		background: #fff;
+	}
+	.Networktitle {
+		height: 42px;
+		padding: 10px 25px;
+	}
+	.analysis-box {
+		width: 100%;
+		box-sizing: border-box;
+		padding: 8px 50px 20px 35px;
+		#ComplaintRankingTitle {
+			height: 45px;
+			a:first-child {
+				border-right: 1px solid rgba(0, 0, 0, .5);
+			}
+			.Checked {
+				background-color: #ccc;
+			}
+			.ComplaintRankingBtn {
+				display: inline-block;
+				width: 170px;
+				height: 45px;
+				text-align: center;
+				font-size: 15px;
+				line-height: 45px;
+				float: left;
+			}
+		}
+		.table-box {
+			height:54vh;
+			min-height:345px;
+			.usersContainer,.baseStationContainer{
+				width: 100%;
+				height:100%;
+				position:relative;
+				.noUsersAnalysis,.noBaseStationAnalysis{
+					font-size:20px;
+					font-weight:700;
+					color: rgba(0,0,0,.6);
+					position:absolute;
+					top:45%;
+					left:50%;
+					transform: translate(-50%,-50%);
+				}
+				.exportBtn{
+					height:26px;
+					width:56px;
+					position:absolute;
+					bottom:4px;
+					right:27%;
+					padding:0;
+				}
+			}
+			.grid {
+				width: 100%;
+				height:100% !important;
+			}
+			/*表头的padding*/
+			.ui-grid-header-cell .sortable {
+				//padding-left: 30px;
+			}
+			/*表头的行高*/
+			.ui-grid-cell-contents {
+				line-height: 30px;
+				padding-left: 30px;
+			}
+		}
+
+	}
+
+	.confirm-button {
+		padding: 4px 12px;
+		border: 1px solid #2BBCFF;
+		color: #2BBCFF;
+		background: #FFFFFF;
+		font-family: '微软雅黑', serif;
+		&:hover {
+			background: #2BBCFF;
+			color: #FFFFFF;
+			cursor: pointer;
+		}
+	}
+
+	.custom-pagination-ul {
+		justify-content: flex-end;
+		padding: 20px 50px 0 0;
+		.custom-pagination-li {
+			width: 70px;
+			height: 30px;
+		}
+	}
+
+	.btn-outline-info:hover {
+		color: #fff;
+		background-color: #5bc0de;
+		border-color: #5bc0de;
+	}
+
+	/*改变placeholder默认颜色*/
+	input:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+		color: #464a4c;
+		opacity: 1;
+	}
+	input::-moz-placeholder { /* Mozilla Firefox 19+ */
+		color: #464a4c;
+		opacity: 1;
+	}
+	input:-ms-input-placeholder {
+		color: #464a4c;
+		opacity: 1;
+	}
+	input::-webkit-input-placeholder {
+		color: #464a4c;
+		opacity: 1;
+	}
+
+}

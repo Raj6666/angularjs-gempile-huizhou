@@ -1,0 +1,113 @@
+<div id="auto_Reports" class="content">
+	<div class="guidepost">
+		<p>
+			<i class="fa fa-map-marker" aria-hidden="true"></i>
+			<span>专题分析 > 分析报告自动化生成</span>
+		</p>
+	</div>
+
+	<div class="query-panel">
+		<div class="head">
+			<div class="title">
+				<div class="text"><span>新建任务</span></div>
+				<div class="right-triangle"></div>
+			</div>
+		</div>
+		<div id="auto_reports_body">
+			<div class="selectiveDiv">
+				<span>报告类型：</span>
+				<ul>
+					<li ng-repeat="type in reportsType" ng-click="selectReportsType(type)">
+						<img ng-src="{{isSelectReportsType(type)}}" class="chooseradio"/>
+						<a>{{type}}</a>
+					</li>
+				</ul>
+			</div>
+			<div class="selectiveDiv selectTime" ng-show="selectedReportsType==='节假日报告'">
+				<ul style="width:1116px!important;">
+					<li>
+						<span>节假日名称：</span>
+						<input class="sameBorder" type="text" placeholder="请输入节假日名称" ng-model="holidayName">
+					</li>
+					<li>
+						<span>节假日时段：</span>
+						<input class="sameBorder" type="text" placeholder="年/月/日" id="startPicker">
+						<span style="margin:0 5px;">至</span>
+						<input class="sameBorder" type="text" placeholder="年/月/日" id="endPicker">
+					</li>
+					<li>
+						<span>平日日期：</span>
+						<input class="sameBorder" type="text" placeholder="年/月/日" id="usualPicker">
+					</li>
+
+				</ul>
+			</div>
+			<div ng-show="endDateCheckHelp.valid && selectedReportsType==='节假日报告'" style="color:red;padding:5px 0 0 15px; ">
+				<i class="fa fa-exclamation-triangle fa-lg" aria-hidden="true"></i>&nbsp;
+				{{endDateCheckHelp.text}}
+			</div>
+			<div ng-show="usualDateCheckHelp.valid && selectedReportsType==='节假日报告'" style="color:red;padding:5px 0 0 15px; ">
+				<i class="fa fa-exclamation-triangle fa-lg" aria-hidden="true"></i>&nbsp;
+				{{usualDateCheckHelp.text}}
+			</div>
+			<div class="selectiveDiv selectTime" ng-show="selectedReportsType==='行政区月报'">
+				<ul>
+					<li style="margin-right:60px;">
+						<span>行&nbsp;政&nbsp;区：</span>
+						<select class="sameBorder" style="padding-left:3px;" ng-model="selectedArea">
+							<option value="" disabled selected style="display:none;">请选择行政区</option>
+							<option value={{area}} ng-repeat="area in areas">{{area}}</option>
+							<!--<option value="惠阳区">惠阳区</option>
+							<option value="博罗县">博罗县</option>
+							<option value="惠东县">惠东县</option>
+							<option value="龙门县">龙门县</option>
+							<option value="大亚湾区">大亚湾区</option>
+							<option value="仲恺区">仲恺区</option>-->
+						</select>
+					</li>
+					<li>
+						<span>月&nbsp;&nbsp;份：</span>
+						<input type="month" class="sameBorder" ng-model="selectedMonth">
+					</li>
+				</ul>
+			</div>
+			<div class="addDiv">
+				<button ng-click="addReport()">添加</button>
+			</div>
+		</div>
+		<div class="footer"></div>
+	</div>
+
+	<div class="tableContainer">
+		<div id="tableTitle" class="title">
+			<a ng-class="{Checked : pageSelect==1,switchBtn : true}"
+			   ng-click="switchReports(1)">节假日报告</a>
+			<a ng-class="{Checked : pageSelect==2,switchBtn : true}"
+			   ng-click="switchReports(2)">行政区月报</a>
+		</div>
+		<div class="usersContainer" ng-show="pageSelect==1">
+			<div id="reports_table1" ui-grid="holidayReportOptions" class="grid"
+				 ui-grid-pinning
+				 ui-grid-exporter
+				 ui-grid-resize-columns
+				 ui-grid-auto-resize
+				 ui-grid-pagination
+			>
+			</div>
+			<div class="noUsersAnalysis" style="display:none">查询不到相关数据</div>
+			<button class="btn btn-primary exportBtn" ng-click="exportReportToCsv1()">导出</button>
+		</div>
+		<div class="usersContainer" ng-show="pageSelect==2">
+			<div id="reports_table2" ui-grid="administrativeReportOptions" class="grid"
+				 ui-grid-pinning
+				 ui-grid-exporter
+				 ui-grid-resize-columns
+				 ui-grid-auto-resize
+				 ui-grid-pagination
+			>
+			</div>
+			<div class="noUsersAnalysis" style="display:none">查询不到相关数据</div>
+			<button class="btn btn-primary exportBtn" ng-click="exportReportToCsv2()">导出</button>
+		</div>
+	</div>
+</div>

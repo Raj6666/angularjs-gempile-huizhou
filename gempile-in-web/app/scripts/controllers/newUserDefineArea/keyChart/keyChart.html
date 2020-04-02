@@ -1,0 +1,10 @@
+<div class="keyChart-component">
+	<div class="chart" id="{{$ctrl.id}}" ng-click="$ctrl.tapIndicator()"></div>
+	<p class="name">{{$ctrl.item.name}}</p>
+	<p class="icon" ng-if="!$ctrl.item.noIcon">
+		<a href="javascript: void(0)" class="imgHoverA">
+			<img ng-src="{{'./images/'+$ctrl.item.avg+'.png'}}">
+			<span class="imgHoverContainer">{{$ctrl.setAvgText()}}于全市均值：{{$ctrl.cityIndicator}}</span>
+		</a>
+	</p>
+</div>

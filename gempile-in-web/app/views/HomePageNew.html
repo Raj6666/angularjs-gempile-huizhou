@@ -1,0 +1,1474 @@
+<!--<script src="../scripts/controllers/PoorCoverageAreaTrendAnalysisController.js"></script>-->
+<div class="content" id="homePageNewModule" ng-mousemove="getMousePosition($event)">
+	<div class="s-head" ng-bind="currentDayTime"></div>
+	<div class="control-panels" ng-click="simulateClick()">
+		<div class="left-side">
+			<div id="leftPanel">
+				<div class="left-side-up" ng-click="simulateClick()" ng-mouseenter="isEnterIndicator = true"
+					 ng-mouseleave="isEnterIndicator = false">
+					<div id="assessmentPanel" class="carousel slide" data-ride="carousel">
+						<div id="assessmentTitle" class="title">
+							<img src="../images/icon_signal.png">
+							<button ng-class="{Checked : pageSelect==1}"
+									ng-click="switchAssessmentAndVolte(1)"></button>
+							<span ng-click="switchAssessmentAndVolte(1)" style="margin-left: 0.1rem;">4G指标</span>
+							<button ng-class="{Checked : pageSelect==2}" ng-click="switchAssessmentAndVolte(2)"
+									style="margin-left: 0.2rem;"></button>
+							<span ng-click="switchAssessmentAndVolte(2)" style="margin-left: 0.1rem;">VOLTE指标</span>
+						</div>
+						<div class="carousel-inner" role="listbox">
+							<div class="carousel-item active">
+								<div id="assessmentChartPanel">
+									<div class="pieChartPanel">
+										<div id="apChart1" class="assessment-charts"></div>
+										<div id="apChart2" class="assessment-charts"></div>
+										<div id="apChart4" class="assessment-charts"></div>
+										<div id="apChart3" class="assessment-charts"></div>
+									</div>
+									<div class="progressPanel">
+										<div class="progressCharts">
+											<div class="textDetailHidden"><span>90ms</span></div>
+											<div id="showDownload" class="imageDetail"><a><img
+												src="../images/icon-download.png"/></a><span id="downloadDetail">HTTP下载速率</span>
+											</div>
+											<div class="textDetail" style="width: 60%;margin-left: -5.5%"><span>{{httpDlRate}}Mbps</span>
+											</div>
+										</div>
+										<div class="progressCharts">
+											<div class="textDetail"><span>{{browseResponseDelay}}ms</span></div>
+											<div id="showBrowse" class="imageDetail"><a><img
+												src="../images/icon-browse.png"/></a><span id="browseDetail"
+																						   class="hoverDetail">浏览</span>
+											</div>
+											<div class="progressDetail">
+												<div id="pChart5" class="progressBar">
+													<div class="leftBar"></div>
+													<div class="rightBar"></div>
+												</div>
+												<span class="percentage">{{browseResponseSuccessRate}}%</span>
+											</div>
+										</div>
+										<div class="progressCharts">
+											<div class="textDetail"><span>{{gemResponseDelay}}ms</span></div>
+											<div id="showGaming" class="imageDetail"><a><img
+												src="../images/icon-gaming.png"/></a><span id="gamingDetail"
+																						   class="hoverDetail">游戏</span>
+											</div>
+											<div class="progressDetail">
+												<div id="pChart2" class="progressBar">
+													<div class="leftBar"></div>
+													<div class="rightBar"></div>
+												</div>
+												<span class="percentage">{{gameResponseSuccessRate}}%</span>
+											</div>
+										</div>
+										<div class="progressCharts">
+											<div class="textDetail"><span>{{videoResponseDelay}}ms</span></div>
+											<div id="showVideo" class="imageDetail"><a><img
+												src="../images/icon-video.png"/></a><span id="videoDetail"
+																						  class="hoverDetail">视频</span>
+											</div>
+											<div class="progressDetail">
+												<div id="pChart3" class="progressBar">
+													<div class="leftBar"></div>
+													<div class="rightBar"></div>
+												</div>
+												<span class="percentage">{{videoResponseSuccessRate}}%</span>
+											</div>
+										</div>
+										<div class="progressCharts">
+											<div class="textDetail"><span>{{instantMessagingResponseDelay}}ms</span>
+											</div>
+											<div id="showChat" class="imageDetail"><a><img
+												src="../images/icon-chat.png"/></a><span id="chatDetail"
+																						 class="hoverDetail">即时通信</span>
+											</div>
+											<div class="progressDetail">
+												<div id="pChart4" class="progressBar">
+													<div class="leftBar"></div>
+													<div class="rightBar"></div>
+												</div>
+												<span class="percentage">{{instantMessagingResponseSuccessRate}}%</span>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="carousel-item">
+								<div id="volteChartPanel">
+									<div class="CallAndRegChartPanel">
+										<div id="callChart" class="horizontalBar-charts"></div>
+										<div id="regChart" class="horizontalBar-charts"></div>
+									</div>
+									<div class="CallAndRegChartPanel">
+										<div id="IMSChart" class="gauge-charts"></div>
+										<div id="firstCallLastChart" class="gauge-charts"></div>
+										<div id="firstCallSuccessChart" class="gauge-charts"></div>
+									</div>
+								</div>
+							</div>
+							<!-- <div class="carousel-item">
+                              <img data-src="../images/icon_signal.png" alt="Third slide">
+                            </div> -->
+						</div>
+					</div>
+				</div>
+				<!-- <div style="width: 100%; padding-top: 2.5%;border-radius: 320px;
+          background: black;"></div> -->
+				<!--=============================================================================-->
+				<div class="left-side-down" ng-mouseenter="isEnterNetElement = true"
+					 ng-mouseleave="isEnterNetElement = false">
+					<div class="title">
+						<img src="../images/icon_network.png">
+						<span>网元网元速率</span>
+					</div>
+					<div id="networkElementChartPanel" class="carousel slide"><!--data-ride="carousel"-->
+						<div class="carousel-inner" role="listbox">
+							<div id="nerChart1" class="networkElementRate-charts carousel-item active"></div>
+							<div id="nerChart2" class="networkElementRate-charts carousel-item"></div>
+							<div id="nerChart3" class="networkElementRate-charts"
+								 ng-show="networkChartPage3" ng-class="{'carousel-item': networkChartPage3}"></div>
+							<div id="nerChart4" class="networkElementRate-charts"
+								 ng-show="networkChartPage4" ng-class="{'carousel-item': networkChartPage4}"></div>
+						</div>
+						<div class="networkElementRate-button carousel-indicators">
+							<button data-target="#networkElementChartPanel" data-slide-to="0"
+									class="networkElementButton active"
+									ng-class="{Checked : networkChartPageNumber==1}"></button>
+							<button data-target="#networkElementChartPanel" data-slide-to="1"
+									class="networkElementButton"
+									ng-class="{Checked : networkChartPageNumber==2}"></button>
+							<button data-target="#networkElementChartPanel" data-slide-to="2"
+									class="networkElementButton" ng-show="networkChartPage3"
+									ng-class="{Checked : networkChartPageNumber==3}"></button>
+							<button data-target="#networkElementChartPanel" data-slide-to="3"
+									class="networkElementButton" ng-show="networkChartPage4"
+									ng-class="{Checked : networkChartPageNumber==4}"></button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="middle">
+			<div id="middlePanel" class="panel-content" ng-mouseenter="isEnterTable = true"  ng-mouseleave="isEnterTable = false">
+				<div class="title">
+					<img src="../images/icon_net_overview.png"><span>网络概览</span>
+				</div>
+				<div class="whole-net-bottom" id="userCount">
+					<i class="fa fa-cloud-download" aria-hidden="true" style="color:#0172CF;font-size:18px" ></i>
+					<span style="color:#0172CF">{{totalFlow}}(TB)</span><br/>
+					<i class="fa fa-user" aria-hidden="true" style="color:#F9760B;font-size:18px"></i>
+					<span style="color:#F9760B">{{totalUsercount}}(万人)</span><br/>
+					<div class="flowType">
+						<span>4G：{{total4GFlow}}(万人)</span><br/>
+						<span>2/3G：{{total2and3GFlow}}(万人)</span>
+					</div>
+				</div>
+				<!--                 <div id="myMap" style="position: relative;"> -->
+				<div id="huizhouMap"></div>
+				<!--                 </div> -->
+				<div id="myTable" class="carousel slide tableMeg" data-ride="carousel"
+					 ng-if="logingOfCity==='huizhou'">
+					<div class="carousel-inner" role="listbox">
+						<div class="carousel-item active">
+							<div class="table-container">
+								<table class="tableStyle" width="100%" bordercolor="#40C4ED" border="1"
+									   cellpadding="220">
+									<thead>
+									<tr class="indicatorsHz">
+										<!-- <th>指标</th>
+                                         <th>惠城区</th>
+                                         <th>惠阳区</th>
+                                         <th>惠东县</th>
+                                         <th>博罗县</th>
+                                         <th>大亚湾区</th>
+                                         <th>龙门县</th>
+                                         <th>仲恺区</th>-->
+									</tr>
+									</thead>
+									<tbody>
+									<tr id="downloadRate">
+										<!-- <td>500K下载速率(Mbps)</td>-->
+										<!-- <td>0</td>
+                                         <td>0</td>
+                                         <td>0</td>
+                                         <td>0</td>
+                                         <td>0</td>
+                                         <td>0</td>
+                                         <td>0</td>-->
+									</tr>
+									<tr id="httpDelay">
+										<!--<td>HTTP响应时延(ms)</td>-->
+										<!-- <td>0</td>
+                                         <td>0</td>
+                                         <td>0</td>
+                                         <td>0</td>
+                                         <td>0</td>
+                                         <td>0</td>
+                                         <td>0</td>-->
+									</tr>
+									<tr id="webpageSuccessRate">
+										<!--<td>页面显示成功率</td>-->
+										<!--<td>0</td>
+                                        <td>0</td>
+                                        <td>0</td>
+                                        <td>0</td>
+                                        <td>0</td>
+                                        <td>0</td>
+                                        <td>0</td>-->
+									</tr>
+									<tr id="appStoreProportion">
+										<!--<td>商店500Kbps以下占比</td>
+                                        <td>0</td>
+                                        <td>0</td>
+                                        <td>0</td>
+                                        <td>0</td>
+                                        <td>0</td>
+                                        <td>0</td>
+                                        <td>0</td>-->
+									</tr>
+									</tbody>
+								</table>
+							</div>
+						</div>
+						<div class="carousel-item">
+							<div class="table-container">
+								<table class="tableStyle" width="100%" bordercolor="#40C4ED" border="1"
+									   cellpadding="220">
+									<thead>
+									<tr class="indicatorsHz">
+										<!-- <th>指标</th>
+                                         <th>惠城区</th>
+                                         <th>惠阳区</th>
+                                         <th>惠东县</th>
+                                         <th>博罗县</th>
+                                         <th>大亚湾区</th>
+                                         <th>龙门县</th>
+                                         <th>仲恺区</th>-->
+									</tr>
+									</thead>
+									<tbody>
+									<tr id="instantMessengerSuccess">
+										<!-- <td>即时通信响应成功率</td> -->
+										<!-- <td>98%</td>
+                                        <td>97%</td>
+                                        <td>98%</td>
+                                        <td>96%</td>
+                                        <td>98%</td>
+                                        <td>97%</td>
+                                        <td>98%</td> -->
+									</tr>
+									<tr id="instantMessengerDelay">
+										<!-- <td>即时通信响应平均时延(ms)</td> -->
+										<!-- <td>77</td>
+                                        <td>82</td>
+                                        <td>83</td>
+                                        <td>83</td>
+                                        <td>82</td>
+                                        <td>79</td>
+                                        <td>80</td> -->
+									</tr>
+									<tr id="browseAppPageDisplayLow">
+										<!-- <td>网页显示5s以上占比</td> -->
+										<!-- <td>10%</td>
+                                        <td>10%</td>
+                                        <td>10%</td>
+                                        <td>10%</td>
+                                        <td>10%</td>
+                                        <td>10%</td>
+                                        <td>12%</td> -->
+									</tr>
+									<tr id="browseAppPageDisplayAvg">
+										<!-- <td>网页显示平均时长(s)</td> -->
+										<!-- <td>3.7</td>
+                                        <td>3.2</td>
+                                        <td>3.6</td>
+                                        <td>3.9</td>
+                                        <td>3.7</td>
+                                        <td>2.9</td>
+                                        <td>3.7</td> -->
+									</tr>
+									</tbody>
+								</table>
+							</div>
+						</div>
+						<div class="carousel-item">
+							<div class="table-container">
+								<table class="tableStyle" width="100%" bordercolor="#40C4ED" border="1"
+									   cellpadding="220">
+									<thead>
+									<tr class="indicatorsHz">
+										<!-- <th>指标</th>
+                                         <th>惠城区</th>
+                                         <th>惠阳区</th>
+                                         <th>惠东县</th>
+                                         <th>博罗县</th>
+                                         <th>大亚湾区</th>
+                                         <th>龙门县</th>
+                                         <th>仲恺区</th>-->
+									</tr>
+									</thead>
+									<tbody>
+									<tr id="videoSuccess">
+										<!-- <td>视频访问成功率</td> -->
+										<!-- <td>98%</td>
+                                        <td>98%</td>
+                                        <td>98%</td>
+                                        <td>98%</td>
+                                        <td>98%</td>
+                                        <td>98%</td>
+                                        <td>98%</td> -->
+									</tr>
+									<tr id="videoDelay">
+										<!-- <td>视频业务响应时延(ms)</td> -->
+										<!-- <td>77</td>
+                                        <td>82</td>
+                                        <td>84</td>
+                                        <td>83</td>
+                                        <td>82</td>
+                                        <td>79</td>
+                                        <td>80</td> -->
+									</tr>
+									<tr id="gameSuccess">
+										<!-- <td>游戏业务访问成功率</td> -->
+										<!-- <td>97%</td>
+                                        <td>98%</td>
+                                        <td>98%</td>
+                                        <td>96%</td>
+                                        <td>96%</td>
+                                        <td>97%</td>
+                                        <td>98%</td> -->
+									</tr>
+									<tr id="gameDelay">
+										<!-- <td>游戏业务响应时延(ms)</td> -->
+										<!-- <td>153</td>
+                                        <td>139</td>
+                                        <td>146</td>
+                                        <td>149</td>
+                                        <td>152</td>
+                                        <td>147</td>
+                                        <td>149</td> -->
+									</tr>
+									</tbody>
+								</table>
+							</div>
+						</div>
+						<div class="carousel-item">
+							<div class="table-container">
+								<table class="tableStyle" width="100%" bordercolor="#40C4ED" border="1"
+									   cellpadding="220">
+									<thead>
+									<tr class="indicatorsHz">
+										<!--<th>指标</th>
+                                        <th>惠城区</th>
+                                        <th>惠阳区</th>
+                                        <th>惠东县</th>
+                                        <th>博罗县</th>
+                                        <th>大亚湾区</th>
+                                        <th>龙门县</th>
+                                        <th>仲恺区</th>-->
+									</tr>
+									</thead>
+									<tbody>
+									<tr id="browseSuccess">
+										<!-- <td>浏览业务响应成功率</td> -->
+										<!-- <td>98%</td>
+                                        <td>98%</td>
+                                        <td>98%</td>
+                                        <td>98%</td>
+                                        <td>98%</td>
+                                        <td>98%</td>
+                                        <td>98%</td> -->
+									</tr>
+									<tr id="browseDelay">
+										<!-- <td>浏览业务响应时延(ms)</td> -->
+										<!-- <td>77</td>
+                                        <td>82</td>
+                                        <td>84</td>
+                                        <td>83</td>
+                                        <td>82</td>
+                                        <td>79</td>
+                                        <td>80</td> -->
+									</tr>
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</div>
+					<div class="networkElementRate-button carousel-indicators">
+						<button data-target="#myTable" data-slide-to="0" class="tableButton active Checked"></button>
+						<button data-target="#myTable" data-slide-to="1" class="tableButton"></button>
+						<button data-target="#myTable" data-slide-to="2" class="tableButton"></button>
+						<button data-target="#myTable" data-slide-to="3" class="tableButton"></button>
+					</div>
+				</div>
+				<div id="czTable" class="carousel slide tableMeg" data-ride="carousel"
+					ng-if="logingOfCity==='chaozhou'">
+					<div class="carousel-inner" role="listbox">
+						<div class="carousel-item active">
+							<div class="table-container">
+								<table class="tableStyle" width="100%" bordercolor="#40C4ED" border="1"
+									   cellpadding="220">
+									<thead>
+									<tr class="indicatorsCz">
+										<!--	<th>指标</th>
+                                            <th>潮安县</th>
+                                            <th>饶平县</th>
+                                            <th>湘桥区</th>-->
+									</tr>
+									</thead>
+									<tbody>
+									<tr id="downloadRateCz">
+										<!--<td>500K下载速率(Mbps)</td>
+										<td>0</td>
+										<td>0</td>
+										<td>0</td>-->
+									</tr>
+									<tr id="httpDelayCz">
+										<!--<td>HTTP响应时延(ms)</td>
+										<td>0</td>
+										<td>0</td>
+										<td>0</td>-->
+									</tr>
+									<tr id="webpageSuccessRateCz">
+										<!--<td>页面显示成功率</td>
+										<td>0</td>
+										<td>0</td>
+										<td>0</td>-->
+									</tr>
+									<tr id="appStoreProportionCz">
+										<!-- <td>商店500Kbps以下占比</td>
+										<td>0</td>
+										<td>0</td>
+										<td>0</td>-->
+									</tr>
+									</tbody>
+								</table>
+							</div>
+						</div>
+						<div class="carousel-item">
+							<div class="table-container">
+								<table class="tableStyle" width="100%" bordercolor="#40C4ED" border="1"
+									   cellpadding="220">
+									<thead>
+									<tr class="indicatorsCz">
+										<!--<th>指标</th>
+										<th>潮安县</th>
+										<th>饶平县</th>
+										<th>湘桥区</th>-->
+									</tr>
+									</thead>
+									<tbody>
+									<tr id="instantMessengerSuccessCz">
+									</tr>
+									<tr id="instantMessengerDelayCz">
+									</tr>
+									<tr id="browseAppPageDisplayLowCz">
+									</tr>
+									<tr id="browseAppPageDisplayAvgCz">
+									</tr>
+									</tbody>
+								</table>
+							</div>
+						</div>
+						<div class="carousel-item">
+							<div class="table-container">
+								<table class="tableStyle" width="100%" bordercolor="#40C4ED" border="1"
+									   cellpadding="220">
+									<thead>
+									<tr class="indicatorsCz">
+										<!--<th>指标</th>
+										<th>潮安县</th>
+										<th>饶平县</th>
+										<th>湘桥区</th>-->
+									</tr>
+									</thead>
+									<tbody>
+									<tr id="videoSuccessCz">
+									</tr>
+									<tr id="videoDelayCz">
+									</tr>
+									<tr id="gameSuccessCz">
+									</tr>
+									<tr id="gameDelayCz">
+									</tr>
+									</tbody>
+								</table>
+							</div>
+						</div>
+						<div class="carousel-item">
+							<div class="table-container">
+								<table class="tableStyle" width="100%" bordercolor="#40C4ED" border="1"
+									   cellpadding="220">
+									<thead>
+									<tr class="indicatorsCz">
+										<!--<th>指标</th>
+										<th>潮安县</th>
+										<th>饶平县</th>
+										<th>湘桥区</th>-->
+									</tr>
+									</thead>
+									<tbody>
+									<tr id="browseSuccessCz">
+									</tr>
+									<tr id="browseDelayCz">
+									</tr>
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</div>
+					<div class="networkElementRate-button carousel-indicators">
+						<button data-target="#czTable" data-slide-to="0" class="tableButton active Checked"></button>
+						<button data-target="#czTable" data-slide-to="1" class="tableButton"></button>
+						<button data-target="#czTable" data-slide-to="2" class="tableButton"></button>
+						<button data-target="#czTable" data-slide-to="3" class="tableButton"></button>
+					</div>
+				</div>
+				<div id="sgTable" class="carousel slide tableMeg" data-ride="carousel"
+					 ng-if="logingOfCity==='shaoguan'">
+					<div class="carousel-inner" role="listbox">
+						<div class="carousel-item active">
+							<div class="table-container">
+								<table class="tableStyle" width="100%" bordercolor="#40C4ED" border="1"
+									   cellpadding="220">
+									<thead>
+									<tr class="indicatorsSg">
+										<!--<th>指标</th>
+										<th>乐昌市</th>
+										<th>南雄市</th>
+										<th>曲江区</th>
+										<th>仁化县</th>
+										<th>乳源瑶族</th>
+										<th>始兴县</th>
+										<th>翁源县</th>
+										<th>新丰县</th>
+										<th>市区</th>-->
+									</tr>
+									</thead>
+									<tbody>
+									<tr id="downloadRateSg">
+										<!--<td>500K下载速率(Mbps)</td>
+										<td>0</td>
+										<td>0</td>
+										<td>0</td>
+										<td>0</td>
+										<td>0</td>
+										<td>0</td>
+										<td>0</td>
+										<td>0</td>
+										<td>0</td>-->
+									</tr>
+									<tr id="httpDelaySg">
+										<!--<td>HTTP响应时延(ms)</td>
+										<td>0</td>
+										<td>0</td>
+										<td>0</td>
+										<td>0</td>
+										<td>0</td>
+										<td>0</td>
+										<td>0</td>
+										<td>0</td>
+										<td>0</td>-->
+									</tr>
+									<tr id="webpageSuccessRateSg">
+										<!--<td>页面显示成功率</td>
+										<td>0</td>
+										<td>0</td>
+										<td>0</td>
+										<td>0</td>
+										<td>0</td>
+										<td>0</td>
+										<td>0</td>
+										<td>0</td>
+										<td>0</td>-->
+									</tr>
+									<tr id="appStoreProportionSg">
+										<!--<td>商店500Kbps以下占比</td>
+										<td>0</td>
+										<td>0</td>
+										<td>0</td>
+										<td>0</td>
+										<td>0</td>
+										<td>0</td>
+										<td>0</td>
+										<td>0</td>
+										<td>0</td>-->
+									</tr>
+									</tbody>
+								</table>
+							</div>
+						</div>
+						<div class="carousel-item">
+							<div class="table-container">
+								<table class="tableStyle" width="100%" bordercolor="#40C4ED" border="1"
+									   cellpadding="220">
+									<thead>
+									<tr class="indicatorsSg">
+										<!--<th>指标</th>
+										<th>乐昌市</th>
+										<th>南雄市</th>
+										<th>曲江区</th>
+										<th>仁化县</th>
+										<th>乳源瑶族</th>
+										<th>始兴县</th>
+										<th>翁源县</th>
+										<th>新丰县</th>
+										<th>市区</th>-->
+									</tr>
+									</thead>
+									<tbody>
+									<tr id="instantMessengerSuccessSg">
+									</tr>
+									<tr id="instantMessengerDelaySg">
+									</tr>
+									<tr id="browseAppPageDisplayLowSg">
+									</tr>
+									<tr id="browseAppPageDisplayAvgSg">
+									</tr>
+									</tbody>
+								</table>
+							</div>
+						</div>
+						<div class="carousel-item">
+							<div class="table-container">
+								<table class="tableStyle" width="100%" bordercolor="#40C4ED" border="1"
+									   cellpadding="220">
+									<thead>
+									<tr class="indicatorsSg">
+										<!--<th>指标</th>
+										<th>乐昌市</th>
+										<th>南雄市</th>
+										<th>曲江区</th>
+										<th>仁化县</th>
+										<th>乳源瑶族</th>
+										<th>始兴县</th>
+										<th>翁源县</th>
+										<th>新丰县</th>
+										<th>市区</th>-->
+									</tr>
+									</thead>
+									<tbody>
+									<tr id="videoSuccessSg">
+									</tr>
+									<tr id="videoDelaySg">
+									</tr>
+									<tr id="gameSuccessSg">
+									</tr>
+									<tr id="gameDelaySg">
+									</tr>
+									</tbody>
+								</table>
+							</div>
+						</div>
+						<div class="carousel-item">
+							<div class="table-container">
+								<table class="tableStyle" width="100%" bordercolor="#40C4ED" border="1"
+									   cellpadding="220">
+									<thead>
+									<tr class="indicatorsSg">
+										<!--<th>指标</th>
+										<th>乐昌市</th>
+										<th>南雄市</th>
+										<th>曲江区</th>
+										<th>仁化县</th>
+										<th>乳源瑶族</th>
+										<th>始兴县</th>
+										<th>翁源县</th>
+										<th>新丰县</th>
+										<th>市区</th>-->
+									</tr>
+									</thead>
+									<tbody>
+									<tr id="browseSuccessSg">
+									</tr>
+									<tr id="browseDelaySg">
+									</tr>
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</div>
+					<div class="networkElementRate-button carousel-indicators">
+						<button data-target="#sgTable" data-slide-to="0" class="tableButton active Checked"></button>
+						<button data-target="#sgTable" data-slide-to="1" class="tableButton"></button>
+						<button data-target="#sgTable" data-slide-to="2" class="tableButton"></button>
+						<button data-target="#sgTable" data-slide-to="3" class="tableButton"></button>
+					</div>
+				</div>
+				<div id="zsTable" class="carousel slide tableMeg" data-ride="carousel"
+					 ng-if="logingOfCity==='zhongshan'">
+					<div class="carousel-inner" role="listbox">
+						<div class="carousel-item active">
+							<div class="table-container">
+								<table class="tableStyle" width="100%" bordercolor="#40C4ED" border="1"
+									   cellpadding="220">
+									<thead>
+									<tr class="indicatorsZs1">
+										<!--<th>指标</th>
+										<th>石岐</th>
+										<th>五桂山镇</th>
+										<th>南区</th>
+										<th>港口镇</th>
+										<th>东升镇</th>
+										<th>东区</th>
+										<th>西区</th>
+										<th>火炬开发区</th>-->
+									</tr>
+									</thead>
+									<tbody>
+									<tr id="downloadRateZs1">
+										<!--<td>500K下载速率(Mbps)</td>
+										<td>0</td>
+										<td>0</td>
+										<td>0</td>
+										<td>0</td>
+										<td>0</td>
+										<td>0</td>-->
+									</tr>
+									<tr id="httpDelayZs1">
+										<!--<td>HTTP响应时延(ms)</td>
+										<td>0</td>
+										<td>0</td>
+										<td>0</td>
+										<td>0</td>
+										<td>0</td>
+										<td>0</td>-->
+									</tr>
+									<tr id="webpageSuccessRateZs1">
+										<!--<td>页面显示成功率</td>
+										<td>0</td>
+										<td>0</td>
+										<td>0</td>
+										<td>0</td>
+										<td>0</td>
+										<td>0</td>-->
+									</tr>
+									<tr id="appStoreProportionZs1">
+										<!--<td>商店500Kbps以下占比</td>
+										<td>0</td>
+										<td>0</td>
+										<td>0</td>
+										<td>0</td>
+										<td>0</td>
+										<td>0</td>-->
+									</tr>
+									</tbody>
+								</table>
+							</div>
+						</div>
+						<div class="carousel-item">
+							<div class="table-container">
+								<table class="tableStyle" width="100%" bordercolor="#40C4ED" border="1"
+									   cellpadding="220">
+									<thead>
+									<tr class="indicatorsZs2">
+										<!--<th>指标</th>
+										<th>沙溪镇</th>
+										<th>三角镇</th>
+										<th>南朗镇</th>
+										<th>黄圃镇</th>
+										<th>阜沙镇</th>
+										<th>南头镇</th>
+										<th>三乡镇</th>
+										<th>民众镇</th>-->
+									</tr>
+									</thead>
+									<tbody>
+									<tr id="downloadRateZs2">
+									</tr>
+									<tr id="httpDelayZs2">
+									</tr>
+									<tr id="webpageSuccessRateZs2">
+									</tr>
+									<tr id="appStoreProportionZs2">
+									</tr>
+									</tbody>
+								</table>
+							</div>
+						</div>
+						<div class="carousel-item">
+							<div class="table-container">
+								<table class="tableStyle" width="100%" bordercolor="#40C4ED" border="1"
+									   cellpadding="220">
+									<thead>
+									<tr class="indicatorsZs">
+										<!--<th>指标</th>
+										<th>东凤镇</th>
+										<th>小榄镇</th>
+										<th>古镇镇</th>
+										<th>横栏镇</th>
+										<th>大涌镇</th>
+										<th>板芙镇</th>
+										<th>神湾镇</th>
+										<th>坦洲镇</th>-->
+									</tr>
+									</thead>
+									<tbody>
+									<tr id="downloadRateZs">
+									</tr>
+									<tr id="httpDelayZs">
+									</tr>
+									<tr id="webpageSuccessRateZs">
+									</tr>
+									<tr id="appStoreProportionZs">
+									</tr>
+									</tbody>
+								</table>
+							</div>
+						</div>
+						<div class="carousel-item">
+							<div class="table-container">
+								<table class="tableStyle" width="100%" bordercolor="#40C4ED" border="1"
+									   cellpadding="220">
+									<thead>
+									<tr class="indicatorsZs1">
+										<!--<th>指标</th>
+										<th>石岐</th>
+										<th>五桂山镇</th>
+										<th>南区</th>
+										<th>港口镇</th>
+										<th>东升镇</th>
+										<th>东区</th>
+										<th>西区</th>
+										<th>火炬开发区</th>-->
+									</tr>
+									</thead>
+									<tbody>
+									<tr id="instantMessengerSuccessZs1">
+									</tr>
+									<tr id="instantMessengerDelayZs1">
+									</tr>
+									<tr id="browseAppPageDisplayLowZs1">
+									</tr>
+									<tr id="browseAppPageDisplayAvgZs1">
+									</tr>
+									</tbody>
+								</table>
+							</div>
+						</div>
+						<div class="carousel-item">
+							<div class="table-container">
+								<table class="tableStyle" width="100%" bordercolor="#40C4ED" border="1"
+									   cellpadding="220">
+									<thead>
+									<tr class="indicatorsZs2">
+										<!--<th>指标</th>
+										<th>沙溪镇</th>
+										<th>三角镇</th>
+										<th>南朗镇</th>
+										<th>黄圃镇</th>
+										<th>阜沙镇</th>
+										<th>南头镇</th>
+										<th>三乡镇</th>
+										<th>民众镇</th>-->
+									</tr>
+									</thead>
+									<tbody>
+									<tr id="instantMessengerSuccessZs2">
+									</tr>
+									<tr id="instantMessengerDelayZs2">
+									</tr>
+									<tr id="browseAppPageDisplayLowZs2">
+									</tr>
+									<tr id="browseAppPageDisplayAvgZs2">
+									</tr>
+									</tbody>
+								</table>
+							</div>
+						</div>
+						<div class="carousel-item">
+							<div class="table-container">
+								<table class="tableStyle" width="100%" bordercolor="#40C4ED" border="1"
+									   cellpadding="220">
+									<thead>
+									<tr class="indicatorsZs">
+										<!--<th>指标</th>
+										<th>东凤镇</th>
+										<th>小榄镇</th>
+										<th>古镇镇</th>
+										<th>横栏镇</th>
+										<th>大涌镇</th>
+										<th>板芙镇</th>
+										<th>神湾镇</th>
+										<th>坦洲镇</th>-->
+									</tr>
+									</thead>
+									<tbody>
+									<tr id="instantMessengerSuccessZs">
+									</tr>
+									<tr id="instantMessengerDelayZs">
+									</tr>
+									<tr id="browseAppPageDisplayLowZs">
+									</tr>
+									<tr id="browseAppPageDisplayAvgZs">
+									</tr>
+									</tbody>
+								</table>
+							</div>
+						</div>
+						<div class="carousel-item">
+							<div class="table-container">
+								<table class="tableStyle" width="100%" bordercolor="#40C4ED" border="1"
+									   cellpadding="220">
+									<thead>
+									<tr class="indicatorsZs1">
+										<!--<th>指标</th>
+										<th>石岐</th>
+										<th>五桂山镇</th>
+										<th>南区</th>
+										<th>港口镇</th>
+										<th>东升镇</th>
+										<th>东区</th>
+										<th>西区</th>
+										<th>火炬开发区</th>-->
+									</tr>
+									</thead>
+									<tbody>
+									<tr id="videoSuccessZs1">
+									</tr>
+									<tr id="videoDelayZs1">
+									</tr>
+									<tr id="gameSuccessZs1">
+									</tr>
+									<tr id="gameDelayZs1">
+									</tr>
+									</tbody>
+								</table>
+							</div>
+						</div>
+						<div class="carousel-item">
+							<div class="table-container">
+								<table class="tableStyle" width="100%" bordercolor="#40C4ED" border="1"
+									   cellpadding="220">
+									<thead>
+									<tr class="indicatorsZs2">
+										<!--<th>指标</th>
+										<th>沙溪镇</th>
+										<th>三角镇</th>
+										<th>南朗镇</th>
+										<th>黄圃镇</th>
+										<th>阜沙镇</th>
+										<th>南头镇</th>
+										<th>三乡镇</th>
+										<th>民众镇</th>-->
+									</tr>
+									</thead>
+									<tbody>
+									<tr id="videoSuccessZs2">
+									</tr>
+									<tr id="videoDelayZs2">
+									</tr>
+									<tr id="gameSuccessZs2">
+									</tr>
+									<tr id="gameDelayZs2">
+									</tr>
+									</tbody>
+								</table>
+							</div>
+						</div>
+						<div class="carousel-item">
+							<div class="table-container">
+								<table class="tableStyle" width="100%" bordercolor="#40C4ED" border="1"
+									   cellpadding="220">
+									<thead>
+									<tr class="indicatorsZs">
+										<!--<th>指标</th>
+										<th>东凤镇</th>
+										<th>小榄镇</th>
+										<th>古镇镇</th>
+										<th>横栏镇</th>
+										<th>大涌镇</th>
+										<th>板芙镇</th>
+										<th>神湾镇</th>
+										<th>坦洲镇</th>-->
+									</tr>
+									</thead>
+									<tbody>
+									<tr id="videoSuccessZs">
+									</tr>
+									<tr id="videoDelayZs">
+									</tr>
+									<tr id="gameSuccessZs">
+									</tr>
+									<tr id="gameDelayZs">
+									</tr>
+									</tbody>
+								</table>
+							</div>
+						</div>
+						<div class="carousel-item">
+							<div class="table-container">
+								<table class="tableStyle" width="100%" bordercolor="#40C4ED" border="1"
+									   cellpadding="220">
+									<thead>
+									<tr class="indicatorsZs1">
+										<!--<th>指标</th>
+										<th>石岐</th>
+										<th>五桂山镇</th>
+										<th>南区</th>
+										<th>港口镇</th>
+										<th>东升镇</th>
+										<th>东区</th>
+										<th>西区</th>
+										<th>火炬开发区</th>-->
+									</tr>
+									</thead>
+									<tbody>
+									<tr id="browseSuccessZs1">
+									</tr>
+									<tr id="browseDelayZs1">
+									</tr>
+									</tbody>
+								</table>
+							</div>
+						</div>
+						<div class="carousel-item">
+							<div class="table-container">
+								<table class="tableStyle" width="100%" bordercolor="#40C4ED" border="1"
+									   cellpadding="220">
+									<thead>
+									<tr class="indicatorsZs2">
+										<!--<th>指标</th>
+										<th>沙溪镇</th>
+										<th>三角镇</th>
+										<th>南朗镇</th>
+										<th>黄圃镇</th>
+										<th>阜沙镇</th>
+										<th>南头镇</th>
+										<th>三乡镇</th>
+										<th>民众镇</th>-->
+									</tr>
+									</thead>
+									<tbody>
+									<tr id="browseSuccessZs2">
+									</tr>
+									<tr id="browseDelayZs2">
+									</tr>
+									</tbody>
+								</table>
+							</div>
+						</div>
+						<div class="carousel-item">
+							<div class="table-container">
+								<table class="tableStyle" width="100%" bordercolor="#40C4ED" border="1"
+									   cellpadding="220">
+									<thead>
+									<tr class="indicatorsZs">
+										<!--<th>指标</th>
+										<th>东凤镇</th>
+										<th>小榄镇</th>
+										<th>古镇镇</th>
+										<th>横栏镇</th>
+										<th>大涌镇</th>
+										<th>板芙镇</th>
+										<th>神湾镇</th>
+										<th>坦洲镇</th>-->
+									</tr>
+									</thead>
+									<tbody>
+									<tr id="browseSuccessZs">
+									</tr>
+									<tr id="browseDelayZs">
+									</tr>
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</div>
+					<div class="networkElementRate-button carousel-indicators">
+						<button data-target="#zsTable" data-slide-to="0" class="tableButton active Checked"></button>
+						<button data-target="#zsTable" data-slide-to="1" class="tableButton"></button>
+						<button data-target="#zsTable" data-slide-to="2" class="tableButton"></button>
+						<button data-target="#zsTable" data-slide-to="3" class="tableButton"></button>
+						<button data-target="#zsTable" data-slide-to="4" class="tableButton"></button>
+						<button data-target="#zsTable" data-slide-to="5" class="tableButton"></button>
+						<button data-target="#zsTable" data-slide-to="6" class="tableButton"></button>
+						<button data-target="#zsTable" data-slide-to="7" class="tableButton"></button>
+						<button data-target="#zsTable" data-slide-to="8" class="tableButton"></button>
+						<button data-target="#zsTable" data-slide-to="9" class="tableButton"></button>
+						<button data-target="#zsTable" data-slide-to="10" class="tableButton"></button>
+						<button data-target="#zsTable" data-slide-to="11" class="tableButton"></button>
+					</div>
+				</div>
+				<div id="zhTable" class="carousel slide tableMeg" data-ride="carousel"
+					 ng-if="logingOfCity==='zhuhai'">
+					<div class="carousel-inner" role="listbox">
+						<div class="carousel-item active">
+							<div class="table-container">
+								<table class="tableStyle" width="100%" bordercolor="#40C4ED" border="1"
+									   cellpadding="220">
+									<thead>
+									<tr class="indicatorsZH">
+										<!--<th>指标</th>
+										<th>乐昌市</th>
+										<th>南雄市</th>
+										<th>曲江区</th>
+										<th>仁化县</th>
+										<th>乳源瑶族</th>
+										<th>始兴县</th>
+										<th>翁源县</th>
+										<th>新丰县</th>
+										<th>市区</th>-->
+									</tr>
+									</thead>
+									<tbody>
+									<tr id="downloadRateZH">
+										<!--<td>500K下载速率(Mbps)</td>
+										<td>0</td>
+										<td>0</td>
+										<td>0</td>
+										<td>0</td>
+										<td>0</td>
+										<td>0</td>
+										<td>0</td>
+										<td>0</td>
+										<td>0</td>-->
+									</tr>
+									<tr id="httpDelayZH">
+										<!--<td>HTTP响应时延(ms)</td>
+										<td>0</td>
+										<td>0</td>
+										<td>0</td>
+										<td>0</td>
+										<td>0</td>
+										<td>0</td>
+										<td>0</td>
+										<td>0</td>
+										<td>0</td>-->
+									</tr>
+									<tr id="webpageSuccessRateZH">
+										<!--<td>页面显示成功率</td>
+										<td>0</td>
+										<td>0</td>
+										<td>0</td>
+										<td>0</td>
+										<td>0</td>
+										<td>0</td>
+										<td>0</td>
+										<td>0</td>
+										<td>0</td>-->
+									</tr>
+									<tr id="appStoreProportionZH">
+										<!--<td>商店500Kbps以下占比</td>
+										<td>0</td>
+										<td>0</td>
+										<td>0</td>
+										<td>0</td>
+										<td>0</td>
+										<td>0</td>
+										<td>0</td>
+										<td>0</td>
+										<td>0</td>-->
+									</tr>
+									</tbody>
+								</table>
+							</div>
+						</div>
+						<div class="carousel-item">
+							<div class="table-container">
+								<table class="tableStyle" width="100%" bordercolor="#40C4ED" border="1"
+									   cellpadding="220">
+									<thead>
+									<tr class="indicatorsZH">
+										<!--<th>指标</th>
+										<th>乐昌市</th>
+										<th>南雄市</th>
+										<th>曲江区</th>
+										<th>仁化县</th>
+										<th>乳源瑶族</th>
+										<th>始兴县</th>
+										<th>翁源县</th>
+										<th>新丰县</th>
+										<th>市区</th>-->
+									</tr>
+									</thead>
+									<tbody>
+									<tr id="instantMessengerSuccessZH">
+									</tr>
+									<tr id="instantMessengerDelayZH">
+									</tr>
+									<tr id="browseAppPageDisplayLowZH">
+									</tr>
+									<tr id="browseAppPageDisplayAvgZH">
+									</tr>
+									</tbody>
+								</table>
+							</div>
+						</div>
+						<div class="carousel-item">
+							<div class="table-container">
+								<table class="tableStyle" width="100%" bordercolor="#40C4ED" border="1"
+									   cellpadding="220">
+									<thead>
+									<tr class="indicatorsZH">
+										<!--<th>指标</th>
+										<th>乐昌市</th>
+										<th>南雄市</th>
+										<th>曲江区</th>
+										<th>仁化县</th>
+										<th>乳源瑶族</th>
+										<th>始兴县</th>
+										<th>翁源县</th>
+										<th>新丰县</th>
+										<th>市区</th>-->
+									</tr>
+									</thead>
+									<tbody>
+									<tr id="videoSuccessZH">
+									</tr>
+									<tr id="videoDelayZH">
+									</tr>
+									<tr id="gameSuccessZH">
+									</tr>
+									<tr id="gameDelayZH">
+									</tr>
+									</tbody>
+								</table>
+							</div>
+						</div>
+						<div class="carousel-item">
+							<div class="table-container">
+								<table class="tableStyle" width="100%" bordercolor="#40C4ED" border="1"
+									   cellpadding="220">
+									<thead>
+									<tr class="indicatorsZH">
+										<!--<th>指标</th>
+										<th>乐昌市</th>
+										<th>南雄市</th>
+										<th>曲江区</th>
+										<th>仁化县</th>
+										<th>乳源瑶族</th>
+										<th>始兴县</th>
+										<th>翁源县</th>
+										<th>新丰县</th>
+										<th>市区</th>-->
+									</tr>
+									</thead>
+									<tbody>
+									<tr id="browseSuccessZH">
+									</tr>
+									<tr id="browseDelayZH">
+									</tr>
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</div>
+					<div class="networkElementRate-button carousel-indicators">
+						<button data-target="#zhTable" data-slide-to="0" class="tableButton active Checked"></button>
+						<button data-target="#zhTable" data-slide-to="1" class="tableButton"></button>
+						<button data-target="#zhTable" data-slide-to="2" class="tableButton"></button>
+						<button data-target="#zhTable" data-slide-to="3" class="tableButton"></button>
+					</div>
+				</div>
+				<div id="mmTable" class="carousel slide tableMeg" data-ride="carousel"
+					 ng-if="logingOfCity==='maoming'">
+					<div class="carousel-inner" role="listbox">
+						<div class="carousel-item active">
+							<div class="table-container">
+								<table class="tableStyle" width="100%" bordercolor="#40C4ED" border="1"
+									   cellpadding="220">
+									<thead>
+									<tr class="indicatorsMM">
+										<!--<th>指标</th>
+										<th>乐昌市</th>
+										<th>南雄市</th>
+										<th>曲江区</th>
+										<th>仁化县</th>
+										<th>乳源瑶族</th>
+										<th>始兴县</th>
+										<th>翁源县</th>
+										<th>新丰县</th>
+										<th>市区</th>-->
+									</tr>
+									</thead>
+									<tbody>
+									<tr id="downloadRateMM">
+										<!--<td>500K下载速率(Mbps)</td>
+										<td>0</td>
+										<td>0</td>
+										<td>0</td>
+										<td>0</td>
+										<td>0</td>
+										<td>0</td>
+										<td>0</td>
+										<td>0</td>
+										<td>0</td>-->
+									</tr>
+									<tr id="httpDelayMM">
+										<!--<td>HTTP响应时延(ms)</td>
+										<td>0</td>
+										<td>0</td>
+										<td>0</td>
+										<td>0</td>
+										<td>0</td>
+										<td>0</td>
+										<td>0</td>
+										<td>0</td>
+										<td>0</td>-->
+									</tr>
+									<tr id="webpageSuccessRateMM">
+										<!--<td>页面显示成功率</td>
+										<td>0</td>
+										<td>0</td>
+										<td>0</td>
+										<td>0</td>
+										<td>0</td>
+										<td>0</td>
+										<td>0</td>
+										<td>0</td>
+										<td>0</td>-->
+									</tr>
+									<tr id="appStoreProportionMM">
+										<!--<td>商店500Kbps以下占比</td>
+										<td>0</td>
+										<td>0</td>
+										<td>0</td>
+										<td>0</td>
+										<td>0</td>
+										<td>0</td>
+										<td>0</td>
+										<td>0</td>
+										<td>0</td>-->
+									</tr>
+									</tbody>
+								</table>
+							</div>
+						</div>
+						<div class="carousel-item">
+							<div class="table-container">
+								<table class="tableStyle" width="100%" bordercolor="#40C4ED" border="1"
+									   cellpadding="220">
+									<thead>
+									<tr class="indicatorsMM">
+										<!--<th>指标</th>
+										<th>乐昌市</th>
+										<th>南雄市</th>
+										<th>曲江区</th>
+										<th>仁化县</th>
+										<th>乳源瑶族</th>
+										<th>始兴县</th>
+										<th>翁源县</th>
+										<th>新丰县</th>
+										<th>市区</th>-->
+									</tr>
+									</thead>
+									<tbody>
+									<tr id="instantMessengerSuccessMM">
+									</tr>
+									<tr id="instantMessengerDelayMM">
+									</tr>
+									<tr id="browseAppPageDisplayLowMM">
+									</tr>
+									<tr id="browseAppPageDisplayAvgMM">
+									</tr>
+									</tbody>
+								</table>
+							</div>
+						</div>
+						<div class="carousel-item">
+							<div class="table-container">
+								<table class="tableStyle" width="100%" bordercolor="#40C4ED" border="1"
+									   cellpadding="220">
+									<thead>
+									<tr class="indicatorsMM">
+										<!--<th>指标</th>
+										<th>乐昌市</th>
+										<th>南雄市</th>
+										<th>曲江区</th>
+										<th>仁化县</th>
+										<th>乳源瑶族</th>
+										<th>始兴县</th>
+										<th>翁源县</th>
+										<th>新丰县</th>
+										<th>市区</th>-->
+									</tr>
+									</thead>
+									<tbody>
+									<tr id="videoSuccessMM">
+									</tr>
+									<tr id="videoDelayMM">
+									</tr>
+									<tr id="gameSuccessMM">
+									</tr>
+									<tr id="gameDelayMM">
+									</tr>
+									</tbody>
+								</table>
+							</div>
+						</div>
+						<div class="carousel-item">
+							<div class="table-container">
+								<table class="tableStyle" width="100%" bordercolor="#40C4ED" border="1"
+									   cellpadding="220">
+									<thead>
+									<tr class="indicatorsMM">
+										<!--<th>指标</th>
+										<th>乐昌市</th>
+										<th>南雄市</th>
+										<th>曲江区</th>
+										<th>仁化县</th>
+										<th>乳源瑶族</th>
+										<th>始兴县</th>
+										<th>翁源县</th>
+										<th>新丰县</th>
+										<th>市区</th>-->
+									</tr>
+									</thead>
+									<tbody>
+									<tr id="browseSuccessMM">
+									</tr>
+									<tr id="browseDelayMM">
+									</tr>
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</div>
+					<div class="networkElementRate-button carousel-indicators">
+						<button data-target="#mmTable" data-slide-to="0" class="tableButton active Checked"></button>
+						<button data-target="#mmTable" data-slide-to="1" class="tableButton"></button>
+						<button data-target="#mmTable" data-slide-to="2" class="tableButton"></button>
+						<button data-target="#mmTable" data-slide-to="3" class="tableButton"></button>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="right-side">
+			<div id="rightPanel" class="panel-content ">
+				<div class="title">
+					<img src="../images/icon_mobile.png"><span>业务分布</span>
+				</div>
+				<div class="businessChartPanel">
+					<div class="twoPieChartPanel">
+						<!--<div id="bpChart1"></div>
+                        <div id="bpChart2"></div>-->
+						<div id="aChart"></div>
+					</div>
+					<div class="twoBarTitle">
+						<div class="left" id="getSubscriberToRank">
+							<span>用户数（万人）</span>
+							<img src="../images/icon_business_user.jpg"/>
+						</div>
+						<div class="right" id="getFlowToRank">
+							<img src="../images/icon_business_flow.jpg"/>
+							<span>流量（TB）</span>
+						</div>
+					</div>
+					<div class="twoWayBarChartPanel">
+						<div id="twoWayBarChart"></div>
+					</div>
+					<div class="twoBarPage">
+						<button class="ui-pg-button first-page ui-disabled" title="第一页"><i class="fa fa-step-backward" aria-hidden="true"></i></button>
+						<button class="ui-pg-button pre-page ui-disabled" title="上一页"><i class="fa fa-backward" aria-hidden="true"></i></button>
+						第<input type="text" ng-model="pageNum" value="1" maxlength="6">页
+						<button class="go">go</button>
+						<button class="ui-pg-button next-page" title="下一页"><i class="fa fa-forward" aria-hidden="true"></i></button>
+						<button class="ui-pg-button last-page" title="最后一页"><i class="fa fa-step-forward" aria-hidden="true"></i></button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

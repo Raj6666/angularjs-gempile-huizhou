@@ -1,0 +1,203 @@
+#business_indicator_trend {
+
+	label {
+		margin-bottom: 0;
+	}
+
+	/*select{
+		-moz-appearance: none;
+		-webkit-appearance: none;
+	}*/
+
+	.business-indicator-query-panel {
+		background-color: white;
+		padding-top: 10px;
+		border-top-left-radius: 4px;
+		border-top-right-radius: 4px;
+		.head {
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+			height: 30px;
+			border-bottom: 2px solid $BLUE_POSITIVE;
+			padding: 0 15px 0 0;
+			.title {
+				display: flex;
+				align-items: center;
+				height: 30px;
+				.text {
+					display: flex;
+					align-items: center;
+					height: 30px;
+					color: white;
+					padding: 0 20px;
+					background-color: $BLUE_POSITIVE;
+				}
+				.right-triangle {
+					width: 30px;
+					height: 30px;
+					display: inline-block;
+					background: url("../../asserts/images/common/right_triangle.png") no-repeat right center;
+					background-size: auto 30px;
+				}
+			}
+			.select-zone {
+				display: flex;
+				height: 30px;
+				.prompt {
+					line-height: 30px;
+					font-size: 15px;
+					margin: 0 5px;
+				}
+				.template-list {
+					cursor: pointer;
+					white-space: nowrap;
+					.dropdown-button {
+						line-height: 30px;
+					}
+					.dropdown-menu {
+						max-width: 300px;
+						max-height: 400px;
+						overflow: auto;
+						.dropdown-item-i {
+							display: flex;
+							align-items: center;
+							height: 30px;
+							cursor: pointer;
+							&:hover {
+								background-color: #F0F0FF;
+							}
+							.delete-btn {
+								margin: 0 10px 0 15px;
+								color: #999999;
+							}
+							.template-name {
+								margin: 0 15px 0 0;
+								max-width: 500px;
+								flex: auto;
+								height: 100%;
+								display: flex;
+								align-items: center;
+							}
+						}
+						.dropdown-item-i-even {
+							background-color: #F7F7FF;
+							&:hover {
+								background-color: #F0F0FF;
+							}
+						}
+					}
+				}
+			}
+		}
+		.query-panel-body {
+			padding: 0 15px;
+			.Ncreate_div{
+				//line-height:45px;
+				height:65px;
+				padding:17px 0;
+				display:flex;
+			}
+			.oneLevel{
+				align-content: center;
+			}
+			.oneLevelDimensionSelect{
+				margin-right:20px;
+				select{
+					height:30px;
+					width:170px;
+					border:1px solid rgba(0, 0, 0, 0.4);
+					border-radius:3px;
+					padding-left:5px;
+					margin-left:10px;
+					margin-top:1px;
+				}
+			}
+			.analysis-parameter-panel {
+				border-bottom: 1px dashed #C1C1C1;
+				line-height: 30px;
+				padding: 10px 0;
+				margin: 0 auto;
+				display: flex;
+				justify-content: flex-start;
+				.select-data-list-panel {
+					width: 240px;
+					margin-right: 30px;
+					flex-direction: column;
+					.select-data-panel-head {
+						display: flex;
+						justify-content: space-between;
+						.search-word-input-label {
+							width: 175px;
+							line-height: 25px;
+							padding: 0 10px;
+							margin-right: 5px;
+							color: #6D6D6D;
+							background: url("../../asserts/images/common/imput_label_line.png") no-repeat bottom;
+						}
+						.search-list-message {
+							width: 175px;
+							line-height: 25px;
+							margin-right: 5px;
+						}
+						.select-list-length {
+							color: #2BBCFF;
+							padding: 0 3px;
+						}
+					}
+					.select-data-panel-body {
+						margin-top: 1rem;
+						border: #CCCCCC 1px solid;
+						background: #FFFFFF;
+						width: 230px;
+						height: 250px;
+						overflow: auto;
+						white-space: nowrap;
+						.network-element-list {
+							margin-left: 10px;
+							margin-bottom: .25rem;
+						}
+					}
+				}
+			}
+			.button-panel {
+				display: flex;
+				justify-content: space-around;
+				padding: 10px 0 5px 0;
+				button:focus {
+					box-shadow: none;
+				}
+			}
+		}
+		.footer {
+			display: flex;
+			justify-content: center;
+			border-top: 2px solid $BLUE_POSITIVE;
+			.collapse-btn {
+				width: 120px;
+				height: 11px;
+				padding: .1rem .5rem;
+				background-color: $BLUE_POSITIVE;
+				border-color: $BLUE_POSITIVE;
+				border-radius: 0 0 2px 2px;
+				i {
+					position: relative;
+					top: -3px;
+				}
+			}
+		}
+	}
+
+	.select-width-140{
+		border:1px solid rgba(0,0,0,.4);
+		width:170px;
+		height:100%;
+		background:#fff;
+		padding:0 6px;
+		margin-bottom:1px;
+		input{
+			text-align:left !important;
+		}
+	}
+
+}

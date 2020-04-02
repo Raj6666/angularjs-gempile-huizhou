@@ -1,0 +1,308 @@
+#sms_bulletin {
+	min-width: 1345px;
+	select{
+		cursor:pointer;
+	}
+	#edit-sms {
+		padding: 15px 20px;
+		width: 100%;
+		.editRules {
+			border: 1px solid #ccc;
+			border-radius: 5px;
+			padding: 15px 15px 15px;
+			margin-bottom: 15px;
+			.threeContainer {
+				display: flex;
+				justify-content: space-between;
+			}
+			.group-block, .add-rule-block {
+				width: 23.5%;
+				height: 270px;
+				border: 2px solid #ccc;
+				.list-group-item {
+					display: flex;
+					justify-content: space-between;
+					border: 0;
+					padding: .6rem 1rem;
+					&:hover {
+						background: #eeeeee;
+						border-radius: 0;
+					}
+				}
+				.group-body {
+					height: calc(100% - 43px);
+					overflow: auto;
+				}
+
+			}
+			.add-rule-block {
+				width: 50.5%;
+				.indicators_list {
+					height:223px;
+					overflow: auto;
+					table {
+						width: 100%;
+						tbody{
+							tr:hover {
+								background: #eeeeee;
+							}
+						}
+					}
+				}
+				th {
+					font-weight: 700;
+				}
+				th, td {
+					text-align: center;
+					padding: .6rem 0;
+				}
+			}
+		}
+		.whetherOrNotUpdate {
+			height:33px;
+			//display: flex;
+			position:relative;
+			.group-update-btn {
+				width: 100px;
+			}
+			.sms-op-block{
+				position:absolute;
+				top:0;
+				left:50%;
+				transform: translate(-50%,0);
+			}
+			.smsNotification{
+				float:right;
+				margin-right:30px;
+			}
+		}
+	}
+	.footer {
+		background: #f2f0f1;
+		margin-bottom: 30px;
+		i {
+			position: relative;
+			font-size: 1.7em;
+		}
+		.up {
+			top: -0.1rem;
+		}
+		.down {
+			top: -0.75rem;
+		}
+	}
+	.query-results {
+		.inline-form-group {
+			border-bottom: 1px dashed #ccc;
+			padding: 16px 25px;
+			height: 70px;
+		}
+		.form-items {
+			display: flex;
+			height: 33px;
+			margin: 3px;
+			align-items: center;
+		}
+		h5 {
+			line-height: 45px;
+			font-weight: 700;
+			padding-left: 20px;
+			margin: 0;
+		}
+		select{
+			-moz-appearance: none;
+			-webkit-appearance: none;
+		}
+		.gridContainer {
+			height: 330px;
+			width: 100%;
+			padding: 0 20px 15px;
+			position:relative;
+			.noAnalysis{
+				font-size:20px;
+				font-weight:700;
+				color: rgba(0,0,0,.6);
+				position:absolute;
+				top:45%;
+				left:50%;
+				transform: translate(-50%,-50%);
+			}
+		}
+	}
+	/**群组点击之后的样式*/
+	.active {
+		background: #eeeeee;
+		border-radius: 0;
+		color:#545454;
+	}
+	.grid {
+		width: 100%;
+		height: 100% !important;
+	}
+	/*表头的padding*/
+	/*.ui-grid-header-cell .sortable {
+		padding-left: 30px;
+	}*/
+	/*表头的行高*/
+	.ui-grid-cell-contents {
+		line-height: 30px;
+		padding-left: 30px;
+	}
+
+	/**模态框的样式*/
+	#addIndicatorsModal {
+		position:fixed;
+		width:100%;
+		height:100%;
+		background:rgba(0,0,0,.2);
+		top:0;
+		left:0;
+		.modal-dialog {
+			position: absolute;
+			margin: 0;
+			top: 50%;
+			left: 50%;
+			transform: translate(-50%, -50%);
+			width: 500px;
+			max-width: 500px;
+			.modal-body {
+				padding: 0 30px 0 25px;
+				color: #333;
+				.title {
+					font-size: 18px;
+					line-height: 50px;
+					span{
+						float:right;
+						font-size:29px;
+						color: rgba(0,0,0,.5);
+						cursor: pointer;
+					}
+				}
+				li {
+					border-top: 1px solid #ccc;
+					height: 50px;
+					padding: 13px 35px;
+					display: flex;
+					justify-content: space-between;
+				}
+				select,input {
+					border: 1px solid #ccc;
+					height:24px;
+					width:265px;
+					padding-left:6px;
+				}
+				select{
+					padding-left:3px;
+				}
+			}
+			.modal-footer {
+				display: flex;
+				justify-content: center;
+				border: 0;
+				padding-top: 9px;
+				.btn {
+					height: 32px;
+					color: #fff;
+					width: 78px;
+					padding: 0;
+				}
+				.btn-primary {
+					background: #3085d6;
+				}
+				.btn-secondary {
+					background: #dd3333;
+				}
+			}
+		}
+	}
+
+	#mySmsModal{
+		.modal-dialog{
+			margin:175px auto;
+			.modal-content{
+				max-width:420px;
+			}
+			textarea{
+				margin:12px 12px 0;
+				height:268px;
+				padding:3px 5px;
+			}
+			.modal-footer{
+				display:flex;
+				justify-content:center;
+			}
+			button{
+				width:96px;
+				height:36px;
+				margin:0 6px;
+				color:#fff;
+				font-size:16px;
+			}
+		}
+	}
+
+	#template_editor{
+		.modal-dialog{
+			margin:175px auto;
+			.modal-content{
+				max-width:400px;
+			}
+			.smsTemplate{
+				padding:16px 13px;
+				.template-list{
+					border:1px solid rgba(0,0,0,.4);
+					width: 260px;
+					height:22px;
+					cursor:pointer;
+					.selected-button{
+						width:100%;
+						padding-left: 5px;
+						position:relative;
+						&::after{
+							position:absolute;
+							top:9px;
+							right:5px;
+						}
+					}
+					#temContainer{
+						width:calc(100% + 2px);
+						padding:2px 0;
+						left: -1px;
+						div {
+							padding-left: 5px;
+							&:hover {
+								background-color:#3399ff;
+								color: #fff;
+							}
+						}
+					}
+				}
+				/*select{
+					border:1px solid rgba(0,0,0,.4);
+				}*/
+			}
+
+			textarea{
+				margin:0 13px;
+				height:292px;
+				padding:3px 5px;
+			}
+			.modal-footer{
+				border:0;
+				display:flex;
+				justify-content:center;
+			}
+			button{
+				width:96px;
+				height:36px;
+				margin:0 6px;
+				color:#fff;
+				font-size:16px;
+			}
+		}
+	}
+}
+
+.modal-backdrop.show {
+	opacity: .2;
+}

@@ -1,0 +1,164 @@
+<div class="content" id="business_indicator_trend">
+	<div class="guidepost">
+		<i class="fa fa-map-marker"></i>
+		<span>业务质量 > 业务指标趋势对比分析</span>
+	</div>
+
+	<div class="business-indicator-query-panel">
+		<div class="head">
+			<div class="title">
+				<div class="text"><span>新建查询</span></div>
+				<div class="right-triangle"></div>
+			</div>
+			<div class="select-zone">
+				<div class="prompt">选择模板：</div>
+				<div class="btn-group template-list">
+					<div class="dropdown-toggle dropdown-button" data-toggle="dropdown" ng-bind="templateName"></div>
+					<div class="dropdown-menu dropdown-menu-right">
+						<div ng-class="$index%2==0? 'dropdown-item-i':'dropdown-item-i dropdown-item-i-even'"
+							 ng-repeat="template in templateList">
+							<i class="fa fa-times delete-btn" ng-click="deleteTemplate(template.id,template.name)"></i>
+							<span class="template-name" ng-click="selectTemplate(template.name,template.id)"
+								  ng-bind="template.name">
+                            </span>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div id="query-panel-body" class="query-panel-body">
+			<div class="Ncreate_div">
+				<span>图标类型：</span>
+				<div class="Nddiv1" style="padding-left:12px;">
+					<ul style="height:45px;overflow: hidden;margin:0">
+						<li ng-repeat="icon in iconType">
+							<img ng-click="selectIcon(icon.value)"
+								 ng-src="{{isSelectIcon(icon.value)}}" class="chooseradio"/>
+							<span>{{icon.name}}</span>
+						</li>
+					</ul>
+				</div>
+			</div>
+
+			<div class="Ncreate_div oneLevel">
+				<div class="oneLevelDimensionSelect">
+					<span>一级维度：</span>
+					<select name="">
+						<option value="">地市</option>
+						<option value="">SGW</option>
+						<option value="">Cell</option>
+						<option value="">业务大类</option>
+						<option value="">业务小类</option>
+					</select>
+				</div>
+				<div ng-dropdown-multiselect
+					 options="oneLevelClassificationOptions"
+					 selected-model="oneLevelClassificationModel"
+					 extra-settings="oneLevelClassificationSetting"
+					 translation-texts="selectorText"
+					 events="oneLevelClassificationEvents">
+				</div>
+			</div>
+
+			<div class="Ncreate_div">
+				<span>时间粒度:</span>
+				<div class="Nddiv1" id="chooseradio3">
+                    <span class="Ntime disabled">
+                        <img ng-src="{{isSelectedInterval(5)}}" class="chooseradio chooseradio1 disabled" other="3">
+                        <span>5分钟</span>
+                    </span>
+					<span class="Ntime">
+                        <img ng-src="{{isSelectedInterval(60)}}" ng-click="selectInterval(60)"
+							 class="chooseradio chooseradio2" other="3">
+                        <span>小时</span>
+                    </span>
+					<span class="Ntime">
+                        <img ng-src="{{isSelectedInterval(1440)}}" ng-click="selectInterval(1440)"
+							 class="chooseradio chooseradio3" other="3">
+                        <span>天</span>
+                    </span>
+				</div>
+				<span class="Ntimeblock">日期：
+                    <input id="d241" ng-change="checkDate()" onchange="" class="Wdate chooseWdate"
+						   ng-model="startDate" style="width: 100px;"
+						   onfocus="WdatePicker({
+                         el:'d241',
+                         dateFmt: 'yyyy-MM-dd',
+                         maxDate: '%y-%M-%d',
+                         onpicked:function(){
+                             $dp.$('d242').focus()
+                         }
+                     })"/>
+                    &nbsp;至&nbsp;
+                    <input id="d242" ng-change="checkDate()" onchange=""
+						   class="Wdate chooseWdate Mmargin0" ng-model="endDate" style="width: 100px;"
+						   onfocus="WdatePicker({
+                     el:'d242',
+                     dateFmt: 'yyyy-MM-dd',
+                     minDate: '#F{$dp.$D(\'d241\')}',
+                     //第一个日期框框选中时间+7天大于1天?设置最大为今天:设置第一个第一个日期框之后的7天
+                     maxDate:(new Date($('#d241').val()).getTime()+7*24*3600*1000)-new Date().getTime()>24*3600*1000?'%y-%M-%d':'#F{$dp.$D(\'d241\',{d:7})}',
+                  })"/>
+                </span>
+				<span class="Ntimeblock">
+                    <span ng-show="selectTime">
+                        <span>时段：</span>
+                        <span ng-show="interval==5">
+                            <input ng-change="checkDate()" ng-model="startTimeMin" id="d245" onchange=""
+								   onfocus="WdatePicker({opposite:true,dateFmt:'HH:mm'})"
+								   class="Wdate chooseWdate2"/>&nbsp;&nbsp;至&nbsp;
+                            <input ng-change="checkDate()" onchange=""
+								   ng-model="endTimeMin" id="d246" onfocus="WdatePicker({dateFmt:'HH:mm'})"
+								   class="Wdate chooseWdate2 Mmargin0"/>
+                        </span>
+                        <span ng-show="interval==60">
+                            <input id="d243" onFocus="WdatePicker({opposite:true,disabledDates:['01:00','02:00','03:00','04:00','05:00','06:00','07:00','08:00','09:00',
+                        '10:00','11:00','12:00','13:00','14:00','15:00','16:00','17:00','18:00','19:00','20:00','21:00','22:00','23:00','00:00'],dateFmt:'HH:00'})"
+								   ng-change="checkDate()" onchange="" class="Wdate chooseWdate2"
+								   ng-model="startTime"/>&nbsp;&nbsp;至&nbsp;
+                            <input id="d244" onFocus="WdatePicker({opposite:true,disabledDates:['01:00','02:00','03:00','04:00','05:00','06:00','07:00','08:00','09:00',
+                        '10:00','11:00','12:00','13:00','14:00','15:00','16:00','17:00','18:00','19:00','20:00','21:00','22:00','23:00','00:00'],dateFmt:'HH:00'})"
+								   ng-change="checkDate()" onchange=""
+								   class="Wdate chooseWdate2 Mmargin0" ng-model="endTime"/>
+                        </span>
+                        <div class="DdisplayIB timequantum" id="divselect1" ng-show="selectMoreDate">
+                            <span class="DdisplayIB timequantum_span select-width" ng-bind="moreDayFindText">跨天查询</span>
+                            <ul class="timequantum_ul">
+                                <li ng-click="moreDayFind('interDays')">跨天查询</li>
+                                <li ng-click="moreDayFind('manyDays')">多天查询</li>
+                            </ul>
+                        </div>
+                    </span>
+                    <br>
+                </span>
+				<span class="Ntimet" ng-show="morningAndNight">
+                    <img ng-click="selectBusyTime(checkMorningAndNight)" ng-src="{{busyImg}}">早晚忙时（09:00-11:59 及 21:00-23:59）
+                </span>
+				<p class="Cclearb"></p>
+			</div>
+
+			<div class="button-panel">
+				<button type="button" class="btn btn-sm confirm-button" ng-click="saveTemplate()">保存模板</button>
+				<button type="button" class="btn btn-sm confirm-button" ng-click="toDoBusinessIndicatorsAnalysis()">查询
+				</button>
+				<button type="button" class="btn btn-sm confirm-button" data-toggle="collapse"
+						data-target="#query-panel-body">取消
+				</button>
+			</div>
+		</div>
+		<div class="footer">
+			<button class="btn btn-info btn-sm collapse-btn flex-center" type="button"
+			><!--data-toggle="collapse" data-target="#query-panel-body"-->
+				<i class="fa fa-bars"></i>
+			</button>
+		</div>
+	</div>
+
+	<div class="Coveragequality_main PpaddingT10">
+		<p class="Networktitle">
+			<span>业务指标趋势对比分析 > 当前查询：</span>
+			<label ng-bind="queryStatusMessage"></label>
+		</p>
+	</div>
+
+</div>

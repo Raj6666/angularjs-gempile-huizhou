@@ -1,0 +1,96 @@
+<div class="content" id="complaint_label_analysis">
+	<!--<input class="btn btn-outline-info selStartDate Wwidth170" type="month"
+		   id="test" style="text-align:left;color:#464a4c;">-->
+<div class="guidepost">
+	<i class="fa fa-map-marker"></i>
+	<span>投诉分析 > 投诉标签分析</span>
+</div>
+<div class="query-panel">
+	<div class="head">
+		<div class="title">
+			<div class="text"><span>新建查询</span></div>
+			<div class="right-triangle"></div>
+		</div>
+	</div>
+	<div id="poor-gis-body" class="collapse poor-gis-body show">
+		<div class="inline-form-group">
+			<div class="selectLabel select-condition">
+				<label class="col-form-label flex-center">标签：</label>
+				<select name="" id="selLabel" class="form-control" ng-model="labelType">
+					<option value="" disabled selected style="display:none;">请选择标签</option>
+					<option value="1">ARPU值</option>
+					<option value="2">主套餐TOP15</option>
+					<option value="3">通话计费时长(MOU)</option>
+					<option value="4">上网流量(DOU)</option>
+					<option value="5">流量套餐TOP15</option>
+					<option value="6">投诉次数</option>
+					<option value="7">用户满意度评分</option>
+					<option value="8">常用APP名称TOP10</option>
+					<option value="9">区域类型</option>
+					<option value="10">终端品牌TOP15</option>
+					<option value="11">TCP一、二次握手时延</option>
+					<option value="12">附着失败次数</option>
+					<option value="13">三次握手失败次数</option>
+				</select>
+			</div>
+			<div class="startDate select-condition">
+				<label class="col-form-label flex-center">开始日期：</label>
+				<div class="form-items">
+					<input class="btn btn-outline-info selStartDate Wwidth170" type="text" placeholder="请选择开始时间"
+						   id="startTimePicker" style="text-align:left;color:#464a4c;">
+				</div>
+			</div>
+			<div class="endDate select-condition">
+				<label class="col-form-label flex-center">结束日期：</label>
+				<div class="form-items">
+					<input class="btn btn-outline-info selEndDate Wwidth170" type="text" placeholder="请选择结束时间"
+						   id="endTimePicker" style="text-align:left;color:#464a4c;">
+				</div>
+			</div>
+
+			<button id="toPoorAreaGisAnalysis" type="button" class="btn btn-info inquire"
+					ng-click="toComplaintLabelAnalysis()">查询
+			</button>
+		</div>
+		<!--<div>{{selDate}}{{timeSlot}}{{selArea}}</div>-->
+	</div>
+	<div class="footer"></div>
+</div>
+<div class="label_analysis">
+	<p class="Networktitle">
+		<span>投诉标签分析 > 当前查询：{{queryStatusMessage}}</span>
+		<label ng-bind=""></label>
+	</p>
+	<div class="analysis-box">
+		<!--图表以及饼图-->
+		<div class="tableAndPieAnalysis">
+			<div class="tableAnalysis">
+				<div id="complaint_label_sheet" ui-grid="labelGridOptions" class="grid"
+					 ui-grid-pinning
+					 ui-grid-exporter
+					 ui-grid-resize-columns
+					 ui-grid-pagination
+				>
+				</div>
+				<div class="noAnalysis" style="display:none">查询不到相关数据</div>
+				<button class="btn btn-primary exportBtn" ng-click="exportToCsv()">导出</button>
+			</div>
+			<div class="pieAnalysis">
+				<div id="pieChart"></div>
+				<!--<div class="noAnalysis">查询不到相关数据</div>-->
+			</div>
+		</div>
+		<!--折线图-->
+		<div class="lineAnalysis">
+			<div class="selectContainer">
+				<select name="type" id="type_name">
+					<option value="用户数" selected="selected">&nbsp;用户数</option>
+					<option value="占比">&nbsp;占比</option>
+				</select>
+				<i class="fa fa-angle-down" aria-hidden="true"></i>
+			</div>
+			<div id="lineChart"></div>
+		</div>
+	</div>
+</div>
+</div>

@@ -1,0 +1,227 @@
+#complaint_label_analysis {
+    min-width: 1345px;
+
+    /** 外部对label标签进行了全局的设置，这里要把label的style还原，如果处理了外部的style问题可以删掉这里 */
+    label {
+        margin-bottom: 0;
+    }
+
+    ul {
+        margin: 0;
+    }
+
+	select{
+		-moz-appearance: none;
+		-webkit-appearance: none;
+	}
+
+    .query-panel {
+        .inline-form-group {
+            .inquire{
+                margin-left:30px;
+            }
+        }
+    }
+
+    .Networktitle {
+        height: 38px;
+        padding: 4px 10px;
+    }
+    .analysis-box{
+        height:calc(86vh);
+        min-height: 620px;
+        width: 100%;
+        box-sizing: border-box;
+        .tableAndPieAnalysis{
+            height:51.5%;
+            display:flex;
+            justify-content:space-around;
+            margin-bottom:8px;
+            .tableAnalysis,.pieAnalysis{
+                background-color:#fff;
+                height:100%;
+                width:68%;
+                border-radius:5px;
+				position:relative;
+				.noAnalysis{
+					font-size:20px;
+					font-weight:700;
+					color: rgba(0,0,0,.6);
+					position:absolute;
+					top:45%;
+					left:50%;
+					transform: translate(-50%,-50%);
+				}
+				.exportBtn{
+					height:26px;
+					width:56px;
+					position:absolute;
+					//bottom:14px;
+					right:20%;
+					padding:0;
+				}
+            }
+            .tableAnalysis{
+                margin-right:8px;
+                //padding:12px 15px 15px 13px;
+                #complaint_label_sheet{
+                    width:100%;
+                    height:100%;
+                }
+            }
+            .pieAnalysis{
+                flex:1;
+                #pieChart{
+                    width:100%;
+                    height:100%;
+                }
+            }
+        }
+        .lineAnalysis{
+            background-color:#fff;
+            height:calc(48.5% - 8px);
+            border-radius:5px;
+            position:relative;
+            .selectContainer{
+                width:82px;
+                height:22px;
+                position:absolute;
+                top:8px;
+                right:25px;
+                background:transparent;
+                select{
+                    position:absolute;
+                    top:0;
+                    right:0;
+                    width:100%;
+                    height:100%;
+                    border:1px solid rgba(0,0,0,0.4);
+                    //padding:10px;
+                    z-index:5;
+                    background:transparent;
+                }
+                i{
+                    position:absolute;
+                    top:3px;
+                    right:6px;
+                    z-index:4;
+                }
+            }
+            #lineChart{
+                height:100%;
+                width:100%;
+                //border:1px solid red;
+            }
+        }
+    }
+
+    .confirm-button {
+        padding: 4px 12px;
+        border: 1px solid #2BBCFF;
+        color: #2BBCFF;
+        background: #FFFFFF;
+        font-family: '微软雅黑', serif;
+        &:hover {
+            background: #2BBCFF;
+            color: #FFFFFF;
+            cursor: pointer;
+        }
+    }
+
+    .custom-pagination-ul {
+        justify-content: flex-end;
+        padding: 20px 50px 0 0;
+        .custom-pagination-li {
+            width: 70px;
+            height: 30px;
+        }
+    }
+
+    .btn-outline-info:hover {
+        color: #fff;
+        background-color: #5bc0de;
+        border-color: #5bc0de;
+    }
+    .grid {
+        width: 100%;
+        height: 100%;
+        .ui-grid-row {
+            cursor: pointer;
+            &:hover {
+                background-color: red;
+            }
+        }
+        .ui-grid-no-row-overlay > * {
+            &:hover {
+                background-color: red;
+            }
+        }
+    }
+    /*表头的padding*/
+    .ui-grid-header-cell .sortable {
+        //padding-left: 30px;
+    }
+    /*表头的行高*/
+    .ui-grid-cell-contents {
+        //line-height: 30px;
+        padding-left: 30px;
+    }
+
+	/**适配屏幕分辨率*/
+	@media screen and (max-width: 1366px) {
+		.ui-grid-cell-contents {
+			line-height: 24px;
+		}
+		.tableAnalysis {
+			padding: 6px 8px 8px 6px;
+		}
+		.exportBtn{
+			bottom:12px;
+		}
+	}
+	@media screen and (min-width: 1367px) and (max-width: 1680px) {
+		.ui-grid-cell-contents {
+			line-height: 27px;
+		}
+		.tableAnalysis {
+			padding: 10px 12px 12px 10px;
+		}
+		.exportBtn{
+			bottom:16px;
+		}
+	}
+	@media screen and (min-width: 1681px) and (max-width: 1920px) {
+		.ui-grid-cell-contents {
+			line-height: 30px;
+		}
+		.tableAnalysis {
+			padding: 11px 13px 13px 11px;
+		}
+		.exportBtn{
+			bottom:17px;
+		}
+	}
+
+    /*改变placeholder默认颜色*/
+    input:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+        color: #464a4c;
+        opacity: 1;
+    }
+    input::-moz-placeholder { /* Mozilla Firefox 19+ */
+        color: #464a4c;
+        opacity: 1;
+    }
+    input:-ms-input-placeholder {
+        color: #464a4c;
+        opacity: 1;
+    }
+    input::-webkit-input-placeholder {
+        color: #464a4c;
+        opacity: 1;
+    }
+
+
+
+
+
+}

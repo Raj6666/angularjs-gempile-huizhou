@@ -40,7 +40,7 @@
 		"gulp-babel": "^6.1.2",
 		"gulp-shell": "^0.6.3",
 		"gulp-watch": "^4.3.11",
-		"highcharts": "^5.0.12",
+		"highcharts": "^8.0.4",
 		"html-loader": "^0.4.5",
 		"jwt-simple": "^0.5.5",
 		"node-sass": "^4.9.4",
